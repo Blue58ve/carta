@@ -4,6 +4,49 @@ Para un comprador cuya prioridad número uno es la ligereza y la comodidad, el *
 
 > **Nota de método.** Las cinco notas de investigación en que se basa este informe (fechadas el 14 de noviembre de 2026) se elaboraron sin poder abrir apple.com, support.apple.com ni macrumors.com, porque la red de la sesión bloqueaba esos dominios. Precios, pesos, dimensiones y autonomías proceden de resúmenes de búsqueda que citan esas páginas y de medios especializados que coinciden entre sí. Las citas a páginas de Apple remiten a lo que esas fuentes reproducen, no a una lectura directa. **Antes de comprar hay que confirmar precios y especificaciones en apple.com/us.** Tampoco se recuperaron las reseñas de The Verge, CNET ni MKBHD sobre los modelos de 2026.
 
+## Actualización: con un iPhone 16 Pro Max de 1 TB, el Air ahorra 62 g pero cuesta unas 6 horas de batería
+
+Después de entregar el informe, el usuario aclaró qué teléfono tiene: un **iPhone 16 Pro Max de 1 TB**, no un iPhone 16 o 17 base. Esta sección sustituye a las recomendaciones condicionadas que aparecen más abajo. El 16 Pro Max pesa **227 g** y mide **8.25 mm** de grosor. Tiene pantalla de 6.9", teleobjetivo periscópico 5x de 12 MP, ultra gran angular y 8 GB de RAM ([GSMArena](https://m.gsmarena.com/apple_iphone_16_pro_max-ampp-13123.php); [iDownloadBlog](https://www.idownloadblog.com/2024/09/09/iphone-16-pro-16-pro-max-tech-specs/); [PhoneArena](https://www.phonearena.com/phones/compare/Apple-iPhone-16-Pro-Max,Qualcomm-Snapdragon-8-Gen-3-Reference-Design/phones/12238,12250)). Fue el campeón de autonomía de su generación: entre **17 h 35 min y 18 h 06 min** en la prueba de navegación de Tom's Guide con un equipo nuevo ([Tom's Guide](https://www.tomsguide.com/phones/iphones/iphone-16-pro-max-battery-life-is-so-unbelievable-we-tested-it-3-times-heres-the-results); [AppleInsider](https://appleinsider.com/articles/24/09/28/iphone-16-pro-max-beats-all-comers-in-battery-life-test)).
+
+| Cambio respecto del 16 Pro Max | Air | iPhone 17 | 18 Pro | 18 Pro Max | Duo |
+|---|---|---|---|---|---|
+| Peso | **−62 g (−27%)** | −50 g | −16 g | +22 g | +27 g |
+| Grosor | **−2.6 mm** | −0.3 mm | +0.5 mm | +0.5 mm | +3.05 mm cerrado |
+| Pantalla | 6.9" → 6.5" | 6.9" → 6.3" | 6.9" → 6.3" | igual | 5.4" + 7.6" plegable |
+| Batería (Tom's Guide, contra un 16 Pro Max nuevo) | −5.5 a −6 h (12 h 02 min); 17 h 15 min con la batería MagSafe | −5 h | −1.3 a −1.8 h | +0.3 a +0.9 h | unas −4 h (prueba no comparable) |
+| Cámara | Pierde el ultra gran angular y el teleobjetivo | Pierde el teleobjetivo | Teleobjetivo 4x de 48 MP en vez de 5x de 12 MP; gana apertura variable | Igual que el 18 Pro | Pierde el teleobjetivo |
+| RAM | 12 GB | 8 GB | 12 GB | 12 GB | 12 GB |
+| Precio con 1 TB (USD) | 1,699 | No existe (máx. 512 GB) | 1,799 | 1,899 | 2,599 |
+
+Las cifras de batería del 16 Pro Max corresponden a un equipo nuevo. Después de dos años de uso, la batería del usuario rinde algo menos, así que las diferencias reales son menores que las de la tabla. El estado exacto se puede ver en Ajustes > Batería > Estado y carga.
+
+Este nuevo punto de partida tiene cuatro consecuencias:
+
+1. **La ganancia ergonómica del Air pasa a ser grande y perceptible.** El informe señalaba que el gran ahorro de peso del Air beneficiaría sobre todo a quien tiene un Pro Max, y este usuario está en ese caso. Son 62 g menos (un 27%) y 2.6 mm menos de grosor, y además desaparece el bloque de tres cámaras.
+2. **Los sacrificios del Air también crecen.** Ningún candidato pierde tanta autonomía, unas 6 horas en la prueba estándar. Además, el usuario se queda sin el zoom 5x y sin el ultra gran angular, que en fotografía casual (retratos, eventos, paisajes) es lo que más se echa de menos en el día a día. Stuff devolvió su Air y se quedó con un 17 Pro por esa razón ([Stuff](https://www.stuff.tv/features/my-iphone-air-is-back-in-its-box-heres-why/)).
+3. **El iPhone 18 Pro cambia de categoría.** Para un dueño de un 16 o un 17 era «más pesado que el actual»; para este usuario es **más ligero y bastante más compacto** (6.3" frente a 6.9"). Es el único candidato que mejora la comodidad sin renunciar al teleobjetivo ni al ultra gran angular. Su autonomía queda cerca de la de un 16 Pro Max con dos años de uso, y suma 12 GB de RAM.
+4. **El almacenamiento filtra candidatos.** Si el usuario ocupa más de 512 GB, el iPhone 17 y el 17e quedan fuera porque no se venden con 1 TB.
+
+**Puntuación de quedarse con el 16 Pro Max:** con la misma escala y las mismas ponderaciones de la tabla principal, le corresponden ligereza 3, autonomía 8 (rebajada por el desgaste), cámara 9, productividad e IA 6 (pantalla grande pero 8 GB), valor 8 y Latinoamérica 9. El total es **6.05**. El Air (7.15) le saca 1.1 puntos y el 18 Pro (6.80), 0.75. Con la ponderación alternativa de ligereza al 25%, quedarse con el 16 Pro Max sube a 6.85 y supera al Air (6.30), aunque sigue por detrás del 18 Pro (7.30).
+
+**Entrega a cuenta:** en agosto de 2026 Apple EE. UU. pagaba **hasta USD 720** por un 16 Pro Max ([MacRumors](https://www.macrumors.com/2026/08/06/apple-raises-trade-in-values/)). El valor pudo cambiar con el ajuste del 12 de noviembre, y Apple paga un monto fijo por modelo sin importar la capacidad ([Cult of Mac](https://www.cultofmac.com/?p=936718)). Eso significa que los 1 TB del usuario no se premian: venderlo por cuenta propia probablemente rinde más. Con USD 720 de crédito, el costo neto antes de impuestos sería este:
+
+| Opción | Precio | Neto con entrega a cuenta |
+|---|---|---|
+| Air de 512 GB | USD 1,299 | unos USD 579 |
+| Air de 1 TB | USD 1,699 | unos USD 979 |
+| 18 Pro de 512 GB | USD 1,399 | unos USD 679 |
+| 18 Pro de 1 TB | USD 1,799 | unos USD 1,079 |
+
+**Recomendación actualizada:**
+
+- **Comprar el iPhone Air.** De todos los candidatos, es donde la prioridad declarada rinde más: el cambio de sensación en la mano será evidente desde el primer día.
+  - Capacidad: el de 1 TB (USD 1,699) si el usuario ocupa más de unos 400 GB; si no, el de 512 GB (USD 1,299), apoyándose en iCloud.
+  - Para quien viene de un Pro Max, la batería MagSafe (USD 99) es prácticamente obligatoria en los días largos.
+  - Hay que probarlo en una tienda antes de pagar, porque el riesgo de arrepentirse es mayor que para un dueño de un modelo base.
+- **Plan B fuerte: el iPhone 18 Pro.** Conviene si, al probarlos, las 12 horas de batería o la pérdida del zoom pesan más que los 46 g de diferencia con el Air. Ofrece comodidad sin sacrificios: más ligero y compacto que el teléfono actual, con todas las cámaras y una autonomía similar.
+- **Esperar es opcional.** El 16 Pro Max todavía tiene buena batería y una cámara completa, así que aguantar hasta la primavera de 2027 por un Air 2 con segunda cámara (rumor) cuesta poco. Pero la ventaja de 1.1 puntos del Air sobre quedarse justifica comprar ya.
+
 ## Apple vende siete iPhone, y el plegable existe pero llega en enero
 
 El evento "Surprise and Shine" del **9 de septiembre de 2026** reordenó el catálogo. Apple presentó el iPhone 18 Pro, el iPhone 18 Pro Max y su primer plegable, bautizado **iPhone Duo**, no "Fold" ni "Ultra", los nombres que circularon antes ([MacRumors](https://www.macrumors.com/2026/09/09/apple-september-2026-event-recap/); [AppleInsider](https://appleinsider.com/articles/26/09/09/the-apple-foldable-is-real-its-here-its-called-iphone-duo)). Los 18 Pro llegaron a las tiendas el 18 de septiembre ([Apple Newsroom](https://www.apple.com/newsroom/2026/09/the-latest-iphone-apple-watch-and-airpods-lineups-arrive-in-stores-worldwide/)). Ese mismo 9 de septiembre Apple retiró el 17 Pro y el 17 Pro Max ([MacRumors](https://www.macrumors.com/2026/09/09/apple-discontinues-iphone-17-pro-max/)) y el último modelo Plus ([Appleosophy](https://appleosophy.com/2026/09/19/apple-quietly-discontinued-the-very-last-iphone-plus-model/)). El catálogo vigente queda así: iPhone 17e, iPhone 16 (solo 128 GB), iPhone 17, iPhone Air, iPhone 18 Pro, iPhone 18 Pro Max e iPhone Duo. **No hay iPhone 18 base, ni 18e, ni Air 2.** La prensa los espera para la primavera de 2027, dentro de un calendario de lanzamiento dividido, pero Apple no lo ha confirmado ([MacRumors](https://www.macrumors.com/2026/06/15/no-iphone-18-this-year-apple-supplier-confirms/); [Business Today](https://www.businesstoday.in/technology/news/story/apple-iphone-18-timeline-foldable-and-pro-lineup-expected-first-followed-by-standard-model-in-spring-2027-550235-2026-08-20)).

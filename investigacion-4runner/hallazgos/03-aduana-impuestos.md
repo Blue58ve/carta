@@ -1,207 +1,273 @@
 # Agente 3 — Aduana venezolana, aranceles e impuestos
-**Fecha de investigación:** 2026-11-18
+**Fecha de investigación:** 2026-11-18 (ronda 1 y ronda 2)
 
-> **Sin 🛑 ALERTA DE ALCANCE confirmada.** No encontré ninguna norma que prohíba a particulares importar un vehículo nuevo. Quedan abiertos dos riesgos que podrían frenar la operación: (1) que la subpartida del vehículo esté en el **Régimen Legal 20 (licencia previa)** de la Resolución 022-2025 [10]; (2) que el presupuesto de USD 80.000 todo incluido **no alcance en ningún escenario** si se confirma el IVA (ver §6). El punto (2) es un problema de presupuesto, no de legalidad, así que no lo marco como 🛑.
+> **No hay 🛑 ALERTA DE ALCANCE confirmada.** No encontré ninguna norma que prohíba a un particular importar un vehículo nuevo.
 >
-> **Límite de método (importante para el verificador).** No pude leer ninguna fuente directamente: WebFetch y la red de la sesión rechazaron todos los dominios que probé (seniat.gob.ve, tradex.com.ve, bakermckenzie.com, finanzasdigital.com, pwc.com, kpmg.com, traviesoevans.com, lega.law, bcv.org.ve, entre otros). Todo lo "verificado" sale de los **resúmenes del buscador (WebSearch)** sobre las URL citadas. Además, el cupo de búsquedas que comparten todos los agentes (200) se agotó a mitad de la investigación, **antes de que pudiera buscar IVA, alícuota de lujo, IGTF, tasa aduanera, tasa BCV, registro de importador y agente de aduanas**. Esos puntos van como **[NO VERIFICADO]**. Cuando muestro un porcentaje para ellos, es un **supuesto de trabajo tomado del conocimiento previo del agente**, no un dato con fuente; sirve solo para el cálculo de sensibilidad.
+> **(ronda 2) Régimen Legal 20.** Ya no lo trato como posible prohibición. Las fuentes lo describen de dos formas: como "licencia previa o restricción especial" [10], o como la **Constancia de Registro de Norma COVENIN / Reglamento Técnico de SENCAMER** [48]. Es un requisito técnico que se tramita por producto, no una prohibición. Tampoco está confirmado que alcance a la 8703.40.
+>
+> **Presupuesto (no es 🛑, porque no es un problema legal).** Con IVA 16 % + 15 % de lujo, ya verificados en la ronda 2, el presupuesto de USD 80.000 **no alcanza en ningún escenario**. Aun con arancel 0 %, el vehículo puesto en puerto costaría ≥ USD 92.600 antes de logística, almacenaje y agente.
+>
+> **Límite de método.** WebFetch y la red de la sesión estuvieron bloqueados en las dos rondas. Todo lo "verificado" sale de los **extractos del buscador** sobre las URL citadas; no leí ninguna Gaceta completa. En la ronda 2 usé 30 búsquedas, el máximo asignado. Lo que no quedó respaldado en un extracto sigue marcado **[NO VERIFICADO]**.
 
 ## Resumen ejecutivo (5 líneas)
-1. **Clasificación:** por el texto del Sistema Armonizado, un híbrido de gasolina **no enchufable** (HEV) va en la **subpartida 8703.40**, no en la 8703.23. La 8703.2x cubre vehículos que solo tienen motor de émbolo [22][23]. El código nacional de 10 dígitos dentro de 8703.40 y su tarifa exacta en el Arancel (Decreto 4.944, G.O. 6.804 Ext., 25-04-2024 [1]) quedan **[NO VERIFICADO]**.
-2. **Arancel:** el Decreto 5.103 (G.O. 6.890 Ext., 06-03-2025) subió del **20 % al 40 %** el arancel de los automóviles de gasolina por encima de cierta cilindrada: 2.100 cm³ según [7], 1.500 cm³ según [8]. No confirmé si la 8703.40 sigue esa regla. Trabajo con un rango del **20–40 %** y uso **40 %** para planificar.
-3. **Híbridos:** no encontré **ninguna exoneración ni rebaja vigente** para vehículos híbridos o eléctricos en Venezuela. Además, en 2025 se **eliminaron** la partida 98.08, que cubría vehículos ensamblados (CBU), y algunas exoneraciones del sector automotor [11][6].
-4. **Carga tributaria:** con los supuestos de trabajo (tasa aduanera 1 %, IVA 16 %, IVA adicional de lujo 15 %), los tributos suman entre **40 % y 85 % del CIF**, o hasta **~89 %** con IGTF y una tasa del 2 %. El costo puesto en puerto, antes de logística local, queda entre **USD 98.000 y 130.000** para un CIF de USD 70.000. Aun con arancel 0 %, el IVA solo llevaría el total por encima de USD 82.000. Con estas cifras, **el presupuesto de USD 80.000 no se cumple**.
-5. **Titular:** los tributos de aduana **son los mismos** para la persona natural y para la C.A. La C.A. solo ganaría si pudiera usar el IVA de importación como crédito fiscal, y eso es **improbable** si el uso es personal del accionista, además de traer riesgos de ISLR y de que se trate como dividendo encubierto. Todo el marco de IVA, IGTF y tasa aduanera, y la tasa BCV, quedan **[NO VERIFICADO]**.
+1. **Clasificación y arancel:**
+   - La 4Runner, híbrida de gasolina no enchufable, va en la **8703.40**, no en la 8703.23, que es solo para motor de émbolo [22][23].
+   - El Arancel vigente es el Decreto 4.944 (G.O. 6.804 Ext., 25-04-2024) con reformas hasta la Res. 007-2026 [1][14].
+   - La **tarifa exacta de la 8703.40 sigue [NO VERIFICADO]**. Lo único que encontré: el Decreto 5.103 (G.O. 6.890 Ext., 06-03-2025) subió del **20 % al 40 %** los vehículos de gasolina de mayor cilindrada [7][8].
+   - Tomo como rango de planificación **20 % / 40 % / 40 %** (mín. / probable / máx.).
+2. **Beneficio para híbridos:** no encontré ninguno aplicable a un particular.
+   - La subpartida 9801.00.00.23 del Decreto 5.103 menciona vehículos "con motor de encendido por chispa y con motor eléctrico" [50], pero parece ser **material de ensamblaje para ensambladoras (MEIV)**. Es una inferencia.
+   - En 2025 se eliminaron la exoneración de IVA de las partidas 98.01–98.07 y la partida 98.08 de vehículos ensamblados (CBU) [11].
+3. **(ronda 2) Tributos verificados:**
+   - **IVA general 16 %** [28][29][33].
+   - **IVA adicional de lujo 15 %**, que la ley permite subir hasta 20 %. Se aplica a vehículos con valor en aduanas ≥ **US$ 40.000**, umbral expresado **en dólares**, así que la 4Runner lo supera. Base legal: art. 61 de la Ley de IVA, G.O. 6.396 Ext. (21-08-2018), ratificado por la G.O. 6.507 Ext. (29-01-2020) [32][33][34].
+   - **Tasa por determinación del régimen aduanero: 1 % del valor en aduanas** según el Reglamento de Tasas [37]. La LOA reformada (G.O. 6.507 Ext., 29-01-2020) admite un rango de 0,5 % a 2 % [36].
+   - **IGTF: 3 % sobre pagos en divisas** (G.O. 6.687 Ext., 25-02-2022). El Decreto 4.972 (G.O. 6.821 Ext., 12-07-2024) solo llevó a 0 % ciertos pagos en bolívares [39][40].
+4. **Carga tributaria total sobre el CIF** (fórmula a + t + (1 + a + t) × 31 %, donde a = arancel y t = tasa aduanera):
+   - **57,9 %** como mínimo (arancel 20 %, tasa 0,5 %).
+   - **84,7 %** en el escenario probable (arancel 40 %, tasa 1 %).
+   - **88,6 %** como máximo (arancel 40 %, tasa 2 % e IGTF 3 % si los tributos se pagaran en divisas).
+   - En dinero: con CIF de USD 70.000, entre **USD 40.500 y 62.000** de tributos; con CIF de USD 75.000, entre **USD 43.400 y 66.450**.
+5. **Persona natural frente a la C.A.:** la carga aduanera es **idéntica**. La C.A. solo bajaría a ~62 % (o ~41 % si también recuperara el IVA de lujo) si el SENIAT le admitiera el crédito fiscal. Con uso personal del accionista eso es improbable, y además abre riesgos de ISLR y de dividendo encubierto. **Siguen [NO VERIFICADO]:**
+   - la tarifa de la 8703.40;
+   - si la Res. 022-2025 la incluye;
+   - si el IGTF se aplica al pago de tributos aduaneros en divisas;
+   - la fecha de tipo de cambio que usa la aduana;
+   - la existencia de valores de referencia del SENIAT.
 
 ## Hallazgos detallados
 
 ### 1. Arancel de Aduanas vigente y cadena de reformas (2024–2026)
 | # | Instrumento | Gaceta Oficial | Contenido relevante | Estado de verificación |
 |---|---|---|---|---|
-| a | **Decreto N° 4.944** (24-04-2024), que dicta el Arancel de Aduanas | **G.O. N° 6.804 Extraordinario, 25-04-2024** [1][2][27] | Es el Arancel base, con códigos de **10 dígitos** [1]. Un bufete reporta su aplicación "a partir del 25 de mayo de 2024" [3] | Varias fuentes secundarias coinciden en el número y la fecha de la Gaceta. No leí el texto |
-| b | **Decreto N° 5.103** | **G.O. N° 6.890 Extraordinario, 06-03-2025** [4][5] | Modifica la nomenclatura y la tarifa (AEC) de subpartidas del art. 37. "Actualiza condiciones para la importación de vehículos" [6]. Permite exonerar el AEC y el IVA en ciertas importaciones del sector automotor y exige 50 % de valor agregado nacional para calificar como material de ensamblaje (MEIV) [6]. Según fuentes no oficiales, sube del 20 % al 40 % la tarifa de turismos y camionetas de gasolina de hasta 9 puestos por encima de 2.100 cm³ [7] (otra fuente dice > 1.500 cc [8]). Limita la antigüedad a **5 años** (art. 13 según [8]) y no limita la importación a fines comerciales [7] | Número y Gaceta: consistentes. El 40 % y el art. 13 salen de **[BUFETE/GESTOR]** comerciales; **no los confirmé en la Gaceta** |
-| c | **Decreto N° 5.122** (reforma parcial) | **G.O. N° 43.111, 21-04-2025** [9] | Contenido no revisado. Un PDF de Tradex lo encabeza con "Número 42.439… 21 de abril de 2025", posible errata | Contenido [NO VERIFICADO] |
-| d | Reforma del Arancel de mayo de 2025 | s/d [12b] | Legis la reseña el 13-05-2025; contenido no revisado | [NO VERIFICADO] |
-| e | **Decreto N° 5.147** (30-06-2025) | **G.O. N° 6.918 Extraordinario** [11] | Elimina la exoneración de IVA de ciertas partes de ensamblaje y **elimina la partida 98.08 (vehículos totalmente ensamblados, CBU)** [11] | Fuente [BUFETE/GESTOR] |
-| f | **Resolución N° 022-2025** (03-07-2025), Ministerio de Economía, Finanzas y Comercio Exterior | **G.O. N° 43.166, 09-07-2025** [10] | Modifica las **columnas 5 y 6 del art. 37** en **29 subpartidas** de vehículos y autopartes y les asigna el **Régimen Legal 20**, descrito como "licencia previa o restricciones especiales". Ejemplos citados: 8703.22.10.10 (1.000–1.500 cm³), 8703.90.90.00, 8701.21.00.00, 8711.20.20.00 [10]. Un especialista dice que rubros que pagaban 3 % pasan a pagar hasta 20 % [10] | Número, fecha y alcance general: varias fuentes coinciden. **No sé si alguna subpartida 8703.40 está en la lista** [NO VERIFICADO] |
-| g | Reforma parcial de agosto de 2025 | s/d [12] | Legis la reseña el 27-08-2025; contenido no revisado | [NO VERIFICADO] |
-| h | Resolución N° 010-2025 | s/d | Según Tradex, elimina la Nota Complementaria 3 del Capítulo 87, que exigía el **certificado de emisiones de fuentes móviles** [14] | [NO VERIFICADO] (solo lo vi en un resumen) |
-| i | **Decreto N° 5.198** (31-12-2025) | **G.O. N° 6.952 Extraordinario**; vigente desde el **05-01-2026** [13] | Modifica 1.371 subpartidas y dos anexos técnicos, con aplicación preferente e inmediata en 753 subpartidas [13]. El listado que vi empieza en el Capítulo 52; no constan cambios en el Capítulo 87 [14] | Cambios en el Capítulo 87 [NO VERIFICADO] |
-| j | **Decreto N° 5.376** | **G.O. N° 43.409, 06-07-2026** [17] | Suspende la **exportación** de materiales de construcción por el sismo del 24-06-2026 (Régimen Legal 1), hasta el 31-12-2026. **No afecta a vehículos importados** | Fuente [BUFETE] |
-| k | **Resolución N° 007-2026** (agosto de 2026), 11.ª reforma | s/d [14][18] | **Contenido desconocido**. Un resumen menciona una vigencia hasta el 31-12-2026 | **[NO VERIFICADO], prioridad alta**: es la reforma más reciente y podría tocar el Capítulo 87 |
+| a | **Decreto N° 4.944** (24-04-2024), Arancel de Aduanas | **G.O. N° 6.804 Ext., 25-04-2024** [1][2][27] | Arancel base, con códigos de **10 dígitos** [1]. Según un bufete, se aplica desde el 25-05-2024 [3] | Número y fecha coinciden en varias fuentes. Texto no leído |
+| b | **Decreto N° 5.103** | **G.O. N° 6.890 Ext., 06-03-2025** [4][5] | Modifica nomenclatura y tarifas del art. 37 [6]. Exige 50 % de valor agregado nacional para las calificaciones MEIV [6][54]. Según fuentes comerciales, sube del 20 % al 40 % la tarifa de turismos y camionetas de gasolina de hasta 9 puestos de > 2.100 cm³ [7] (otra fuente dice > 1.500 cc [8]). Limita la antigüedad a 5 años (art. 13 [8]). **(ronda 2)** Su tabla incluye la subpartida **9801.00.00.23** "con motor de encendido por chispa y con motor eléctrico", junto a tractores de carretera; la columna de tarifa es ilegible en el extracto [50]. AB Group dice que el decreto da a híbridos y eléctricos "partida propia y tratamiento diferenciado", sin cifras, y que la regla de 5 años no les aplica [8] | Gaceta: consistente. El 40 % y la referencia a híbridos vienen de **[BUFETE/GESTOR]**; no confirmados en la Gaceta |
+| c | **Decreto N° 5.122** | **G.O. N° 43.111, 21-04-2025** [9] | Reforma parcial; contenido no revisado | [NO VERIFICADO] |
+| d | Reforma de mayo de 2025 | s/d [12b] | Contenido no revisado | [NO VERIFICADO] |
+| e | **Decreto N° 5.147** (30-06-2025) | **G.O. N° 6.918 Ext.** [11] | Elimina la partida **98.08 (vehículos CBU)** y la posibilidad de exonerar el IVA en las partidas **98.01 a 98.07** [11]. **(ronda 2)** Según un resumen, también dispensa temporalmente el Régimen Legal 20 de SENCAMER en ciertas subpartidas [48] | [BUFETE/GESTOR]; la dispensa está [NO VERIFICADO] en cuanto a qué subpartidas cubre |
+| f | **Resolución N° 022-2025** (03-07-2025), MPPEF | **G.O. N° 43.166, 09-07-2025** [10][49] | Modifica las columnas 5 y 6 del art. 37 en **29 subpartidas** de vehículos y autopartes, con **Régimen Legal 20** en importación. Códigos citados: 8701.21.00.00, 8703.22.10.10, 8703.90.90.00 y 8711.20.20.00 [10]. Las exportaciones siguen mayormente con régimen general (8716.31.00.10 con RL 11 y 20) [49] | **(ronda 2)** En 30 búsquedas ningún extracto menciona 8703.23, 8703.24, 8703.40 ni 8704. Su inclusión sigue [NO VERIFICADO] |
+| g | Reforma de agosto de 2025 | s/d [12] | Contenido no revisado | [NO VERIFICADO] |
+| h | Resolución N° 010-2025 | s/d [14] | Elimina la Nota Complementaria 3 del Capítulo 87 (certificado de emisiones) | [NO VERIFICADO] |
+| i | **Decreto N° 5.198** (31-12-2025) | **G.O. N° 6.952 Ext.**; vigente desde el 05-01-2026 [13] | Modifica 1.371 subpartidas y 2 anexos; 753 con aplicación preferente [13]. No hallé cambios en el Capítulo 87 | [NO VERIFICADO] respecto al Capítulo 87 |
+| j | **Decreto N° 5.376** | **G.O. N° 43.409, 06-07-2026** [17] | Suspende exportaciones de materiales de construcción. **No afecta al caso** | [BUFETE] |
+| k | **Resolución N° 007-2026** (agosto de 2026), 11.ª reforma | s/d [14][18] | Contenido desconocido | **[NO VERIFICADO], prioridad alta** |
 
-**Conclusión:** el Arancel vigente es el **Decreto 4.944 (G.O. 6.804 Ext., 25-04-2024)**, con al menos 11 reformas. Para fijar la tarifa de la 4Runner hay que leer, en este orden: el art. 37 del Decreto 4.944, el Decreto 5.103, la Resolución 022-2025 y la Resolución 007-2026. Ninguno de esos textos se pudo leer en esta sesión. Según Ámbito Aduanero, la LOA permite modificar el Arancel **por resolución** con aprobación previa del Consejo de Ministros y publicación en Gaceta [18]. Por eso la tarifa puede cambiar sin un decreto nuevo.
+La LOA establece que se aplican **el régimen jurídico y el Arancel vigentes a la fecha de registro de la declaración de aduanas** (ronda 2) [36]. Por eso cualquier reforma publicada antes de registrar la declaración afecta a la operación.
 
 ### 2. Clasificación arancelaria
-- **8703.40** (texto SA 2022/NANDINA): "Los demás vehículos, equipados para la propulsión con motor de émbolo alternativo de encendido por chispa y con motor eléctrico, **excepto los que se puedan cargar mediante conexión a una fuente externa de alimentación eléctrica**". Los híbridos enchufables van en 8703.60 y los eléctricos puros en 8703.80 [22].
-- **8703.21 a 8703.24:** cubren vehículos con motor de émbolo de encendido por chispa **únicamente**. La palabra "únicamente" viene de la nomenclatura SA desde 2017; la cito por conocimiento previo y debe confirmarse en el texto del Decreto 4.944 [1]. Un HEV con motor eléctrico de tracción, como el i-FORCE MAX, **no puede ir en 8703.23**.
-- Un documento técnico del MINCIT de Colombia aclara que **la 8703.40 no exige que la propulsión eléctrica y térmica sea simultánea ni en paralelo** [22]. Costa Rica (Res. MH-DGA-RES-535-2024) trata los híbridos de la misma manera [23]. Las dos son referencias comparadas, no venezolanas.
-- **Código nacional de 10 dígitos:** **[NO VERIFICADO]**. El Arancel venezolano divide la 8703 por cilindrada; por ejemplo, la Gaceta 43.166 cita "8703.22.10.10 – 1.000 a 1.500 cm³" [10]. Lo probable es que la 8703.40 tenga aperturas por cilindrada parecidas. El motor de 2.393 cm³ la pondría en el tramo de 1.500 a 3.000 cm³, o por encima de 2.100 cm³ si se usa ese umbral. **Fuente que lo resuelve:** art. 37 del Decreto 4.944 [1], con las modificaciones del Decreto 5.103 [4] y la Resolución 022-2025 [10].
-- **Riesgo de reclasificación:** si la aduana considerara que el sistema es un "microhíbrido" sin tracción eléctrica real, o la clasificara en 8703.23, la tarifa sería la de gasolina > 2.100 cm³, es decir, **40 %** según [7]. Conviene llevar la ficha técnica de Toyota que describe el motor-generador integrado en la transmisión.
-- La partida **87.04** (pick-ups de carga) mantiene el 20 % según [7], pero la 4Runner es una SUV de pasajeros, así que no aplica.
-- **Descartado:** un documento "Arancel Aduanero de Importaciones 2026 – MEFP" en Scribd muestra tarifas de 3 % y 5 % para la 8703.40, pero **no es venezolano** (lo publica un ministerio "MEFP" de otro país). No debe usarse.
+- **8703.40** (SA 2022): vehículos con motor de émbolo de encendido por chispa **y** motor eléctrico, excepto los que se pueden cargar desde una fuente externa. Los híbridos enchufables van en 8703.60 y los eléctricos en 8703.80 [22][55].
+- **8703.21–8703.24:** cubren vehículos con **solo** motor de émbolo de encendido por chispa. El SA divide esas subpartidas en 1.000, 1.500 y 3.000 cm³; el corte de 2.100 cm³ es una regla **nacional** (ronda 2) [55].
+- La 8703.40 no exige que la propulsión sea simultánea o en paralelo [22]. Costa Rica clasifica los híbridos de la misma forma [23].
+- **Código nacional de 10 dígitos:** **[NO VERIFICADO]**. El Arancel venezolano abre la 8703 por cilindrada; por ejemplo, existe la 8703.22.10.10 para 1.000–1.500 cm³ [10].
+- **(ronda 2) Capítulo 98:** por el contexto, la 9801.00.00.23 parece ser el **material de ensamblaje (CKD/MEIV)** para vehículos híbridos, destinado a ensambladoras calificadas, y no la importación de un vehículo ensamblado (CBU) por un particular. Es una **inferencia** del agente [50][6]. Además, la exoneración de IVA de las partidas 98.01–98.07 se eliminó en junio de 2025 [11].
+- **Riesgo de reclasificación:** si la aduana no acepta la condición de híbrido, aplicaría la tarifa de gasolina > 2.100 cm³, que sería del 40 % según [7].
 
 ### 3. Tarifa ad valorem (AEC) aplicable
-- **Hecho de fuente secundaria:** Decreto 5.103: turismos y camionetas de gasolina de hasta 9 puestos con más de 2.100 cm³ pasan del 20 % al 40 %; los de menor cilindrada siguen en 20 % [7]. AB Group Shipping sitúa el umbral del 40 % en 1.500 cc [8]. Con cualquiera de los dos umbrales, un motor de 2.393 cm³ queda en el tramo del 40 % **si las reglas de gasolina se aplican a la 8703.40**.
-- **No verificado:** la tarifa propia de la 8703.40 de 2.393 cm³. No encontré fuente, oficial ni secundaria, que la dé.
-- **Rango de trabajo:** mín. **20 %** (si los híbridos mantuvieran la tarifa anterior), probable o de planificación **40 %**, máx. **40 %**. No hallé evidencia de una tarifa preferencial para híbridos.
-- **Origen:** no conozco ningún acuerdo preferencial entre Venezuela y Japón o EE. UU. que rebaje el AEC [NO VERIFICADO]. Los acuerdos con Brasil (ACE 69) no aplican.
+- **(ronda 2)** Busqué la tarifa de la 8703.40 con 6 consultas específicas. **Ninguna dio un extracto con el porcentaje.**
+- Lo que hay son fuentes secundarias que no coinciden:
+  - 20 % → 40 % para gasolina > 2.100 cm³ [7];
+  - 40 % para > 1.500 cc [8];
+  - 40 % "para vehículos" en una guía de 2026 [52];
+  - 35–70 % y una supuesta "reducción de hasta 20 puntos para híbridos" en el sitio de un vendedor de Toyota, **sin cita normativa y poco fiable** [52];
+  - un análisis colombiano de hace unos dos años según el cual Venezuela **no estipula tratamientos diferenciales para híbridos** [51].
+- **Rango de trabajo (sin cambios):** mín. **20 %**, probable **40 %**, máx. **40 %**.
+- **Origen:** no conozco preferencias arancelarias con Japón ni con EE. UU. [NO VERIFICADO].
 
 ### 4. Tratamiento especial para híbridos o eléctricos
-- **No encontré** ningún decreto vigente (2022–2026) que exonere o rebaje el arancel o el IVA de los vehículos híbridos o eléctricos en Venezuela. Hice una búsqueda ampliada específica y solo aparecieron exoneraciones generales [19][6][14]. **No demuestra que no exista**: es **[NO VERIFICADO]**. Se resolvería con el texto del decreto de exoneraciones vigente y del Arancel.
-- **Exoneraciones vigentes en general:**
-  - En la G.O. 6.952 Ext. (31-12-2025) se publicó, junto con el Decreto 5.198, un decreto de exoneraciones de impuesto de importación e IVA. Su número es 5.196 o 5.197; las fuentes no coinciden. Deroga el Decreto 5.145 (30-06-2025) y rige **hasta el 31-12-2026** [14][15][16].
-  - No vi que cubra vehículos de pasajeros CBU para particulares [NO VERIFICADO].
-  - Antecedentes: los regímenes automotores anteriores exigían un "Certificado de Exoneración del Sector Automotriz" o el régimen de material de ensamblaje (Decreto 4.412 de 2021; prórroga del Decreto 4.985 hasta el 31-12-2024, con exoneración del 90 %). Estaban dirigidos a ensambladoras o bienes concretos, no a particulares [19].
-  - La exoneración que quedaba para la vía CBU desapareció con la **eliminación de la partida 98.08** en junio de 2025 [11].
-- **Acceso a la Justicia** reseña una "suspensión de la aplicación de las exenciones a la importación previstas en el Decreto-Ley del IVA" [15]. Eso **reduce** beneficios, no los amplía.
-- **Conclusión de trabajo:** el cliente **no debe contar con ningún beneficio por ser híbrido**, ni como persona natural ni como C.A.
+- **No encontré ninguna exoneración, rebaja ni régimen vigente** para híbridos aplicable a un particular. En la ronda 2 hice 4 búsquedas adicionales y salieron solo regímenes de Argentina y Colombia, que no aplican.
+- **(ronda 2) Decreto N° 5.197, "Decreto de Exoneraciones en Materia Aduanera"** (G.O. 6.952 Ext., 31-12-2025, vigente hasta el 31-12-2026) [47]:
+  - Según un resumen, el Apéndice I exonera el **90 % del impuesto de importación y el 90 % del IVA**. Otra fuente habla del Apéndice IV.
+  - Los bienes del Apéndice I necesitan permiso del **COMEX (Régimen Legal 9)**.
+  - El MPPEF puede incluir o excluir bienes por resolución.
+  - **No se encontró que cubra vehículos de pasajeros CBU [NO VERIFICADO].** Un decreto anterior mencionaba "vehículos… totalmente ensamblados, partidas 87.01 a 87.16" en un contexto que no está claro [47].
+  - Fuente que lo resuelve: Apéndice I de la G.O. 6.952, que el SENIAT tiene indexada en seniatenlinea.seniat.gob.ve/wp-content/uploads/2026/01/GORBV-6952.pdf [47].
+- **(ronda 2) Decreto N° 5.196** (misma Gaceta): suspende exenciones de IVA a importaciones de alimentos e insumos [47]. Reduce beneficios.
+- **(ronda 2) Decreto N° 5.207** (G.O. 43.292, 09-01-2026): exonera IVA, impuesto de importación, tasa e IGTF **solo a combustibles y aditivos** [46]. No aplica.
+- **Conclusión:** no hay beneficio para híbridos con el que se pueda contar.
 
 ### 5. Base imponible y valoración
-- **Valor en aduana CIF** (factura + flete + seguro): una fuente comercial secundaria indica que Venezuela calcula los tributos sobre el CIF [24]. La regla legal está en la Ley Orgánica de Aduanas, su Reglamento y el Acuerdo de Valoración de la OMC. Los artículos concretos son **[NO VERIFICADO]**.
-- **Valores o precios de referencia del SENIAT para vehículos nuevos:** **[NO VERIFICADO]**. No encontré si existen listas oficiales. **Riesgo práctico:** si el valor declarado queda por debajo de los precios públicos (MSRP o equivalentes), es esperable que la aduana lo ajuste. Recomendación: que la factura del concesionario refleje el precio real de la transacción, con el pago bancario trazable.
-- **Base del IVA de importación:** supongo que es **CIF + arancel + tasa aduanera** (y otros recargos). Es la regla habitual de la Ley de IVA para importaciones, pero **no la verifiqué en esta sesión** [NO VERIFICADO; la resuelve el artículo de base imponible en importaciones de la Ley de IVA vigente].
+- **Valor en aduana CIF.** Venezuela aplica el **Acuerdo de Valoración de la OMC (GATT 1994) desde el 29-12-1994**, según jurisprudencia del TSJ (ronda 2) [54].
+- **Base del IVA en importación:** valor en aduanas **más el arancel** (ronda 2, según fuentes de gestores [38]). Que también incluya la tasa aduanera está [NO VERIFICADO], pero el efecto es mínimo: 0,31 puntos del CIF.
+- **Momento del pago (ronda 2):** el impuesto de importación, la tasa y los demás gravámenes se pagan **antes o en el momento del registro de la declaración** [36].
+- **Valores de referencia del SENIAT para vehículos:** **[NO VERIFICADO]**, no encontré ninguna lista vigente (ronda 2). La **Gerencia del Valor (División de Precios)** del SENIAT atiende consultas de valor de vehículos [54] y ha aplicado ajustes de valor en otros casos, por ejemplo Pirelli [54]. Recomendación: factura real del concesionario y pago bancario trazable.
 
-### 6. IVA, alícuota adicional de lujo, tasa aduanera, IGTF y otras cargas
-**Todos los datos de esta sección son [NO VERIFICADO]**, porque el cupo de búsquedas se agotó antes de llegar a ellos. Los valores que siguen son **supuestos de trabajo del conocimiento previo del agente**, para que el verificador o un nuevo agente los confirme:
-
-| Concepto | Supuesto de trabajo | Qué falta confirmar | Fuente que lo resolvería |
+### 6. IVA, IVA de lujo, tasa aduanera, IGTF y otras cargas (ronda 2)
+| Concepto | Valor verificado | Base legal / fuente | Comentario |
 |---|---|---|---|
-| IVA, alícuota general en importación | 16 % | Alícuota vigente en nov-2026 y decreto que la fija | Ley de IVA vigente y decreto de alícuota general (portal SENIAT / G.O.) |
-| IVA adicional por bienes suntuarios (vehículos) | 15 % adicional, que se suma al general | La alícuota exacta (la ley fija un rango), el **umbral de valor del vehículo** y la unidad en que se expresa (USD, "moneda de mayor valor" del BCV o UT) | Ley de IVA vigente, artículos sobre consumo suntuario y su reforma más reciente |
-| ¿Supera la 4Runner el umbral de lujo? | Probablemente sí, si el umbral está en decenas de miles de USD | Umbral real y si se mide sobre FOB, CIF o valor en aduana | Ídem |
-| Tasa por determinación del régimen aduanero | 1 % del valor en aduana (sensibilidad hasta 2 %) | Porcentaje, base y si existe otra "tasa por servicio aduanero" | Ley Orgánica de Aduanas vigente (artículo de tasas) y su Reglamento |
-| IGTF | 3 % sobre pagos en divisas, en ciertos supuestos | (a) alícuota vigente en 2026; (b) si se aplica al pago de tributos de aduana en divisas; (c) si se aplica al pago en EE. UU. desde cuenta extranjera (en principio no, por ser una operación fuera del sistema venezolano); (d) si se aplica a los honorarios en divisas del agente de aduanas | Ley de IGTF vigente, decreto de alícuota y providencias del SENIAT |
-| Moneda de pago de los tributos | Se liquidan en Bs a la tasa oficial BCV del día que fija la norma (registro de la declaración o llegada) | Fecha de tasa aplicable y si se aceptan pagos en divisas | LOA, Código Orgánico Tributario vigente y providencias del SENIAT |
-| Tasa BCV más reciente | — | No se pudo consultar bcv.org.ve (dominio bloqueado) | bcv.org.ve |
-| Ley de Protección de Pensiones (contribución especial de empresas) | Grava la nómina de las empresas, **no la importación** | Confirmar que no grava importaciones | G.O. de la ley (2024) |
-| Timbre fiscal / tasas estadales | — | Si algún estado cobra timbre sobre trámites de importación o registro | Leyes de timbre fiscal estadal (Carabobo o Vargas/La Guaira) |
+| **IVA, alícuota general** | **16 %** | Rango legal 8 %–16,5 %. Fijado en 16 % por el Decreto 3.584 (ago-2018) [29] y mantenido en la reforma de la Ley de IVA, **G.O. 6.507 Ext., 29-01-2020** [30][33]. Vigencia en 2026: PwC Tax Summaries [28] | No encontré reforma de la Ley de IVA en 2025–2026 (búsqueda específica [33]) |
+| **IVA adicional por consumo suntuario (vehículos)** | **15 %** adicional, sobre la misma base → **31 % en total** | **Art. 61 de la Ley de IVA**: vehículos con **valor en aduanas (o precio de fábrica en el país) ≥ US$ 40.000** (G.O. 6.396 Ext., 21-08-2018 [32]). La reforma de 2020 (G.O. 6.507 Ext.) mantiene el 15 % "hasta tanto el Ejecutivo establezca una alícuota distinta" (rango 15–20 %, art. 27) [33][34][35] | **Unidad: USD.** La reforma de 2018 dejó de usar unidades tributarias [33]. **La 4Runner lo supera** (CIF 70.000–75.000 > 40.000). No encontré ningún decreto que haya subido la alícuota por encima del 15 % [NO VERIFICADO para 2026] |
+| IVA adicional por pagos en divisas o criptoactivos | 5 %–25 % en la ley, **sin alícuota fijada** según fuentes de 2020 [42] | Ley de IVA 2020 | No encontré decreto que la active. Estado en 2026 y aplicación en aduana: [NO VERIFICADO]. No la incluyo en el cálculo |
+| **Tasa por determinación del régimen aduanero** | **1 % del valor en aduanas** (rango legal 0,5 %–2 %) | Reglamento de la LOA sobre Tasas Aduaneras (Decreto N° 1.505, fecha s/d): "uno por ciento (1 %) del valor en aduanas" [37]. La LOA reformada (G.O. 6.507 Ext., 29-01-2020) fija la tasa entre 0,5 % y 2 % [36]. Gestores reportan ~1 % [38] | Es posible que el reglamento sea anterior a 2020; el 1 % que se aplica en la práctica no lo confirmé en el portal del SENIAT |
+| **IGTF** | **3 %** sobre pagos en divisas o criptoactivos | Ley de IGTF reformada, **G.O. 6.687 Ext., 25-02-2022** [39]. **Decreto 4.972, G.O. 6.821 Ext., 12-07-2024** (vigente desde el 15-07-2024): 0 % en ciertas operaciones en bolívares; no cambia el 3 % en divisas [40]. Guías de 2026 confirman el 3 % [41] | Lo cobran los **contribuyentes especiales** [39]. **No encontré si se aplica al pago de tributos aduaneros en divisas [NO VERIFICADO].** Si los tributos se pagan en Bs, el IGTF en divisas no se aplica. El pago del vehículo en EE. UU. desde una cuenta extranjera está fuera del sistema venezolano; que no cause IGTF es una inferencia del agente |
+| **Moneda y tipo de cambio** | Los tributos se pagan **antes o al registrar la declaración** [36]. Las cantidades fijas de la LOA se expresan en múltiplos de la tasa oficial BCV de la moneda de mayor valor (reforma de 2020) [36][45] | LOA, G.O. 6.507 Ext. (2020); Acceso a la Justicia [45] | **La regla exacta de qué fecha de tasa se usa para convertir el CIF a Bs sigue [NO VERIFICADO].** Como el pago coincide con el registro, la diferencia práctica es mínima |
+| **Tasa oficial BCV** | **911,62 Bs/USD** (fijada el 12-11-2026, vigente desde el 13-11-2026) | [PRENSA] que cita al BCV [43]. Referencias: 891,10 (03-11) y 896,12 (06-11) [43] | No encontré la tasa del 18-11-2026. Hay depreciación continua (unos 2,3 % en 9 días) |
+| Unidad Tributaria | **Bs 43** | Providencia SNAT/2025/000048, G.O. 43.140, 02-06-2025 [44] | Ya casi no se usa como referencia aduanera; la LOA usa la tasa BCV [45] |
+| Ley de Protección de Pensiones, timbre fiscal estadal | Sin cambios respecto a la ronda 1 | — | [NO VERIFICADO]. En principio no gravan la importación |
 
 ### 7. Restricciones y requisitos para importar
-- **Prohibición de importar por particulares:** **no encontré ninguna**. Según una fuente comercial, el Decreto 5.103 **no limita la importación a fines comerciales** [7]. Esto respalda que una persona natural puede importar para uso propio. No está confirmado en la Gaceta.
-- **Antigüedad:** máximo **5 años** según el Decreto 5.103 [7][8]. Una regla anterior, recogida en jurisprudencia de 2014, solo admitía vehículos nuevos con año modelo igual al de importación o el siguiente [21]. Un vehículo nuevo MY2026/2027 cumple las dos reglas.
-- **Licencia previa (Régimen Legal 20):** la Resolución 022-2025 lo exige para 29 subpartidas de vehículos y autopartes [10]. **Hay que comprobar si alguna 8703.40 está en la lista.** Si lo está, se necesitará una licencia del ministerio competente antes del embarque, y una persona natural podría no conseguirla. Es el principal riesgo de alcance pendiente.
-- **Certificado de emisiones:** se habría eliminado como requisito de la Nota Complementaria 3 del Capítulo 87 (Resolución 010-2025) [14] [NO VERIFICADO].
-- **RIF, registro de usuario aduanero del SENIAT y agente de aduanas obligatorio:** **[NO VERIFICADO]**. Hay que confirmar si una persona natural puede actuar como consignatario de una importación única sin estar inscrita como importador habitual, y si la LOA obliga a usar un agente de aduanas o permite actuar directamente. En la práctica se espera que intervenga un agente [suposición]. **Fuente:** LOA vigente (auxiliares de la administración aduanera) y providencias del SENIAT sobre el registro de usuarios.
-- **Régimen de equipaje o menaje:** existe un régimen de equipaje de pasajeros que ha permitido ingresar vehículos usados de uso personal en ciertos supuestos, con jurisprudencia sobre sus requisitos [20]. Está pensado para viajeros o personas que se mudan, no para residentes. **El cliente, residente en Venezuela, muy probablemente no califica** [suposición basada en [20]; requisitos actuales NO VERIFICADOS].
-- **La C.A. recién constituida:** si aún no tiene completo el registro de usuario aduanero o de importador, **no podrá figurar como consignataria** hasta tenerlo [requisito exacto NO VERIFICADO].
+- **Prohibición para particulares:** no encontré ninguna. El Decreto 5.103 no limita la importación a fines comerciales [7].
+- **Antigüedad:** máximo 5 años [7][8]. No afecta a un vehículo nuevo.
+- **(ronda 2) Régimen Legal 20 (Res. 022-2025):**
+  - Finanzas Digital lo describe como "licencia previa o restricciones especiales" expedida por el "órgano competente" [10].
+  - SENCAMER lo identifica con la **Constancia de Registro de Norma Venezolana COVENIN / Reglamento Técnico**. El RL 21 se fusionó con el RL 20 por el Decreto N° 4.111. El Decreto N° 3.679 (30-05-2005) exige presentar la constancia de SENCAMER junto con la declaración de aduanas [48].
+  - Se tramita en SENCAMER en línea, por producto [48].
+  - **No sé si una persona natural puede pedirla ni cuánto tarda [NO VERIFICADO]**, ni si la 8703.40 está en la lista.
+  - **No es una prohibición**, por eso no hay 🛑. Si la 8703.40 estuviera incluida, añadiría un trámite técnico y tiempo.
+  - El Decreto 5.147 habría dispensado temporalmente el RL 20 en ciertas subpartidas [48] [NO VERIFICADO].
+- **Agente de aduanas:** según una guía de gestor (ronda 2), "en ambas vías [ordinaria y equipaje] es obligatorio gestionar el trámite con un agente aduanal autorizado por el SENIAT" [53]. Es una fuente [BUFETE/GESTOR]; el artículo de la LOA sigue [NO VERIFICADO].
+- **RIF y registro de usuario aduanero de la persona natural o de la C.A.:** [NO VERIFICADO].
+- **(ronda 2) Régimen de equipaje** [53]:
+  - El vehículo, valorado como nuevo, no puede superar **US$ 20.000**.
+  - Exige **al menos 1 año de residencia fuera del país** y tener el vehículo a nombre del viajero **≥ 11 meses** antes del ingreso.
+  - Requiere un certificado de uso emitido por un consulado venezolano.
+  - Un vehículo por persona, de hasta 9 puestos; no se puede vender en Venezuela durante 3 años.
+  - **El cliente no califica por dos motivos:** es residente en Venezuela y el valor de la 4Runner supera los US$ 20.000. Fuentes de gestores y prensa; el texto normativo actual está [NO VERIFICADO].
 
 ### 8. Persona natural frente a la C.A.: diferencias tributarias
-- **Tributos de aduana** (arancel, tasa, IVA, IVA adicional): **iguales** con cualquier titular. No hay alícuotas diferenciadas por tipo de importador en las fuentes revisadas.
+- **Tributos de aduana:** **iguales** para los dos titulares. No hay alícuotas distintas según el tipo de importador.
 - **Crédito fiscal de IVA (solo la C.A.):**
-  - La Ley de IVA solo permite deducir los créditos fiscales de bienes ligados a la actividad gravada. Un vehículo para uso personal o familiar del accionista **no cumpliría esa condición** y es probable que el SENIAT rechazara el crédito en una fiscalización [regla general; artículo exacto NO VERIFICADO].
-  - Una C.A. recién constituida sin ventas no tendría débitos contra los que compensar el crédito, así que el beneficio sería solo diferido.
-  - Tampoco sé si la alícuota adicional de lujo da derecho a crédito [NO VERIFICADO].
-  - Si el crédito del IVA general (16 %) se admitiera, que es improbable, la carga efectiva bajaría unos 19–23 puntos del CIF (ver §Cifras).
-- **ISLR (C.A.):** la depreciación del vehículo solo es deducible si el gasto es normal y necesario para producir la renta. Con uso personal, el SENIAT podría rechazarla. Si la C.A. paga el vehículo y lo usa el accionista, existe el riesgo de que se trate como **distribución encubierta de dividendos**, o como renta en especie para el accionista, con ISLR sobre dividendos [régimen exacto y alícuotas NO VERIFICADOS].
-- **Salida futura del vehículo de la C.A.:** si después la C.A. lo vende o lo transfiere al accionista, esa operación generaría IVA (débito fiscal) e ISLR sobre la ganancia [NO VERIFICADO].
-- **Impuesto a los grandes patrimonios:** solo alcanzaría al cliente o a la C.A. si son sujetos pasivos especiales y superan el umbral legal. El umbral, la unidad en que se expresa y la vigencia en 2026 están **[NO VERIFICADO]**.
-- **Valoración de trabajo:** desde el punto de vista aduanero y tributario, **importar a nombre de la persona natural es más simple y menos arriesgado** para un uso personal. La C.A. no reduce los tributos de aduana y añade riesgos de fiscalización. Esto es un análisis del agente, no un dato.
+  - Un vehículo para uso personal del accionista difícilmente cumple el requisito de estar vinculado a la actividad gravada, así que el crédito probablemente se rechazaría [artículo exacto NO VERIFICADO].
+  - Una C.A. recién constituida sin ventas solo acumularía el crédito, sin poder usarlo.
+  - Si se admitiera el crédito del IVA general, la carga probable bajaría de 84,7 % a **62,2 %**; si también se admitiera el IVA de lujo, a **41,0 %**. No sé si el IVA de lujo da derecho a crédito [NO VERIFICADO].
+- **ISLR, dividendo encubierto, transferencia posterior al accionista e impuesto a los grandes patrimonios:** sin cambios respecto a la ronda 1 [NO VERIFICADO].
+- **Valoración del agente:** para uso personal, importar como persona natural es lo más simple y lo menos arriesgado.
 
 ## Cifras clave (tabla: concepto | valor | rango mín/prob/máx si es estimación | fuente [n] | fecha de la fuente / Gaceta)
 
 | Concepto | Valor | Rango mín / prob / máx (si es estimación) | Fuente [n] | Fecha fuente / Gaceta |
 |---|---|---|---|---|
 | Arancel de Aduanas base | Decreto N° 4.944 (24-04-2024) | — | [1][2][27] | G.O. N° 6.804 Ext., 25-04-2024 |
-| Subpartida SA aplicable | 8703.40 (HEV gasolina no enchufable) | — | [22][23] (nomenclatura SA; confirmar en [1]) | SA 2022 |
-| Código nacional de 10 dígitos | [NO VERIFICADO] | — | resolverlo con [1][4][10] | — |
-| Arancel (AEC) gasolina > 2.100 cm³ tras el Decreto 5.103 | 40 % (antes 20 %) [BUFETE/GESTOR] | — | [7] ([8] dice > 1.500 cc) | Decreto 5.103, G.O. N° 6.890 Ext., 06-03-2025 |
-| Arancel (AEC) aplicable a la 8703.40 de 2.393 cm³ | [NO VERIFICADO] (estimación) | 20 % / 40 % / 40 % | inferido de [7][8] | — |
-| Licencia previa (Régimen Legal 20) para 29 subpartidas de vehículos y autopartes | Sí, para las subpartidas listadas; **no sé si incluye la 8703.40** | — | [10] | Res. 022-2025, G.O. N° 43.166, 09-07-2025 |
-| Antigüedad máxima | 5 años [BUFETE/GESTOR] | — | [7][8] | Decreto 5.103 (06-03-2025) |
-| Partida 98.08 (CBU) | Eliminada | — | [11] | Decreto 5.147, G.O. N° 6.918 Ext., 30-06-2025 |
-| Exoneraciones aduaneras generales vigentes | Hasta el 31-12-2026; **sin cobertura conocida para este vehículo** | — | [14][15][16] | G.O. N° 6.952 Ext. (31-12-2025) |
-| Beneficio para híbridos o eléctricos | No encontrado [NO VERIFICADO] | — | [19][6] | — |
-| Reforma más reciente del Arancel | Res. 007-2026 (ago-2026), contenido [NO VERIFICADO] | — | [14][18] | ago-2026 |
-| Tasa por determinación del régimen aduanero | [NO VERIFICADO] (supuesto de trabajo) | 1 % / 1 % / 2 % | — (LOA) | — |
-| IVA, alícuota general | [NO VERIFICADO] (supuesto de trabajo) | 16 % | — (Ley IVA) | — |
-| IVA adicional suntuario | [NO VERIFICADO] (supuesto de trabajo) | 0 % (bajo el umbral) / 15 % / 15 % | — (Ley IVA) | — |
-| IGTF | [NO VERIFICADO] (supuesto de trabajo) | 0 % (tributos pagados en Bs) / 0 % / 3 % sobre los tributos | — (Ley IGTF) | — |
-| Tasa oficial BCV | [NO VERIFICADO] (bcv.org.ve bloqueado) | — | — | — |
+| Subpartida SA | 8703.40 | — | [22][23][55] | SA 2022 |
+| Código nacional de 10 dígitos | [NO VERIFICADO] | — | resolver con [1][4][10] | — |
+| AEC gasolina > 2.100 cm³ (Decreto 5.103) | 40 % (antes 20 %) [BUFETE/GESTOR] | — | [7] ([8]: > 1.500 cc) | G.O. N° 6.890 Ext., 06-03-2025 |
+| AEC de la 8703.40 de 2.393 cm³ | [NO VERIFICADO] | 20 % / 40 % / 40 % | inferido de [7][8][52] | — |
+| Régimen Legal 20 en 29 subpartidas de vehículos y autopartes | Sí; la 8703.40 [NO VERIFICADO] | — | [10][48][49] | Res. 022-2025, G.O. N° 43.166, 09-07-2025 |
+| Partida 98.08 (CBU) y exoneración de IVA de las partidas 98.01–98.07 | Eliminadas | — | [11] | Decreto 5.147, G.O. N° 6.918 Ext., 30-06-2025 |
+| Exoneraciones aduaneras generales (Decreto 5.197) | 90 % del arancel y 90 % del IVA en el Apéndice I, hasta el 31-12-2026; **cobertura de vehículos no hallada** | — | [47] | G.O. N° 6.952 Ext., 31-12-2025 |
+| Beneficio para híbridos | No encontrado | — | [51][50][11] | — |
+| **IVA, alícuota general** (ronda 2) | **16 %** | — | [28][29][30][33] | Decreto 3.584 (2018); Ley IVA, G.O. N° 6.507 Ext., 29-01-2020 |
+| **IVA adicional de lujo** (ronda 2) | **15 %** (rango legal 15–20 %) | — | [32][33][34][35] | Art. 61 Ley IVA; G.O. N° 6.396 Ext., 21-08-2018; G.O. N° 6.507 Ext., 29-01-2020 |
+| **Umbral de lujo para vehículos** (ronda 2) | Valor en aduanas ≥ **US$ 40.000** (en USD). **La 4Runner lo supera** | — | [32][33][35] | Ídem |
+| **Tasa por determinación del régimen aduanero** (ronda 2) | **1 % del valor en aduanas** | 0,5 % / 1 % / 2 % (rango de la LOA) | [36][37][38] | Reglamento de Tasas (Decreto 1.505); LOA, G.O. N° 6.507 Ext., 29-01-2020 |
+| **IGTF** (ronda 2) | **3 %** sobre pagos en divisas | 0 % (tributos en Bs) / 0 % / 3 % | [39][40][41] | G.O. N° 6.687 Ext., 25-02-2022; Decreto 4.972, G.O. N° 6.821 Ext., 12-07-2024 |
+| IVA adicional por pago en divisas | 5–25 % en la ley; sin decreto que la fije (2020) | — | [42] | Ley IVA 2020; vigencia en 2026 [NO VERIFICADO] |
+| **Tasa oficial BCV** (ronda 2) | **911,62 Bs/USD** | — | [43] [PRENSA] | Fijada el 12-11-2026, vigente desde el 13-11-2026 |
+| Unidad Tributaria (ronda 2) | Bs 43 | — | [44] | Prov. SNAT/2025/000048, G.O. N° 43.140, 02-06-2025 |
+| Tope de valor del régimen de equipaje (ronda 2) | US$ 20.000 (valor como nuevo) | — | [53] [BUFETE/GESTOR] | s/f |
 
-**Fórmulas** (supuesto: el IVA y el IVA adicional se calculan sobre la misma base):
+**Fórmulas (ronda 2):**
 - Arancel = CIF × a
-- Tasa aduanera = CIF × t
-- Base IVA = CIF + Arancel + Tasa
-- IVA general = Base IVA × g
-- IVA adicional de lujo = Base IVA × s
-- IGTF = (total de tributos pagados en divisas) × i, solo si aplica
-- **Carga total (% del CIF) = a + t + (1 + a + t) × (g + s)**, más IGTF si aplica. El porcentaje no depende del CIF salvo por el umbral de lujo.
+- Tasa = CIF × t
+- Base del IVA = CIF + Arancel + Tasa (la inclusión de la tasa es un supuesto)
+- IVA = Base × 16 %
+- IVA de lujo = Base × 15 % (aplica porque el valor en aduanas ≥ US$ 40.000)
+- IGTF = Tributos × 3 %, solo si se pagan en divisas y el impuesto aplica [NO VERIFICADO]
+- **Carga (% del CIF) = a + t + (1 + a + t) × 31 %**
 
-**Escenarios** (supuestos de trabajo t = 1 %, g = 16 %; arancel a y lujo s según el escenario):
+**Escenarios recalculados (ronda 2), en USD:**
 
-| Escenario | a | s | Carga % CIF | CIF 70.000: Arancel / Tasa / IVA / Lujo / **Total tributos** / CIF + tributos | CIF 75.000: Arancel / Tasa / IVA / Lujo / **Total tributos** / CIF + tributos |
+| Escenario | a | t | Carga % del CIF | CIF 70.000: Arancel / Tasa / IVA 16 % / Lujo 15 % / **Total tributos** / CIF + tributos | CIF 75.000: Arancel / Tasa / IVA 16 % / Lujo 15 % / **Total tributos** / CIF + tributos |
 |---|---|---|---|---|---|
-| **A, planificación** (40 % + lujo) | 40 % | 15 % | **84,7 %** | 28.000 / 700 / 15.792 / 14.805 / **59.297** / 129.297 | 30.000 / 750 / 16.920 / 15.862,50 / **63.532,50** / 138.532,50 |
-| B (40 %, sin lujo) | 40 % | 0 % | **63,6 %** | 28.000 / 700 / 15.792 / 0 / **44.492** / 114.492 | 30.000 / 750 / 16.920 / 0 / **47.670** / 122.670 |
-| C (20 % + lujo) | 20 % | 15 % | **58,5 %** | 14.000 / 700 / 13.552 / 12.705 / **40.957** / 110.957 | 15.000 / 750 / 14.520 / 13.612,50 / **43.882,50** / 118.882,50 |
-| **D, mínimo** (20 %, sin lujo) | 20 % | 0 % | **40,4 %** | 14.000 / 700 / 13.552 / 0 / **28.252** / 98.252 | 15.000 / 750 / 14.520 / 0 / **30.270** / 105.270 |
-| **Máx.** (A con t = 2 % e IGTF 3 % sobre tributos) | 40 % | 15 % | **88,6 %** | total con IGTF ≈ 62.020 / ≈ 132.020 | total con IGTF ≈ 66.450 / ≈ 141.450 |
-| Referencia: arancel 0 %, sin lujo | 0 % | 0 % | 17,2 % | 0 / 700 / 11.312 / 0 / **12.012** / 82.012 | 0 / 750 / 12.120 / 0 / **12.870** / 87.870 |
+| **Mínimo** | 20 % | 0,5 % | **57,9 %** | 14.000 / 350 / 13.496 / 12.652,50 / **40.498,50** / 110.498,50 | 15.000 / 375 / 14.460 / 13.556,25 / **43.391,25** / 118.391,25 |
+| Arancel 20 %, tasa 1 % | 20 % | 1 % | 58,5 % | 14.000 / 700 / 13.552 / 12.705 / **40.957** / 110.957 | 15.000 / 750 / 14.520 / 13.612,50 / **43.882,50** / 118.882,50 |
+| **Probable** | 40 % | 1 % | **84,7 %** | 28.000 / 700 / 15.792 / 14.805 / **59.297** / 129.297 | 30.000 / 750 / 16.920 / 15.862,50 / **63.532,50** / 138.532,50 |
+| Arancel 40 %, tasa 2 % | 40 % | 2 % | 86,0 % | 28.000 / 1.400 / 15.904 / 14.910 / **60.214** / 130.214 | 30.000 / 1.500 / 17.040 / 15.975 / **64.515** / 139.515 |
+| **Máximo** (40 %, tasa 2 % + IGTF 3 % sobre tributos) | 40 % | 2 % | **88,6 %** | Tributos + IGTF ≈ **62.020** / ≈ 132.020 | Tributos + IGTF ≈ **66.450** / ≈ 141.450 |
+| Referencia: arancel 0 % | 0 % | 1 % | 32,3 % | 0 / 700 / 11.312 / 10.605 / **22.617** / 92.617 | 0 / 750 / 12.120 / 11.362,50 / **24.232,50** / 99.232,50 |
 
-**Por titular** (mismos supuestos):
+En bolívares, a la tasa BCV de 911,62 (vigente desde el 13-11-2026) [43], el escenario probable equivale a **≈ Bs 54,06 millones** (CIF 70.000) y **≈ Bs 57,92 millones** (CIF 75.000). Es solo ilustrativo: la tasa aplicable será la de la fecha que fije la aduana.
 
-| Titular | Carga tributaria de aduana | Carga efectiva si se admitiera el crédito del IVA general (16 %) | Comentario |
-|---|---|---|---|
-| Persona natural | A 84,7 % · B 63,6 % · C 58,5 % · D 40,4 % | No aplica: un consumidor final no recupera el IVA | Opción más simple |
-| La C.A. venezolana | Igual: A 84,7 % · B 63,6 % · C 58,5 % · D 40,4 % | A ≈ 62,2 % · B ≈ 41,0 % · C ≈ 39,2 % · D ≈ 21,0 % (resta (1 + a + t) × 16 %) | **Improbable** con uso personal. Además: posible rechazo en fiscalización, crédito sin aprovechar por falta de ventas y riesgo de ISLR y dividendo encubierto. Tampoco sé si el IVA de lujo se acredita |
+**Por titular (ronda 2):**
 
-*Ninguno de estos importes incluye flete interno, almacenaje, servicios portuarios ni honorarios del agente de aduanas, que llevan otros agentes.*
+| Titular | Carga aduanera | Carga efectiva si se admite crédito del IVA general | Carga efectiva si se admite también el crédito del IVA de lujo | Comentario |
+|---|---|---|---|---|
+| Persona natural | Mín. 57,9 % · Prob. 84,7 % · Máx. 88,6 % | No aplica | No aplica | La opción más simple |
+| La C.A. venezolana | Igual: 57,9 % · 84,7 % · 88,6 % | Mín. ≈ 38,6 % · Prob. ≈ 62,2 % | Mín. ≈ 20,5 % · Prob. ≈ 41,0 % | **Improbable** con uso personal: posible rechazo del crédito, crédito sin usar por falta de ventas, riesgo de ISLR y de dividendo encubierto. Que el IVA de lujo dé crédito está [NO VERIFICADO] |
+
+*Los importes no incluyen flete interno, almacenaje, servicios portuarios ni honorarios del agente de aduanas, que llevan otros agentes.*
 
 ## Riesgos detectados
-1. **Tarifa de la 8703.40 sin confirmar.** La diferencia entre 20 % y 40 % de arancel, arrastrada por el IVA, equivale a unos **26 puntos del CIF**: alrededor de USD 18.300 con un CIF de 70.000 y USD 19.700 con uno de 75.000.
-2. **Presupuesto inviable con los supuestos actuales.** Aun en el escenario mínimo D, el costo antes de logística local es de USD 98.000–105.000. Con arancel 0 %, solo el IVA lo deja en USD 82.000–88.000. El presupuesto de USD 80.000 todo incluido **no se cumple** salvo que exista una exoneración que no encontré. Depende de confirmar el IVA, que está [NO VERIFICADO].
-3. **Licencia previa (Régimen Legal 20)** si la 8703.40 está entre las 29 subpartidas de la Res. 022-2025 [10]. Podría impedir la importación a una persona natural o a una C.A. sin registro. **Riesgo de alcance pendiente.**
-4. **Resolución 007-2026** (agosto de 2026) con contenido desconocido: podría haber cambiado tarifas o regímenes del Capítulo 87.
-5. **Normativa muy cambiante:** al menos 11 reformas del Arancel entre abril de 2024 y agosto de 2026. La tarifa que se aplica es la vigente en la fecha que fije la LOA (registro de la declaración o llegada). Si el vehículo llega en 2027, el decreto de exoneraciones que vence el 31-12-2026 ya no regirá.
-6. **Reclasificación** a 8703.23, o rechazo de la condición de híbrido, si la documentación técnica no es clara.
-7. **Ajuste del valor** por la aduana si la factura queda por debajo de los precios de referencia o del precio público; hay que comprobar si existen listas del SENIAT.
-8. **La C.A.:** registro de importador incompleto, que impide nacionalizar a su nombre; rechazo del crédito fiscal de IVA y de la depreciación; posible dividendo encubierto; IVA e ISLR adicionales si luego transfiere el vehículo al accionista.
-9. **Tipo de cambio:** los tributos se liquidan en Bs [NO VERIFICADO]. Una devaluación entre la liquidación y el pago, o diferencias entre tasas, alteran el costo en USD.
-10. **Verificación limitada:** ningún dato de este archivo se leyó en la fuente primaria. Todo sale de resúmenes del buscador o de fuentes secundarias.
+1. **Tarifa de la 8703.40 sin confirmar.** La diferencia entre 20 % y 40 % es de unos **26 puntos del CIF**: alrededor de USD 18.300 con CIF de 70.000 y USD 19.650 con CIF de 75.000.
+2. **El presupuesto no alcanza (ronda 2, ya con IVA verificado).** Escenario mínimo: USD 110.500–118.400 antes de logística. Escenario probable: USD 129.300–138.500. Ni con arancel 0 % (USD 92.600–99.200) se llega a USD 80.000.
+3. **Régimen Legal 20:** si la 8703.40 estuviera en la Res. 022-2025, habría que tramitar la constancia COVENIN o reglamento técnico de SENCAMER, o la "licencia previa", con plazo desconocido. No está confirmado que la incluya ni que sea una prohibición.
+4. **Resolución 007-2026** (agosto de 2026) con contenido desconocido. Se aplica el Arancel vigente a la fecha de registro de la declaración [36].
+5. **Normativa muy cambiante:** al menos 11 reformas del Arancel entre 2024 y 2026. El Decreto 5.197 vence el 31-12-2026. El Ejecutivo puede subir el IVA de lujo hasta el 20 % y la tasa aduanera hasta el 2 % sin reformar la ley [33][36].
+6. **Reclasificación** a 8703.23 si no se acredita la condición de híbrido.
+7. **Ajuste del valor** por la Gerencia del Valor del SENIAT [54].
+8. **La C.A.:** registro aduanero incompleto, rechazo de crédito y de depreciación, posible dividendo encubierto.
+9. **Tipo de cambio:** depreciación del bolívar de unos 2,3 % en 9 días en noviembre de 2026 [43]. Conviene registrar la declaración y pagar el mismo día.
+10. **IGTF** sobre tributos pagados en divisas o sobre honorarios en divisas del agente: no está aclarado.
+11. **Verificación limitada:** todas las cifras salen de extractos del buscador; no leí ninguna Gaceta completa.
 
 ## Preguntas abiertas
-1. ¿Cuál es el código nacional de 10 dígitos y la tarifa de la 8703.40 para un motor de 2.393 cm³ en el art. 37 del Decreto 4.944, con las modificaciones del Decreto 5.103, la Res. 022-2025 y la Res. 007-2026? Lo resuelve el texto de esas Gacetas.
-2. ¿Está alguna subpartida 8703.40 en el Régimen Legal 20 (Res. 022-2025, G.O. 43.166)? ¿Qué ministerio emite la licencia y puede pedirla una persona natural?
-3. ¿Qué cambió exactamente la Res. 007-2026 (agosto de 2026)? ¿En qué Gaceta se publicó?
-4. IVA: alícuota general vigente, alícuota adicional de lujo, umbral del vehículo (unidad y base de medición) y decreto o Gaceta. ¿Hubo reformas de la Ley de IVA en 2025–2026?
-5. Tasa por determinación del régimen aduanero: porcentaje, base y artículo de la LOA vigente.
-6. IGTF: alícuota vigente en 2026 y si aplica al pago de tributos de aduana en divisas o a los honorarios del agente.
-7. ¿Se pueden pagar los tributos de aduana en divisas? ¿A qué fecha se toma la tasa BCV? ¿Cuál es la tasa BCV de noviembre de 2026?
-8. ¿Puede una persona natural con RIF ser consignataria de una importación única sin estar inscrita como importador? ¿Es obligatorio el agente de aduanas?
-9. ¿Publica el SENIAT valores de referencia para vehículos nuevos?
-10. ¿Cubre el decreto de exoneraciones de la G.O. 6.952 Ext. (5.196 o 5.197) alguna subpartida de vehículos de pasajeros? ¿Hay algún beneficio para híbridos fuera del Arancel, por ejemplo en leyes ambientales o de transición energética?
-11. Ley de IVA: ¿la alícuota adicional de lujo da derecho a crédito fiscal? ¿Qué artículo impide deducir los créditos de bienes ajenos a la actividad?
-12. Impuesto a los grandes patrimonios: umbral vigente en 2026 y si alcanza al cliente o a la C.A.
-
-**Para el orquestador:** las preguntas 1 a 7 necesitan una ronda nueva con más cupo de búsquedas, o que se permitan en la red de la sesión los dominios seniat.gob.ve, tradex.com.ve, traviesoevans.com, bcv.org.ve, pwc.com, kpmg.com y lega.law.
+1. ¿Cuál es el código de 10 dígitos y la tarifa de la 8703.40 de 2.393 cm³ en el art. 37 del Decreto 4.944 con sus reformas, en especial el Decreto 5.103 y la Res. 007-2026? Lo resuelve el texto de las Gacetas 6.804 y 6.890 Ext., por ejemplo los PDF de Tradex o Travieso Evans [1][4][50].
+2. ¿Incluye la Res. 022-2025 alguna 8703.40? ¿El RL 20 equivale aquí a la constancia de SENCAMER o a una licencia ministerial? ¿Puede pedirla una persona natural y cuánto tarda?
+3. ¿Qué cambió la Res. 007-2026?
+4. ¿Se aplica el IGTF al pago de tributos aduaneros en divisas? ¿Acepta el SENIAT pagos de aduana en divisas?
+5. ¿Qué fecha de tasa BCV se usa para convertir el CIF: la del registro de la declaración o la del pago?
+6. ¿El 1 % del Reglamento de Tasas sigue siendo la tasa aplicada tras la reforma de la LOA de 2020?
+7. ¿La base del IVA de importación incluye la tasa aduanera? ¿El IVA de lujo da derecho a crédito fiscal?
+8. ¿Cubre el Apéndice I del Decreto 5.197 algún vehículo de la partida 87.03? Hay que revisar el PDF GORBV-6952 [47].
+9. ¿Existen listas de valores de referencia del SENIAT para vehículos nuevos?
+10. ¿Es obligatorio por ley el agente de aduanas para una persona natural (artículo de la LOA)? ¿Qué registros se exigen (RIF, registro de usuario aduanero)?
+11. ¿Se ha activado la alícuota adicional de IVA por pagos en divisas (5–25 %)?
+12. ¿Cuál es el umbral vigente en 2026 del impuesto a los grandes patrimonios?
 
 ## Fuentes (lista numerada: título — URL — fecha de la fuente — consultada 2026-11-18 — tipo: primaria/secundaria/prensa/foro)
-*Todas se consultaron el 2026-11-18 **a través de los resúmenes del buscador**. No se abrió ninguna URL directamente porque los dominios estaban bloqueados en la sesión.*
+*Todas se consultaron el 2026-11-18 **a través de los extractos del buscador**; no se abrió ninguna URL directamente. "Primaria (copia)" significa una copia de la Gaceta u otra norma alojada por un tercero, que no se leyó completa.*
 
-1. Gaceta Oficial N° 6.804 Extraordinario (Decreto N° 4.944, Arancel de Aduanas), copia alojada por Travieso Evans — https://www.traviesoevans.com/travieso/wp-content/uploads/gacetas/2024/04-abril/2024-04-25-6804-extraordinario.pdf — 25-04-2024 — consultada 2026-11-18 — primaria (copia de la G.O.; no leída directamente)
+1. Gaceta Oficial N° 6.804 Extraordinario (Decreto N° 4.944, Arancel de Aduanas) — https://www.traviesoevans.com/travieso/wp-content/uploads/gacetas/2024/04-abril/2024-04-25-6804-extraordinario.pdf ; copia de Tradex: https://www.tradex.com.ve/wp-content/uploads/Tradex-Arancel-de-Aduanas-Decreto-4.944-GOE-6.804.pdf — 25-04-2024 — consultada 2026-11-18 — primaria (copia)
 2. FEDEAGRO, "Se dicta el Arancel de Aduanas" — https://fedeagro.org/se-dicta-el-arancel-de-aduanas/ — 2024 — consultada 2026-11-18 — secundaria
 3. Stanzione, "Actualización en el Arancel de Aduanas en Venezuela a partir del pasado 25 de mayo de 2024" — https://stanzione.com/actualizacion-en-el-arancel-de-aduanas-en-venezuela-a-partir-del-pasado-25-de-mayo-de-2024/ — 2024 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-4. Gaceta Oficial N° 6.890 Extraordinario (Decreto N° 5.103), copias de KPMG y Travieso Evans — https://assets.kpmg.com/content/dam/kpmg/ve/pdf/2025/3/g.e_6.890.pdf ; https://traviesoevans.com/travieso/wp-content/uploads/gacetas/2025/03-marzo/2025-03-06-6890-extraordinario.pdf — 06-03-2025 — consultada 2026-11-18 — primaria (copia; no leída directamente)
+4. Gaceta Oficial N° 6.890 Extraordinario (Decreto N° 5.103) — https://assets.kpmg.com/content/dam/kpmg/ve/pdf/2025/3/g.e_6.890.pdf ; https://traviesoevans.com/travieso/wp-content/uploads/gacetas/2025/03-marzo/2025-03-06-6890-extraordinario.pdf — 06-03-2025 — consultada 2026-11-18 — primaria (copia)
 5. Legis, "Reforma Parcial del Arancel de Aduanas" — https://www.legis.com.ve/BancoConocimiento/N/nota_20-03-2025-01/nota_20-03-2025-01.asp?Miga=1&CodSeccion=25 — 20-03-2025 — consultada 2026-11-18 — secundaria
-6. PwC Venezuela, "Decreto N° 5.103, que modifica parcialmente el Decreto N° 4.944" (Exoneraciones IVA e Impuestos de Importación FY25) — https://www.pwc.com/ve/es/assets/documentos/stl/NAC-Exoneraciones-IVA-e-Impuestos-de-Importacion-FY25-Rev-AAP-1.pdf — 2025 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-7. Continental Suppliers, "SENIAT autoriza importación de vehículos nuevos y usados" — https://continentalsuppliers.com/seniat-autoriza-importacion-de-vehiculos-nuevos-y-usados/ — s/f (posterior a mar-2025) — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] (empresa importadora)
-8. AB Group Shipping, "Calculadora envío carro a Venezuela 2026" — https://www.abgroupshipping.com/blogs/es/calculadora-envio-carro-a-venezuela-2026-desde-1-450 — 2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] (naviera)
-9. Decreto N° 5.122 / Gaceta Oficial N° 43.111 — https://vlexvenezuela.com/vid/decreto-n-5-122-1080119490 ; https://www.bancaynegocios.com/wp-content/uploads/2025/05/GO-43.111-2-4.pdf — 21-04-2025 — consultada 2026-11-18 — primaria (copia; no leída)
-10. Resolución N° 022-2025, G.O. N° 43.166: Badell & Grau — https://badellgrau.com/gaceta-oficial-n-o-43-166-del-09-de-julio-de-2025/ ; Ámbito Aduanero (X) — https://x.com/ambitoaduanero/status/1945213683782893594 ; Finanzas Digital — https://finanzasdigital.com/regimen-legal-20-importacion-vehiculos-venezuela-2025/ y https://finanzasdigital.com/resolucion-gaceta-oficial-43-166-importacion-vehiculos-venezuela/ ; Fedecámaras Radio — https://fedecamarasradio.com/gobierno-ajusta-aranceles-de-importacion-para-vehiculos-y-autopartes-en-gaceta-oficial-n-43-166/ ; Sumarium — https://sumarium.info/2025/07/15/gobierno-venezolano-refuerza-control-de-comercio-exterior-sobre-vehiculos-y-autopartes-con-nueva-resolucion/ — 09/15-07-2025 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] y [PRENSA] (resumen de una fuente primaria)
+6. PwC Venezuela, "Decreto N° 5.103, que modifica parcialmente el Decreto N° 4.944" — https://www.pwc.com/ve/es/assets/documentos/stl/NAC-Exoneraciones-IVA-e-Impuestos-de-Importacion-FY25-Rev-AAP-1.pdf — 2025 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+7. Continental Suppliers, "SENIAT autoriza importación de vehículos nuevos y usados" — https://continentalsuppliers.com/seniat-autoriza-importacion-de-vehiculos-nuevos-y-usados/ — s/f (posterior a mar-2025) — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+8. AB Group Shipping, "Calculadora envío carro a Venezuela 2026" — https://www.abgroupshipping.com/blogs/es/calculadora-envio-carro-a-venezuela-2026-desde-1-450 — 2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+9. Decreto N° 5.122 / G.O. N° 43.111 — https://vlexvenezuela.com/vid/decreto-n-5-122-1080119490 ; https://www.bancaynegocios.com/wp-content/uploads/2025/05/GO-43.111-2-4.pdf — 21-04-2025 — consultada 2026-11-18 — primaria (copia)
+10. Resolución N° 022-2025, G.O. N° 43.166: Badell & Grau — https://badellgrau.com/gaceta-oficial-n-o-43-166-del-09-de-julio-de-2025/ ; Ámbito Aduanero (X) — https://x.com/ambitoaduanero/status/1945213683782893594 ; Finanzas Digital — https://finanzasdigital.com/regimen-legal-20-importacion-vehiculos-venezuela-2025/ y https://finanzasdigital.com/resolucion-gaceta-oficial-43-166-importacion-vehiculos-venezuela/ ; Fedecámaras Radio — https://fedecamarasradio.com/gobierno-ajusta-aranceles-de-importacion-para-vehiculos-y-autopartes-en-gaceta-oficial-n-43-166/ ; Sumarium — https://sumarium.info/2025/07/15/gobierno-venezolano-refuerza-control-de-comercio-exterior-sobre-vehiculos-y-autopartes-con-nueva-resolucion/ — 09/15-07-2025 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] / [PRENSA]
 11. LEĜA Abogados, "Reforma del Arancel de Aduanas de fecha 30 de junio de 2025" (Decreto 5.147, G.O. 6.918 Ext.) — https://lega.law/reform-of-the-customs-tariff-dated-june-30-2025/ — 2025 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-12. Legis, "Reforman parcialmente el decreto que establece el Arancel de Aduanas" — https://www.legis.com.ve/BancoConocimiento/N/nota_27-08-2025-07/nota_27-08-2025-07.asp?Miga=1&CodSeccion=25 — 27-08-2025 — consultada 2026-11-18 — secundaria. 12b. Legis, "Dictan decreto que reforma el Arancel de Aduanas" — https://www.legis.com.ve/BancoConocimiento/N/nota_13-05-2025-n2/nota_13-05-2025-n2.asp?Miga=1&CodSeccion=25 — 13-05-2025 — secundaria
-13. Baker McKenzie, "Venezuela: Nueva reforma parcial del Arancel de Aduanas" (Decreto 5.198) — https://www.bakermckenzie.com/en/insight/publications/2026/01/venezuela-new-partial-amendment-to-the-customs-tariff-schedule (PDF en español: https://www.bakermckenzie.com/-/media/files/insight/publications/2026/01/venezuela-new-partial-amendment-to-the-customs-tariff-schedule/venezuela-new-partial-amendment-to-the-customs-tariff-schedule-spanish.pdf) — ene-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-14. Tradex, "Normativa Arancelaria / Exoneración de Gravámenes y Tributos" y "SUMARIO – Reforma Arancel de Aduanas – Decreto de Exoneración G.O. 6.952" — https://www.tradex.com.ve/normativa-arancelaria/ ; https://www.tradex.com.ve/wp-content/uploads/Tradex-Reforma-Arancel-de-Aduanas-Decreto-de-Exoneracion-GO.-6.952.pdf — 2025–2026 (actualizada a ago-2026) — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] (recopila Gacetas)
-15. Acceso a la Justicia, "Suspensión de la aplicación de las exenciones a la importación previstas en el Decreto-Ley que establece el IVA" y "Exoneraciones de Impuestos de Importación e IVA a la importación" — https://accesoalajusticia.org/suspension-de-la-aplicacion-de-las-exenciones-a-la-importacion/ ; https://accesoalajusticia.org/exoneraciones-de-impuestos-de-importacion-e-impuesto-al-valor-agregado-a-la-importacion/ — 2025–2026 — consultada 2026-11-18 — secundaria (ONG jurídica)
-16. LEĜA, "Exoneraciones en materia aduanera vigentes hasta el 31 de diciembre de 2026" — https://lega.law/en/exoneraciones-en-materia-aduanera-vigentes-hasta-el-31-de-diciembre-de-2026/ — ene-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-17. Tinoco, Travieso, Planchart & Núñez, "Decreto Nro. 5.376…" (G.O. 43.409) — https://ttpn.com.ve/?p=5604 — jul-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-18. Ámbito Aduanero, "Arancel de Aduanas de Venezuela único instrumento legal que contempla restricciones a las operaciones aduaneras" (y aviso de la Resolución N° 007-2026) — https://www.ambitoaduanero.com/home-mainmenu-1/21-jurisprudenciassecciona/87-aranceladuanasvenezuela — s/f — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-19. Holland & Knight, "Venezuela decreta exoneraciones afectando los impuestos de importación" (2023) y "Venezuela extiende exoneración del IVA a la importación" (2024) — https://www.hklaw.com/-/media/files/insights/publications/2023/07/venezueladecreeprovidesexemptionsaffectingimporttaxeses.pdf ; https://www.hklaw.com/-/media/files/insights/publications/2024/09/venezuelaextendsvatexemptiones.pdf — jul-2023 / sep-2024 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
-20. Acceso a la Justicia, "Requisitos para la importación de vehículos bajo régimen de equipaje" e "Importación de vehículo usado bajo régimen aduanero especial de equipaje"; Legiscomex, "Régimen de equipaje de pasajeros" — https://accesoalajusticia.org/requisitos-para-la-importacion-de-vehiculos-bajo-regimen-de-equipaje/ ; https://accesoalajusticia.org/importacion-de-vehiculo-usado-bajo-regimen-aduanero-especial-de-equipaje/ ; https://www.legiscomex.com/BancoMedios/Documentos%20PDF/régimen%20de%20equipaje%20de%20pasajeros.pdf — s/f — consultada 2026-11-18 — secundaria
-21. Tribunal Superior Contencioso Tributario / TSJ-SPA, sentencia de 2014 sobre importación de vehículos nuevos (vLex) — https://vlexvenezuela.com/vid/tribunal-superior-contencioso-tributario-593348022 — 02-07-2014 — consultada 2026-11-18 — primaria (jurisprudencia; norma posiblemente derogada)
-22. MINCIT Colombia, proyecto de decreto sobre vehículos híbridos (análisis de la 8703.40) — https://abcrepecev.com/hubfs/21-04-21-pd-vehiculos-hibridos.pdf — abr-2021 — consultada 2026-11-18 — secundaria (referencia comparada de nomenclatura). Complemento: Studocu (UCV Perú), "Clasificación de vehículos híbridos y eléctricos – 8703" — https://www.studocu.com/pe/document/universidad-cesar-vallejo/nomenclatura-arancelaria-y-valoracion-aduanera/vehiculo-hibrido-y-electricos/95358829 — s/f — [FORO/REDES]
-23. Ministerio de Hacienda de Costa Rica, Resolución MH-DGA-RES-0535-2024 (clasificación de híbridos en la 8703.40) — https://www.hacienda.go.cr/docs/MH-DGA-RES-0535-2024.pdf — 2024 — consultada 2026-11-18 — secundaria (referencia comparada)
-24. Easyship, "Calculadora de aranceles e impuestos – Venezuela" (método CIF) — https://www.easyship.com/es-es/duties-and-taxes-calculator/venezuela — s/f — consultada 2026-11-18 — secundaria comercial
-25. Somerset Escargot, "Nuevas tasas de importación en Venezuela 2026…" — https://somersetescargot.co.uk/nuevas-tasas-de-importacion-en-venezuela-2026-cambios-en-aranceles-aduaneros-desde-marzo/ — 2026 — consultada 2026-11-18 — [FORO/REDES] (**poco fiable; no se usó para ninguna cifra**)
-26. Times Brasil, "Venezuela quer elevar tarifa sobre carros brasileiros" (ACE 69) — https://timesbrasil.com.br/brasil/venezuela-quer-elevar-tarifa-sobre-carros-brasileiros/ — 2025 — consultada 2026-11-18 — [PRENSA] (contexto; no aplica a la 4Runner)
-27. Pandectas Digital, "Arancel de Aduanas [Vigente]" — https://pandectasdigital.blogspot.com/2024/04/arancel-de-aduanas.html — abr-2024 — consultada 2026-11-18 — secundaria [FORO/REDES]
+12. Legis, "Reforman parcialmente el decreto que establece el Arancel de Aduanas" — https://www.legis.com.ve/BancoConocimiento/N/nota_27-08-2025-07/nota_27-08-2025-07.asp?Miga=1&CodSeccion=25 — 27-08-2025 — secundaria. 12b. Legis, "Dictan decreto que reforma el Arancel de Aduanas" — https://www.legis.com.ve/BancoConocimiento/N/nota_13-05-2025-n2/nota_13-05-2025-n2.asp?Miga=1&CodSeccion=25 — 13-05-2025 — consultada 2026-11-18 — secundaria
+13. Baker McKenzie, "Venezuela: Nueva reforma parcial del Arancel de Aduanas" (Decreto 5.198) — https://www.bakermckenzie.com/en/insight/publications/2026/01/venezuela-new-partial-amendment-to-the-customs-tariff-schedule — ene-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+14. Tradex, "Normativa Arancelaria / Exoneración de Gravámenes y Tributos" y "SUMARIO – Reforma Arancel – Decreto de Exoneración G.O. 6.952" — https://www.tradex.com.ve/normativa-arancelaria/ ; https://www.tradex.com.ve/wp-content/uploads/Tradex-Reforma-Arancel-de-Aduanas-Decreto-de-Exoneracion-GO.-6.952.pdf — 2025–2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+15. Acceso a la Justicia, "Suspensión de la aplicación de las exenciones a la importación…" y "Exoneraciones de Impuestos de Importación e IVA a la importación" — https://accesoalajusticia.org/suspension-de-la-aplicacion-de-las-exenciones-a-la-importacion/ ; https://accesoalajusticia.org/exoneraciones-de-impuestos-de-importacion-e-impuesto-al-valor-agregado-a-la-importacion/ — 2025–2026 — consultada 2026-11-18 — secundaria
+16. LEĜA, "Exoneraciones en materia aduanera vigentes hasta el 31 de diciembre de 2026" — https://lega.law/en/exoneraciones-en-materia-aduanera-vigentes-hasta-el-31-de-diciembre-de-2026/ ; https://lega.law/lega-informa/exoneraciones-aduanas-2026/ — ene-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+17. TTPN, "Decreto Nro. 5.376…" (G.O. 43.409) — https://ttpn.com.ve/?p=5604 — jul-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+18. Ámbito Aduanero, "Arancel de Aduanas de Venezuela…" (y aviso de la Res. 007-2026) — https://www.ambitoaduanero.com/home-mainmenu-1/21-jurisprudenciassecciona/87-aranceladuanasvenezuela — s/f — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+19. Holland & Knight, exoneraciones 2023 y 2024 — https://www.hklaw.com/-/media/files/insights/publications/2023/07/venezueladecreeprovidesexemptionsaffectingimporttaxeses.pdf ; https://www.hklaw.com/-/media/files/insights/publications/2024/09/venezuelaextendsvatexemptiones.pdf — 2023/2024 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+20. Acceso a la Justicia y Legiscomex, régimen de equipaje (jurisprudencia) — https://accesoalajusticia.org/requisitos-para-la-importacion-de-vehiculos-bajo-regimen-de-equipaje/ ; https://accesoalajusticia.org/importacion-de-vehiculo-usado-bajo-regimen-aduanero-especial-de-equipaje/ ; https://www.legiscomex.com/BancoMedios/Documentos%20PDF/régimen%20de%20equipaje%20de%20pasajeros.pdf — s/f — consultada 2026-11-18 — secundaria
+21. TSJ / Tribunal Superior Contencioso Tributario, sentencia de 2014 sobre vehículos nuevos (vLex) — https://vlexvenezuela.com/vid/tribunal-superior-contencioso-tributario-593348022 — 02-07-2014 — consultada 2026-11-18 — primaria (jurisprudencia)
+22. MINCIT Colombia, proyecto de decreto sobre híbridos (análisis de la 8703.40) — https://abcrepecev.com/hubfs/21-04-21-pd-vehiculos-hibridos.pdf — abr-2021 — secundaria (referencia comparada); Studocu (UCV Perú) — https://www.studocu.com/pe/document/universidad-cesar-vallejo/nomenclatura-arancelaria-y-valoracion-aduanera/vehiculo-hibrido-y-electricos/95358829 — [FORO/REDES] — consultada 2026-11-18
+23. Ministerio de Hacienda de Costa Rica, Res. MH-DGA-RES-0535-2024 — https://www.hacienda.go.cr/docs/MH-DGA-RES-0535-2024.pdf — 2024 — consultada 2026-11-18 — secundaria (referencia comparada)
+24. Easyship, calculadora de aranceles de Venezuela (método CIF) — https://www.easyship.com/es-es/duties-and-taxes-calculator/venezuela — s/f — consultada 2026-11-18 — secundaria comercial
+25. Somerset Escargot, "Nuevas tasas de importación en Venezuela 2026…" — https://somersetescargot.co.uk/nuevas-tasas-de-importacion-en-venezuela-2026-cambios-en-aranceles-aduaneros-desde-marzo/ — 2026 — consultada 2026-11-18 — [FORO/REDES] (poco fiable; no se usó)
+26. Times Brasil, ACE 69 — https://timesbrasil.com.br/brasil/venezuela-quer-elevar-tarifa-sobre-carros-brasileiros/ — 2025 — consultada 2026-11-18 — [PRENSA] (contexto)
+27. Pandectas Digital, "Arancel de Aduanas [Vigente]" — https://pandectasdigital.blogspot.com/2024/04/arancel-de-aduanas.html — abr-2024 — consultada 2026-11-18 — [FORO/REDES]
+28. (ronda 2) PwC Worldwide Tax Summaries, "Venezuela – Corporate – Other taxes" (IVA general 16 %, rango 8–16,5 %) — https://taxsummaries.pwc.com/venezuela/corporate/other-taxes — 2026 (s/f) — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+29. (ronda 2) KPMG Venezuela, Síntesis Legal 35/2018 (Decreto 3.584, alícuota general 16 %) — https://kpmg.com/ve/es/home/insights/2018/08/sintesislegal35-2018.html — ago-2018 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+30. (ronda 2) vLex, "Sobre la reforma de la Ley que establece el IVA" (16 % mantenido) — https://vlexvenezuela.com/vid/reforma-ley-establece-iva-929608712 — 2020 — consultada 2026-11-18 — secundaria; JETRO (16 % desde el 01-01-2020) — https://www.jetro.go.jp/world/cs_america/ve/invest_04.html — s/f — secundaria
+31. (ronda 2) KPMG, Síntesis Legal 1-2026 — https://assets.kpmg.com/content/dam/kpmg/ve/pdf/2026/1/S%C3%ADntesis%20Legal%201-2026.pdf — ene-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR] (contexto; no se extrajeron cifras)
+32. (ronda 2) Travieso Evans, memo de la reforma de la Ley de IVA y G.O. Ext. N° 6.396 (art. 61: vehículos ≥ US$ 40.000; lujo 15 %) — http://www.traviesoevans.com/memos/memo-reforma-ley-iva.pdf ; http://www.traviesoevans.com/memos/Gaceta-Ext-6396-21082018-ReformaLey-IVA.pdf — 21-08-2018 — consultada 2026-11-18 — primaria (copia) / [BUFETE/GESTOR]
+33. (ronda 2) G.O. N° 6.507 Ext., Decreto Constituyente de reforma de la Ley de IVA (y comparativos) — https://www.asambleanacional.gob.ve/storage/documentos/leyes/decreto-constituyente-de-reforma-parcial-del-decreto-con-rango-valor-y-fuerza-de-ley-que-establece-el-impuesto-al-valor-agregado-20220204234747.pdf ; https://www.venamcham.org/wp-content/uploads/2021/11/Reforma-COT-IVA-G.O.-Ext-No-6507-29-ENE-2020.pdf ; Moore, comparativo 2020 frente a 2018 — https://www.moore-venezuela.com/MediaLibsAndFiles/media/venezuelaweb.moorestephens.com/Documents/Comparativo-Ley-del-IVA-2020-vs-2018-pdfDEFINITIVO.pdf ; transcripción — https://docs.cachicamo.app/fiscal/ley-iva-2020 — 29-01-2020 — consultada 2026-11-18 — primaria (copia)
+34. (ronda 2) Banca y Negocios, "Impuesto al lujo…" y "Alícuota del IVA al consumo suntuario será de 15 %"; Tal Cual, "Bienes suntuarios pagarán en total 31 %…" — https://www.bancaynegocios.com/impuesto-al-lujo-vehiculos-aviones-armas-y-otros-productos-pagaran-iva-de-15-en-venezuela/ ; https://www.bancaynegocios.com/alicuota-del-iva-al-consumo-suntuario-sera-de-15/ ; https://talcualdigital.com/bienes-suntuarios-pagaran-en-total-31-de-impuesto-al-valor-agregado/ — ago-2018 — consultada 2026-11-18 — [PRENSA]
+35. (ronda 2) Rodríguez C., "6 claves sobre tarifas y exenciones del IVA en Venezuela" (vehículos ≥ US$ 40.000 → 31 %) — https://rodriguezc.com/6-claves-sobre-tarifas-y-exencioness-del-iva-en-venezuela/ — s/f — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+36. (ronda 2) G.O. N° 6.507 Ext., Decreto Constituyente de reforma de la Ley Orgánica de Aduanas (tasa del 0,5 % al 2 %; pago antes o al registro; régimen y Arancel vigentes a la fecha de registro) — https://www.venamcham.org/wp-content/uploads/2021/11/G.O.-Ext-6507-Ene-2020-Reforma-de-la-Ley-Orga%CC%81nica-de-Aduanas-MAYO-2020-comprimido.pdf ; https://www.asambleanacional.gob.ve/storage/documentos/leyes/decreto-constituyente-de-reforma-del-decreto-con-rango-valor-y-fuerza-de-ley-organica-de-aduanas-20220204223809.pdf ; Acceso a la Justicia (comparación) — https://accesoalajusticia.org/wp-content/uploads/2020/02/Ley-Org%C3%A1nica-de-Aduanas.-Comparaci%C3%B3n-vis-a-vis.pdf ; Travieso Evans (alerta) — https://www.traviesoevans.com/wp-content/uploads/2020/11/Alerta-Reforma-Decreto-LOAduanas-espanol-enero-29-2020.pdf — 29-01-2020 — consultada 2026-11-18 — primaria (copia)
+37. (ronda 2) Reglamento de la LOA sobre las Tasas Aduaneras (Decreto N° 1.505; tasa del 1 % del valor en aduanas) — https://vlexvenezuela.com/vid/decreto-n-1-505-547479754 ; https://irp-cdn.multiscreensite.com/d92a6498/files/uploaded/REGLAMENTO%20LEY%20ORG%C3%81NICA%20DE%20ADUANAS.pdf — fecha s/d (probablemente anterior a 2020) — consultada 2026-11-18 — primaria (copia)
+38. (ronda 2) Bitácora Económica, "Automotrices prefieren pagar impuestos a ensamblar en Venezuela"; Maxiautos, "Importar un vehículo a Venezuela en 2026"; ByMotorCar, "How to import Chinese cars to Venezuela" — https://bitacoraeconomica.com/automotrices-prefieren-pagar-impuestos-a-ensamblar-en-venezuela/ ; https://maxiautosve.com/importar-un-vehiculo-a-venezuela-en-2025-2026-plazos-costos-y-documentos-clave/ ; https://bymotorcar.com/import-chinese-cars-to-venezuela/ — 2025–2026 — consultada 2026-11-18 — [PRENSA] / [BUFETE/GESTOR]
+39. (ronda 2) IGTF 3 % en divisas (G.O. 6.687 Ext.; percepción por contribuyentes especiales): Moore Venezuela — https://www.moore-venezuela.com/wp-content/uploads/sites/15/2025/12/156-IGTF.pdf ; Crónica Uno — https://cronica.uno/igtf-de-3-a-transacciones-en-divisas-debe-reflejarse-en-las-facturas-a-partir-del-lunes/ ; Gerencia y Tributos — https://gerenciaytributos.blogspot.com/2022/03/regimen-percepcion-IGTF-contribuyentes-especiales-divisas.html — 2022/2025 — consultada 2026-11-18 — secundaria / [PRENSA]
+40. (ronda 2) Decreto N° 4.972, G.O. N° 6.821 Ext. (IGTF del 2 % al 0 % en ciertas operaciones en Bs): PwC — https://www.pwc.com/ve/es/publicaciones/assets/PublicacionesNew/Boletines/Modificación%20de%20la%20Alícuota%20de%20IGTF%202%20al%200%20(Julio%202024).pdf ; Forvis Mazars — https://www.forvismazars.com/ve/es/insights/forvis-mazars-insights/se-fija-en-0-la-alicuota-del-igtf ; Acceso a la Justicia — https://accesoalajusticia.org/fue-eliminado-impuesto-grandes-transacciones-financieras/ — 12-07-2024 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+41. (ronda 2) Guías de IGTF 2026 (3 % vigente): Nompli — https://www.nompli.com/blog/igtf-venezuela-como-calcular-3-porciento-2026 ; Alegra — https://blog.alegra.com/venezuela/como-calcular-el-igtf-en-una-factura/ — 2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+42. (ronda 2) IVA adicional por pagos en divisas (5–25 %, sin decreto que lo fije): Nayma Consultores — https://naymaconsultores.com/claves-iva-adicional-a-los-pagos-en-dolares-venezuela/ ; Infobae — https://www.infobae.com/america/venezuela/2020/02/10/venezuela-el-regimen-de-nicolas-maduro-impondra-altos-impuestos-extras-a-las-compras-en-dolares/ ; El Carabobeño — https://www.el-carabobeno.com/en-claves-que-dice-la-ley-del-iva-sobre-los-consumos-en-divisas/ — 2020 — consultada 2026-11-18 — secundaria / [PRENSA]
+43. (ronda 2) Tasa BCV de noviembre de 2026: Finanzas Digital — https://finanzasdigital.com/tasa-de-cambio-bcv-12-noviembre-2026/ , https://finanzasdigital.com/tasa-de-cambio-bcv-03-noviembre-2026/ , https://finanzasdigital.com/tasa-de-cambio-bcv-06-noviembre-2026/ ; El Caribe — https://www.elcaribe.com.do/panorama/dolar-venezuela-hoy-4-noviembre-2026/ ; La Patilla — https://lapatilla.com/2026/11/12/el-dolar-bcv-sigue-sin-encontrar-techo-y-ya-amenaza-otra-barrera-historica/ — 03/12-11-2026 — consultada 2026-11-18 — [PRENSA] (cita al BCV)
+44. (ronda 2) UT de Bs 43 (Prov. SNAT/2025/000048, G.O. 43.140): IUSDATA — https://iusdata.com/seniat-ut-unidad-tributaria-bs-43/ ; FOGADE — https://www.fogade.gob.ve/2025/06/04/seniat-ajusta-unidad-tributaria-a-43-bolivares/ — 02/04-06-2025 — consultada 2026-11-18 — secundaria / organismo oficial
+45. (ronda 2) Acceso a la Justicia, "Sustitución progresiva de la Unidad Tributaria como referencia fiscal en Venezuela" — https://accesoalajusticia.org/sustitucion-progresiva-unidad-tributaria-referencia-fiscal-venezuela/ — 2025 — consultada 2026-11-18 — secundaria
+46. (ronda 2) Decreto N° 5.207, G.O. N° 43.292 (exoneración para combustibles): PwC — https://www.pwc.com/ve/es/assets/documentos/stl/NAC-Exoneracion-IVA-Decreto-5207-Ene2026.pdf ; LEĜA — https://lega.law/lega-informa/exoneracion-iva-importacion-hidrocarburos/ ; Torres Plaz & Araujo — https://www.torresplazaraujo.com/alerta-legal-decreto-no-5-207/ ; Finanzas Digital — https://finanzasdigital.com/exoneracion-impuestos-combustibles-venezuela-2026/ — 09-01-2026 — consultada 2026-11-18 — secundaria [BUFETE/GESTOR]
+47. (ronda 2) Decretos N° 5.197 (exoneraciones aduaneras) y N° 5.196 (suspensión de exenciones de IVA), G.O. N° 6.952 Ext.: TTPN — https://ttpn.com.ve/?p=5409 ; LEĜA — https://lega.law/lega-informa/exoneraciones-aduanas-2026/ ; Grant Thornton — https://www.grantthornton.com.ve/globalassets/1.-member-firms/venezuela/2026/ni-resumen-decreto-de-suspension-de-exenciones-del-iva.pdf ; Acceso a la Justicia — https://accesoalajusticia.org/nuevas-regulaciones-sobre-el-pago-del-i-v-a/ ; Cavefar (decreto anterior) — https://cavefar.org.ve/wp-content/uploads/2025/07/Decreto-de-Exoneracion-y-Exenciones.pdf ; G.O. 6.952 en el SENIAT (indexada) — seniatenlinea.seniat.gob.ve/wp-content/uploads/2026/01/GORBV-6952.pdf — 31-12-2025 — consultada 2026-11-18 — primaria (copia) / secundaria [BUFETE/GESTOR]
+48. (ronda 2) Régimen Legal 20 / SENCAMER: SENCAMER, "Tres nuevos productos deben cumplir Régimen Legal 20" — https://www.sencamer.gob.ve/?p=7316 ; Decreto N° 3.679 (30-05-2005) — https://ine.gob.ve/wp-content/uploads/2024/09/Decreto-No.pdf ; SENCAMER en línea — https://enlinea.sencamer.gob.ve/action/registro/intro ; Aduaneros.net, Decreto 5.147 / G.O. 6.918 Ext. — https://aduaneros.net/wp-content/uploads/2025/07/2025_Reforma_5_AA_Decreto_5147_GOE_6918.pdf ; Unica Customs — https://www.unicacustoms.com/en/blog/how-to-import-a-car-to-venezuela/ — 2005–2025 — consultada 2026-11-18 — primaria (organismo y decreto) / secundaria
+49. (ronda 2) Finanzas Digital, "Gaceta Oficial N° 43.166: Sumario"; Hexa Legal (entrevista a Marisol Mujica) — https://finanzasdigital.com/gaceta-oficial-43166/ ; https://hexa-legal.com/marisol-mujica-ajuste-arancelario-eleva-costos-y-complica-importacion-de-vehiculos/ — jul-2025 — consultada 2026-11-18 — [PRENSA] / [BUFETE/GESTOR]
+50. (ronda 2) Tradex, PDF del Decreto 5.103 (extracto con la subpartida 9801.00.00.23) — https://www.tradex.com.ve/wp-content/uploads/Tradex-Decreto-5.103-Reforma-del-Arancel-de-Aduanas.pdf — 06-03-2025 — consultada 2026-11-18 — primaria (copia)
+51. (ronda 2) Asuntos Legales (Colombia), "La paradoja de los vehículos híbridos" (Venezuela sin trato diferencial) — https://www.asuntoslegales.com.co/analisis/camilo-castrillon-2955163/la-paradoja-de-los-vehiculos-hibridos-3962501 — ~2024 — consultada 2026-11-18 — [PRENSA]
+52. (ronda 2) Toyove, "Aranceles para importar un Toyota a Venezuela 2026" (poco fiable); Landeed, "Cómo importar a Venezuela en 2026" — https://toyove.com/aranceles-importar-toyota-venezuela/ ; https://landeed-ve.netlify.app/guide/importar-a-venezuela/ — 2026 — consultada 2026-11-18 — [FORO/REDES]
+53. (ronda 2) Régimen de equipaje para vehículos (US$ 20.000, 1 año fuera, agente obligatorio): Diario El Regional del Zulia — https://diarioelregionaldelzulia.com/seniat-reactiva-importacion-de-vehiculos-por-regimen-de-equipaje/ ; La Nación — https://lanacionweb.com/frontera/como-importar-un-vehiculo-usado-bajo-el-regimen-de-equipaje/ ; Cedrizuela — https://cedrizuela.com/blogs/migracion/importacion-de-vehiculos-a-venezuela-regimen-de-equipaje-vs-via-comun-seniat-e-intt ; Venezuela Productiva Automotriz — https://venezuelaproductivaautomotriz.com/42695-importar-carro-venezuela-aranceles/ ; Embajada de Venezuela en Polonia — https://www.venez.pl/certificado-de-uso-de-vehiculo/ ; Scribd — https://www.scribd.com/document/526465502/La-Importacion-de-Vehiculos-Bajo-Regimen-de-Equipaje-de-Pasajeros-1 — s/f a 2026 — consultada 2026-11-18 — [PRENSA] / [BUFETE/GESTOR] / [FORO/REDES]
+54. (ronda 2) Valoración: Pirelli Venezuela vs. SENIAT (vLex) — https://vlexvenezuela.com/vid/pirelli-venezuela-c-vs-seniat-407618458 ; TSJ-SPA N° 01428, 03-12-2015 — https://vlexvenezuela.com/vid/servicio-nacional-integrado-administracion-593081778 — 2010–2015 — consultada 2026-11-18 — primaria (jurisprudencia)
+55. (ronda 2) Duane Morris, "Navigating the Charge" (códigos SA 8703.40–8703.80) y aperturas SA del Capítulo 87 (MH El Salvador) — https://www.duanemorris.com/site/static/dms-ev-latin-america-us.pdf ; https://transparencia.mh.gob.sv/downloads/pdf/DC5710_cap_tulo87.pdf — s/f — consultada 2026-11-18 — secundaria (referencia de nomenclatura)

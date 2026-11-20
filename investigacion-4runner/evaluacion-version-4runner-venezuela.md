@@ -103,6 +103,42 @@ Puntuación de 1 (peor) a 5 (mejor), con el criterio del orquestador a partir de
 
 ---
 
+## 5-bis. Decisión del cliente: la nueva generación (2025–2027). ¿Qué versión exacta?
+
+**Recomendación: 4Runner TRD Off-Road con motor i-FORCE 2.4 turbo (sin híbrido), 4x4, año modelo 2026.** Sirve también una 2025 con la campaña 25V595000 ya aplicada, o una 2027 si aparece a precio similar.
+
+| Versión (6.ª gen.) | Valoración | Motivo |
+|---|---|---|
+| ⭐ **TRD Off-Road i-FORCE 4x4** | **La ideal** | No es híbrida. Trae 4x4 de conexión manual con baja, **bloqueo electrónico del diferencial trasero** de serie y **amortiguadores Bilstein monotubo con depósito remoto**. Es la más cercana a la Trailhunter sin el riesgo híbrido. MSRP en EE. UU.: USD 49.690 (2025) y USD 49.990 (2026). |
+| ✅ **TRD Off-Road Premium i-FORCE 4x4** | Muy buena, si el presupuesto lo permite | Mismo hardware todoterreno, con más confort. El desconectador de barra estabilizadora de 2026 es solo para la versión híbrida. |
+| ✅ **SR5 i-FORCE 4x4** | Opción económica | Más barata (MSRP de USD 41.270–43.570) y la más fácil de encontrar en Venezuela: ventas cerradas de la SR5 2025 en USD 85.000–94.000; SR5 2026 en ≈ USD 105.000. Rines de 17″ con neumáticos más fáciles de conseguir. No trae bloqueo trasero ni los Bilstein. **Comprobar que sea 4x4:** hay SR5 4x2. |
+| ⚠️ TRD Sport / TRD Sport Premium | No es la ideal | Orientadas a ciudad, y muchas son 4x2. |
+| ❌ Trailhunter, TRD Pro, Platinum, y las TRD Off-Road o Limited con **i-FORCE MAX** | Evitar | Son híbridas: sin servicio ni garantía en Venezuela, y las más caras. |
+
+**Puntos de atención de la TRD Off-Road:**
+- Viene con neumáticos todoterreno de ≈ 33″ en rines de 18″ (Falken WildPeak, según Toyota). En Venezuela son más difíciles de conseguir que las medidas de 17″: conviene traer un juego de repuesto desde EE. UU.
+- **Precio estimado en Venezuela:** ≈ USD 100.000–120.000. Es una estimación a partir de la diferencia con la SR5; solo se vio un anuncio de una TRD Off-Road 2025 0 km a USD 150.000, sin saber si era híbrida. Negociar con varias ofertas.
+
+**Cómo comprobar que la unidad NO es híbrida:**
+- no tiene el emblema "i-FORCE MAX";
+- el tablero no muestra indicadores del sistema híbrido;
+- no hay cables naranjas de alto voltaje en el compartimiento del motor;
+- la etiqueta de ventana (Monroney), consultada por VIN, dice "2.4L i-FORCE".
+
+**Condiciones de uso del 2.4 turbo en Venezuela:**
+- solo gasolina de 95 o Súper Premium, nunca la de 91 ni la subsidiada;
+- aceite 0W-20 API SP cada 5.000–7.500 km;
+- filtro de aire más frecuente si se usa fuera de carretera;
+- un escáner OBD-II;
+- un stock de filtros, bujías y aceite traído de EE. UU. vía Grupo BS LLC.
+
+**Año:**
+- 2026: es casi idéntica a la 2025 y tiene las campañas más simples (etiquetas de carga).
+- 2025: verificar en NHTSA, por VIN, que esté aplicada la actualización del cuadro de instrumentos (25V595000).
+- 2027: según foros, solo trae cambios menores de equipamiento y color, sin confirmación oficial.
+
+---
+
 ## 6. Antes de comprarle a un importador en Venezuela: lista de verificación
 
 Más de la mitad del riesgo de comprar aquí está en la **documentación y la historia del vehículo**, no en el motor.
@@ -147,7 +183,7 @@ Más de la mitad del riesgo de comprar aquí está en la **documentación y la h
 |---|---|
 | **Máxima adaptación al país, confiabilidad y presupuesto** | ⭐ **5.ª gen. 4.0 V6 TRD Off-Road (o Premium) 2022–2024, 4x4** |
 | Opción económica de la misma generación | 5.ª gen. SR5 / SR5 Premium 4x4 2022–2024 |
-| Si quieres la generación nueva | 6.ª gen. **i-FORCE sin híbrido** (SR5 4x4 o TRD Off-Road i-FORCE) |
+| **Generación nueva (elegida por el cliente)** | ⭐ 6.ª gen. **TRD Off-Road i-FORCE 4x4 2026, sin híbrido** (económica: SR5 i-FORCE 4x4) |
 | Evitar por ahora | 6.ª gen. **i-FORCE MAX híbrida** (Trailhunter, TRD Pro, Platinum), salvo que aceptes no tener servicio ni garantía y asumas el plan de mitigación |
 
 ---
@@ -173,4 +209,7 @@ Más de la mitad del riesgo de comprar aquí está en la **documentación y la h
 17. El Diario, Toyota de Venezuela 2024 (8 modelos, sin la 4Runner; garantía de los vehículos importados) — https://eldiario.com/2024/03/19/toyota-venezuela-como-y-donde-se-pueden-adquirir-los-vehiculos/ — prensa
 18. CarAraC, T24A-FTS: problemas y durabilidad (sin recalls del motor; sensible a la calidad del combustible) — https://cararac.com/blog/toyota-highlander-2-4-turbo-engine-problems-durability.html — secundaria
 19. Low-Offset, confiabilidad del 1GR-FE — https://low-offset.com/toyota/1grfe-engine — secundaria
-20. Investigación previa: `hallazgos/06-sistema-hibrido.md` (gasolina en Venezuela, servicio híbrido) y `hallazgos/09-verificacion.md` (concesionarios de Carabobo, mercado y reventa)
+20. Toyota Pressroom, 2026 4Runner (bloqueo trasero de serie en TRD Off-Road; Bilstein con depósito remoto; i-FORCE MAX opcional en TRD Off-Road, TRD Off-Road Premium y Limited) — https://pressroom.toyota.com/the-2026-toyota-4runner-engineered-for-exploration/ — primaria
+21. SlashGear, TRD Off-Road frente a las demás versiones (solo 4x4 de conexión manual; rines de 18″ con neumáticos todoterreno) — https://www.slashgear.com/2253493/how-toyota-4runner-trd-off-road-compares-non-trail-trims/ — prensa
+22. 4Runner6G, cambios 2027 (foro, sin confirmación oficial) — https://www.4runner6g.com/2027-4runner-changes/ — foro
+23. Investigación previa: `hallazgos/06-sistema-hibrido.md` (gasolina en Venezuela, servicio híbrido) y `hallazgos/09-verificacion.md` (concesionarios de Carabobo, mercado y reventa)

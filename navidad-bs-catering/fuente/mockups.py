@@ -34,8 +34,86 @@ def place_on_surface(surface_px, surface_mm, rect_mm):
     return map_pts(Hm, [(x0, y0), (x1, y0), (x1, y1), (x0, y1)])
 
 
+D = 1932 / 1500   # las formas de enfoque se midieron sobre la foto a 1500 px de ancho
+
+
+def focus_mask(shape, focus, feather, erode=0):
+    h, w = shape[:2]
+    mask = np.zeros((h, w), np.uint8)
+    for kind, data, *scale in focus:
+        k = scale[0] if scale else D
+        if kind == "poly":
+            cv2.fillPoly(mask, [np.int32(np.array(data, np.float64) * k)], 255)
+        elif kind == "ellipse":
+            cx, cy, ax, ay = [v * k for v in data]
+            cv2.ellipse(mask, (int(cx), int(cy)), (int(ax), int(ay)), 0, 0, 360, 255, -1)
+        elif kind == "rect":
+            x0, y0, x1, y1 = [int(v * k) for v in data]
+            mask[y0:y1, x0:x1] = 255
+    if erode:
+        mask = cv2.erode(mask, np.ones((erode * 2 + 1, erode * 2 + 1), np.uint8))
+    hard = mask.astype(np.float32) / 255
+    return cv2.GaussianBlur(hard, (0, 0), feather)[..., None], hard
+
+
+def disguise_background(img, focus, feather=6, blur=46, glass=None, glass_cut=None, protect=None):
+    """Desenfoque profundo + desaturado + tono azul noche fuera del producto (y la mano),
+    con viñeta suave: el fondo se vuelve una atmósfera y el empaque queda en primer plano."""
+    f = img.astype(np.float32) / 255
+    m, hard = focus_mask(img.shape, focus, feather, erode=5)
+    # desenfoque normalizado: el brillo del producto no se derrama sobre el fondo (sin halo)
+    keep = cv2.dilate(hard, np.ones((61, 61), np.uint8))
+    outside = (1 - keep)[..., None]
+    num = cv2.GaussianBlur(f * outside, (0, 0), blur)
+    den = cv2.GaussianBlur(outside, (0, 0), blur)[..., None] if outside.ndim == 2 else cv2.GaussianBlur(outside[..., 0], (0, 0), blur)[..., None]
+    far = cv2.GaussianBlur(f, (0, 0), blur * 3)
+    bg = np.where(den > 0.02, num / np.maximum(den, 1e-4), far)
+    bg = cv2.GaussianBlur(bg, (0, 0), 12)
+    g = bg.mean(2, keepdims=True)
+    bg = g + (bg - g) * 0.25
+    navy = np.array([48, 28, 15], np.float32) / 255           # #0F1C30 en BGR
+    bg = bg * 0.40 + navy * 0.60
+    h, w = img.shape[:2]
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    r = np.sqrt(((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2)
+    vig = np.clip(1.05 - 0.38 * r ** 1.6, 0.45, 1)[..., None]
+    out = f * m + bg * vig * (1 - m)
+    if glass:
+        # plástico transparente: deja ver el fondo ya disimulado y conserva sus brillos
+        gm, _ = focus_mask(img.shape, glass, 8)
+        if glass_cut:
+            cut, _ = focus_mask(img.shape, glass_cut, 8)
+            gm = gm * (1 - cut)
+        if protect is not None:
+            gm = gm * (1 - protect[..., None])
+        # solo donde el plástico deja ver el fondo claro (no sobre la bandeja negra)
+        lum = cv2.GaussianBlur(f.mean(2), (0, 0), 6)
+        gm = gm * np.clip((lum - 0.2) / 0.16, 0, 1)[..., None]
+        spec = np.clip(f - cv2.GaussianBlur(f, (0, 0), 20), 0, 1) * 1.6
+        gray = f.mean(2, keepdims=True)
+        fd = gray + (f - gray) * 0.15            # lo que se ve a través del plástico, sin color
+        glassy = bg * vig * 0.7 + fd * 0.3 + spec
+        out = out * (1 - gm) + np.clip(glassy, 0, 1) * gm
+    out = out * (0.9 + 0.1 * vig)
+    return (np.clip(out, 0, 1) * 255).astype(np.uint8)
+
+
+def finish(out, out_name, crop=None, max_side=1600, focus=None, **glass):
+    if focus:
+        out = disguise_background(out, focus, **glass)
+    if crop:
+        x0, y0, x1, y1 = crop
+        out = out[y0:y1, x0:x1]
+    h, w = out.shape[:2]
+    s = max_side / max(h, w)
+    if s < 1:
+        out = cv2.resize(out, (int(w * s), int(h * s)), interpolation=cv2.INTER_AREA)
+    cv2.imwrite(str(OUT / out_name), out, [cv2.IMWRITE_JPEG_QUALITY, 88])
+    print("ok", out_name)
+
+
 def composite(photo_path, label_rgba, quad, out_name, gloss=0.35, shade=0.55, crop=None,
-              max_side=1600, ignore=None):
+              max_side=1600, ignore=None, focus=None):
     photo = cv2.imread(str(photo_path), cv2.IMREAD_COLOR).astype(np.float32) / 255
     Hh, Wh = photo.shape[:2]
     lh, lw = label_rgba.shape[:2]
@@ -66,15 +144,7 @@ def composite(photo_path, label_rgba, quad, out_name, gloss=0.35, shade=0.55, cr
     rgb = rgb + (1 - rgb) * hl
     out = photo * (1 - a) + np.clip(rgb, 0, 1) * a
     out = (out * 255).astype(np.uint8)
-    if crop:
-        x0, y0, x1, y1 = crop
-        out = out[y0:y1, x0:x1]
-    h, w = out.shape[:2]
-    s = max_side / max(h, w)
-    if s < 1:
-        out = cv2.resize(out, (int(w * s), int(h * s)), interpolation=cv2.INTER_AREA)
-    cv2.imwrite(str(OUT / out_name), out, [cv2.IMWRITE_JPEG_QUALITY, 88])
-    print("ok", out_name)
+    finish(out, out_name, crop, max_side, focus)
 
 
 def load(name):
@@ -83,28 +153,51 @@ def load(name):
 
 FOTOS = ROOT / "fotos"
 
+# Zonas que quedan nítidas (producto + mano). El resto se disimula.
+F_LID = [("poly", [(220, 570), (1165, 548), (1238, 616), (1284, 800), (1326, 1100), (1300, 1335), (1180, 1395),
+                   (150, 1400), (60, 1290), (70, 1000), (190, 635)]),
+         ("poly", [(95, 690), (175, 655), (215, 700), (205, 820), (130, 1100), (260, 1420),
+                   (170, 1570), (0, 1640), (0, 820)])]
+F_HALL = [("poly", [(60, 430), (1145, 322), (1145, 350), (1095, 590), (1050, 640), (1052, 1590), (1185, 1640),
+                    (1175, 1700), (255, 1815), (250, 1770), (330, 1000), (60, 455)]),
+          ("poly", [(160, 1000), (300, 955), (425, 1010), (390, 1400), (300, 1560), (200, 1630),
+                    (0, 1720), (0, 1460), (140, 1310)])]
+F_BAG = [("poly", [(20, 0), (1500, 0), (1500, 40), (1470, 60), (1312, 1565), (283, 1712),
+                   (150, 470), (20, 40)])]
+F_PAN = [("poly", [(893, 92), (1318, 288), (1306, 322), (700, 1742), (520, 1800), (300, 1705),
+                   (155, 1628), (875, 110)]),
+]
+G_DOME = [("ellipse", (990, 1143, 420, 420), 1), ("rect", (570, 1143, 1410, 1500), 1),
+          ("ellipse", (998, 1440, 428, 290), 1)]
+G_DOME_CUT = [("poly", [(300, 1000), (445, 690), (485, 880), (560, 1335), (870, 1385), (885, 1450),
+                        (700, 1500), (420, 1530), (300, 1720), (0, 1720), (0, 1250)])]
+HAND_DOME = [(300, 1000), (445, 690), (485, 880), (560, 1335), (870, 1385), (885, 1450), (700, 1500),
+             (420, 1530), (300, 1720), (0, 1720), (0, 1250)]
+F_DOME = [("ellipse", (990, 1143, 398, 398), 1), ("rect", (592, 1143, 1388, 1400), 1),
+          ("ellipse", (998, 1440, 426, 288), 1), ("poly", HAND_DOME)]
+
 # 1 · Tapa del envase (zona plana ≈ 160 × 110 mm)
 lid = [(322, 889), (1546, 902), (1610, 1688), (168, 1700)]
 composite(FOTOS / "envase-tapa.jpg", load("etiqueta-asado-negro.png"),
           place_on_surface(lid, (160, 110), (35, 21, 125, 77)),
           "maqueta-envase-asado-negro.jpg", gloss=0.4, crop=(0, 560, 1932, 2000),
-          ignore=[(735, 1250, 1065, 1440)])
+          ignore=[(735, 1250, 1065, 1440)], focus=F_LID)
 composite(FOTOS / "envase-tapa.jpg", load("etiqueta-ensalada-de-gallina.png"),
           place_on_surface(lid, (160, 110), (35, 21, 125, 77)),
           "maqueta-envase-ensalada-de-gallina.jpg", gloss=0.4, crop=(0, 560, 1932, 2000),
-          ignore=[(735, 1250, 1065, 1440)])
+          ignore=[(735, 1250, 1065, 1440)], focus=F_LID)
 
 # 2 · Bolsa de hallacas (bloque 2×2 ≈ 220 × 345 mm)
 hall = [(451, 787), (1303, 761), (1393, 2141), (464, 2180)]
 composite(FOTOS / "hallacas.jpg", load("etiqueta-hallacas.png"),
           place_on_surface(hall, (220, 345), (45, 132, 175, 212)),
-          "maqueta-hallacas.jpg", gloss=0.5, crop=(0, 300, 1932, 2576))
+          "maqueta-hallacas.jpg", gloss=0.5, crop=(0, 300, 1932, 2576), focus=F_HALL)
 
 # 3 · Bolsa esmerilada (cuerpo bajo la solapa ≈ 300 × 310 mm)
 bag = [(193, 605), (1893, 567), (1687, 2009), (367, 2190)]
 composite(FOTOS / "bolsa.jpg", load("sticker-bolsa.png"),
           place_on_surface(bag, (300, 310), (85, 48, 215, 238)),
-          "maqueta-bolsa.jpg", gloss=0.15, shade=0.35)
+          "maqueta-bolsa.jpg", gloss=0.15, shade=0.35, focus=F_BAG)
 
 # 4 · Pan de jamón: panel frontal de la etiqueta de cierre sobre la boca de la bolsa
 pan = load("etiqueta-pan-de-jamon.png")
@@ -113,7 +206,8 @@ c = np.array([1430, 248.0]); u = np.array([0.910, 0.414]); v = np.array([-0.414,
 px = 5.07  # px por mm en la foto
 TL = c - 40 * px * u; TR = c + 40 * px * u
 quad = [TL, TR, TR + 60 * px * v, TL + 60 * px * v]
-composite(FOTOS / "pan-de-jamon.jpg", front, quad, "maqueta-pan-de-jamon.jpg", gloss=0.2)
+composite(FOTOS / "pan-de-jamon.jpg", front, quad, "maqueta-pan-de-jamon.jpg", gloss=0.2,
+          focus=F_PAN)
 
 # 5 · Domo de la torta negra: la cinta pasa por encima siguiendo la curva del domo
 import math
@@ -206,14 +300,7 @@ def dome_ribbon(photo_path, ribbon, out_name, crop):
     rgb = rgb + (1 - rgb) * hl
     out = photo.astype(np.float32) / 255 * (1 - a) + np.clip(rgb, 0, 1) * a
     out = (out * 255).astype(np.uint8)
-    x0, y0, x1, y1 = crop
-    out = out[y0:y1, x0:x1]
-    h, w = out.shape[:2]
-    s = 1600 / max(h, w)
-    if s < 1:
-        out = cv2.resize(out, (int(w * s), int(h * s)), interpolation=cv2.INTER_AREA)
-    cv2.imwrite(str(OUT / out_name), out, [cv2.IMWRITE_JPEG_QUALITY, 88])
-    print("ok", out_name)
+    finish(out, out_name, crop, 1600, F_DOME, glass=G_DOME, glass_cut=G_DOME_CUT, protect=a[..., 0])
 
 
 dome_ribbon(FOTOS / "domo-torta.jpg", load("cinta-torta-negra.png"), "maqueta-torta-negra.jpg",

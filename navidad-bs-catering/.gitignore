@@ -1,0 +1,5 @@
+fuente/_build/
+# Fotos del empaque (personales) y maquetas hechas con ellas: se mantienen fuera del repositorio
+fuente/fotos/
+maquetas/
+*.zip

@@ -1,9 +1,9 @@
-# Kit Navideño BS Catering · «Navidad en Casa» 2026
+# Kit Navideño BS Catering · «Navidad en casa» 2026
 
 Etiquetas, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro, ensalada de gallina, pan de jamón y mini torta negra de obsequio).
 Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vectorizado.
 
-> **Borrador 1.** Las medidas son estimaciones hechas a partir de las fotos. Ajustar cuando lleguen las medidas reales (ver «Pendientes»).
+> **Borrador 2.** Las medidas son estimaciones hechas a partir de las fotos. Ajustar cuando lleguen las medidas reales (ver «Pendientes»).
 
 ## Archivos
 
@@ -21,17 +21,23 @@ Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vec
 
 | # | Pieza | Medida de corte | Material | Dónde va |
 |---|---|---|---|---|
-| 01 | Etiqueta Asado Negro | 110 × 70 mm, esquinas r 4 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
-| 02 | Etiqueta Ensalada de Gallina | 110 × 70 mm, esquinas r 4 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
+| 01 | Etiqueta Asado Negro | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
+| 02 | Etiqueta Ensalada de Gallina | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
 | 03 | Etiqueta Hallacas | 130 × 80 mm, esquinas r 4 mm | Vinil autoadhesivo | Centro de la bolsa al vacío |
 | 04 | Etiqueta de cierre Pan de Jamón | 80 × 120 mm (se dobla a la mitad) | Vinil autoadhesivo | Cierra la boca de la bolsa kraft |
-| 05 | Etiqueta Torta Negra (obsequio) | Ø 50 mm | Vinil autoadhesivo | Tope del domo |
+| 05 | Cinta de regalo Torta Negra (obsequio) | 240 × 25 mm, colas en V de 7 mm | Vinil autoadhesivo | Por encima del domo, de base a base (también lo sella) |
 | 06 | Sello de cierre (opcional) | Ø 40 mm | Vinil autoadhesivo | Solapa de la bolsa o sobre |
 | 07 | Sticker principal de la bolsa | 130 × 190 mm, arco | Vinil autoadhesivo | Frente de la bolsa esmerilada |
 | 08 | Tarjeta (frente y dorso) | 100 × 150 mm | Cartulina 300–350 g | Dentro de la bolsa |
 
-Cantidades por kit de 4 personas: 1 de cada etiqueta (01–05), 1 sticker de bolsa, 1 tarjeta y 1–2 sellos.
+Cantidades por kit de 4 personas: 1 de cada etiqueta y la cinta (01–05), 1 sticker de bolsa, 1 tarjeta y 1–2 sellos.
 Como el kit siempre va en múltiplos de 4, un kit de 8 lleva el doble de unidades (2 bolsas de hallacas, 2 envases de cada plato, etc.) con las mismas etiquetas. Por eso ninguna etiqueta indica cantidades.
+
+### Cómo se coloca la cinta de la torta negra
+1. Pegar una punta en la base negra del domo, de un lado.
+2. Subir por la pared del domo, cruzar el tope (ahí queda «Torta Negra · Obsequio de la casa») y bajar por el otro lado.
+3. Pegar la otra punta en la base. La cinta queda como un listón de regalo y sella el domo.
+4. Largo: 2 × alto del domo + ancho del domo + 1 cm. Con la medida real se ajusta el archivo (hoy 240 mm).
 
 ### Cómo se coloca la etiqueta del pan de jamón
 1. Doblar la boca de la bolsa kraft unos 2 cm.
@@ -57,9 +63,9 @@ Como el kit siempre va en múltiplos de 4, un kit de 8 lleva el doble de unidade
 - **Cormorant Garamond** (nombres de producto y textos), **Josefin Sans** (mayúsculas espaciadas, eco de «CATERING») y **Pinyon Script** («Feliz Navidad»). Todas de Google Fonts, licencia libre (OFL). Están en `fuente/fuentes/`.
 
 ## Pendientes
-1. **Usuario de Instagram:** se usó `@bscatering` provisionalmente. Confirmarlo.
-2. **Medidas reales:** tapa del envase (zona plana), bolsa de hallacas, ancho de la bolsa kraft, diámetro del tope del domo y bolsa esmerilada.
-3. **Nombre del kit:** se usó «Navidad en Casa». Opciones: «La Mesa del 24», «Nochebuena en Casa», «Sabor a Hogar», «Tradición en Casa».
+1. **Medidas reales:** tapa del envase (zona plana), bolsa de hallacas, ancho de la bolsa kraft, alto y ancho del domo (para el largo de la cinta) y bolsa esmerilada.
+
+Confirmados: nombre «Navidad en casa» e Instagram **@bscateringve**.
 
 ## Editar y regenerar
 Los textos (nombre del kit, año, Instagram, productos y mensaje de la tarjeta) están al inicio de `fuente/build.py`.

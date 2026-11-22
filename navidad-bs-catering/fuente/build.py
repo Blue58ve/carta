@@ -21,10 +21,10 @@ OUT_SVG = ROOT / "svg"
 BUILD = ROOT / "_build"
 
 # ───────────────────────── CONFIGURACIÓN ─────────────────────────
-KIT = "Navidad en Casa"          # nombre del kit
+KIT = "Navidad en casa"          # nombre del kit
 ANIO = "2026"
 ANIO_NUEVO = "2027"
-INSTAGRAM = "@bscatering"        # ← CONFIRMAR usuario de Instagram
+INSTAGRAM = "@bscateringve"      # instagram.com/bscateringve
 
 PRODUCTOS_ENVASE = [             # etiquetas para envases Safe-T-Fresh
     ("asado-negro", "Asado Negro"),
@@ -282,26 +282,26 @@ def add_piece(pid, title, W, H, shape, art, material, notes, fold=None, pages=No
 
 
 def envase_label(name):
-    W, H, r = 110.0, 70.0, 4.0
+    W, H, r = 90.0, 56.0, 3.5
     cx = W / 2
-    size = 10.5 if len(name) <= 12 else 8.8
-    a = [bg(W, H), subtle_stars(W, H, seed=len(name) + 2, n=10, avoid=[(22, 5, 88, 65)]),
+    size = 8.6 if len(name) <= 12 else 7.0
+    a = [bg(W, H), subtle_stars(W, H, seed=len(name) + 2, n=8, inset=6.5, avoid=[(18, 4, 72, 52)]),
          double_frame_rrect(W, H, r)]
     # logo enmarcado por ramitas
-    a.append(logo(cx, 8.2, 17.5))
-    a.append(sprig(cx - 13.5, 24.8, 13, -62, mirror=True))
-    a.append(sprig(cx + 13.5, 24.8, 13, 62))
-    a.append(text(cx, 39.6, name, size, "serif", IVORY, 500, italic=True))
-    a.append(divider(cx, 45.2, 17))
-    a.append(text(cx, 52.0, f"{KIT.upper()} · {ANIO}", 2.55, "sans", GOLD, 300, ls=0.95))
-    a.append(instagram(cx, 61.2, 2.05, GOLD))
+    a.append(logo(cx, 6.6, 13.6))
+    a.append(sprig(cx - 10.6, 19.3, 10.2, -62, mirror=True, sw=0.18))
+    a.append(sprig(cx + 10.6, 19.3, 10.2, 62, sw=0.18))
+    a.append(text(cx, 30.6, name, size, "serif", IVORY, 500, italic=True))
+    a.append(divider(cx, 35.1, 13, star=1.25, gap=2.7, sw=0.18))
+    a.append(text(cx, 40.9, f"{KIT.upper()} · {ANIO}", 2.15, "sans", GOLD, 400, ls=0.75))
+    a.append(instagram(cx, 48.3, 1.85, GOLD, ls=0.25))
     return W, H, rrect_path(0, 0, W, H, r), "".join(a)
 
 
 for pid, name in PRODUCTOS_ENVASE:
     W, H, shape, art = envase_label(name)
     add_piece(f"etiqueta-{pid}", f"Etiqueta envase · {name}", W, H, shape, art,
-              "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 4 mm).",
+              "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 3,5 mm).",
               "Va centrada sobre la zona plana de la tapa del envase Safe-T-Fresh, un poco hacia la bisagra para no tocar la pestaña frontal.")
 
 
@@ -376,20 +376,35 @@ def round_label(D, pid, center_art, top_txt, bottom_txt, size=2.15, ls=0.55):
     return "".join(a), circle_path(c, c, R)
 
 
-def torta_label():
-    D = 50.0
-    c = D / 2
-    center = (logo(c, 12.2, 10.5, kind="mono")
-              + text(c, 31.0, "Torta Negra", 6.4, "serif", IVORY, 500, italic=True)
-              + divider(c, 34.6, 6.2, star=0.9, gap=2.0, sw=0.16))
-    art, shape = round_label(D, "torta", center, "OBSEQUIO DE LA CASA", f"NAVIDAD {ANIO}", 2.05, 0.6)
-    return D, D, shape, art
+def torta_cinta():
+    """Cinta tipo listón que pasa por encima del domo, de base a base, con colas en V."""
+    W, H, N = 240.0, 25.0, 7.0          # largo, ancho, profundidad del corte en V
+    cx, cy = W / 2, H / 2
+    shape = (f"M0,0 H{f(W)} L{f(W - N)},{f(cy)} L{f(W)},{f(H)} H0 L{f(N)},{f(cy)} Z")
+    a = [bg(W, H),
+         # ribete dorado a todo lo largo, como el borde tejido de un listón
+         f'<g stroke="{GOLD}">'
+         f'<line x1="-3" y1="2.2" x2="{f(W + 3)}" y2="2.2" stroke-width="0.36"/>'
+         f'<line x1="-3" y1="3.25" x2="{f(W + 3)}" y2="3.25" stroke-width="0.15"/>'
+         f'<line x1="-3" y1="{f(H - 2.2)}" x2="{f(W + 3)}" y2="{f(H - 2.2)}" stroke-width="0.36"/>'
+         f'<line x1="-3" y1="{f(H - 3.25)}" x2="{f(W + 3)}" y2="{f(H - 3.25)}" stroke-width="0.15"/></g>',
+         # centro (queda en el tope del domo)
+         text(cx, 13.9, "Torta Negra", 7.4, "serif", IVORY, 500, italic=True),
+         text(cx, 18.9, "OBSEQUIO DE LA CASA", 1.85, "sans", GOLD, 400, ls=0.6),
+         sparkle(cx - 22.5, 11.6, 1.25), sparkle(cx + 22.5, 11.6, 1.25)]
+    for side in (-1, 1):
+        a += [logo(cx + side * 37, 7.6, 9.8, kind="mono"),
+              sparkle(cx + side * 53, cy, 0.9),
+              text(cx + side * 76, 13.4, "FELIZ NAVIDAD", 2.5, "sans", GOLD, 300, ls=1.1),
+              sparkle(cx + side * 99, cy, 0.9),
+              f'<circle cx="{f(cx + side * 105)}" cy="{f(cy)}" r="0.3" fill="{GOLD}"/>']
+    return W, H, shape, "".join(a)
 
 
-W, H, shape, art = torta_label()
-add_piece("etiqueta-torta-negra", "Etiqueta redonda · Mini Torta Negra (obsequio)", W, H, shape, art,
-          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel circular Ø 50 mm.",
-          "Va en el tope del domo. Si el domo es muy curvo, se puede bajar a Ø 45 mm sin cambiar el diseño (se escala).")
+W, H, shape, art = torta_cinta()
+add_piece("cinta-torta-negra", "Cinta de regalo · Mini Torta Negra (obsequio)", W, H, shape, art,
+          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en tira de 240 × 25 mm con colas en V (7 mm).",
+          "Pasa por encima del domo como un listón de regalo: se pega desde la base negra de un lado, sube, cruza el tope (ahí queda «Torta Negra») y baja hasta la base del otro lado. Además sella el domo. El largo se ajusta con la medida real: 2 × alto del domo + ancho + 1 cm.")
 
 
 def sello_label():

@@ -39,6 +39,18 @@ ASADO, PERNIL = 30, 30                   # kits con asado negro / con pernil (co
 KITS = ASADO + PERNIL                    # 60 kits: el resto de piezas se imprime para 60 o más
 META = KITS
 
+# Etiquetas que se mandan a hacer (sin la tarjeta): nombre de archivo, medida y cantidad
+ETIQUETAS = {
+    "etiqueta-asado-negro": ("Asado-Negro", "90x56mm", ASADO),
+    "etiqueta-pernil": ("Pernil", "90x56mm", PERNIL),
+    "etiqueta-ensalada-de-gallina": ("Ensalada-de-Gallina", "90x56mm", KITS),
+    "etiqueta-hallacas": ("Hallacas", "130x80mm", KITS),
+    "etiqueta-pan-de-jamon": ("Pan-de-Jamon", "80x60mm", KITS),
+    "cinta-torta-negra": ("Cinta-Torta-Negra", "255x25mm", KITS),
+    "sello-cierre": ("Sello-redondo", "30mm", KITS * 2),      # cierre del pan + solapa de la bolsa
+    "sticker-bolsa": ("Sticker-bolsa", "130x190mm", KITS),
+}
+
 P = {p["id"]: p for p in B.PIECES}
 NUM = {p["id"]: i for i, p in enumerate(B.PIECES, 1)}
 
@@ -396,19 +408,14 @@ def main():
     for g in sorted((ROOT / "guias").glob("*-guia.pdf")):
         shutil.copy2(g, d_ref / g.name)
 
-    # archivo único con todas las etiquetas: lo más sencillo para la imprenta
+    # etiquetas sueltas para la imprenta: un PDF por etiqueta, con medida y cantidad en el nombre
     d_env = ROOT / "etiquetas-imprenta"
     d_env.mkdir(exist_ok=True)
-    wr = PdfWriter()
-    for sh in sheets:
-        if sh["id"] != "P0":
-            for pg in PdfReader(d_prod / f"{sh['archivo']}.pdf").pages:
-                wr.add_page(pg)
-    wr.add_metadata({"/Title": f"BS Catering · Etiquetas Navidad en casa {B.ANIO}", "/Author": "BS Catering",
-                     "/Subject": "Etiquetas autoadhesivas — pliegos 33 × 48 cm con CutContour"})
-    with open(d_env / f"BS-Catering-Etiquetas-Navidad-{B.ANIO}.pdf", "wb") as fh:
-        wr.write(fh)
-    print("archivo único", d_env)
+    for pid, (nombre, medida, cant) in ETIQUETAS.items():
+        n = NUM[pid]
+        dst = d_env / f"{list(ETIQUETAS).index(pid) + 1:02d}-{nombre}_{medida}_{cant}-unidades.pdf"
+        shutil.copy2(d_ind / f"{n:02d}-{pid}.pdf", dst)
+    print("etiquetas sueltas", d_env)
 
     (TMP / "resumen.json").write_text(json.dumps(dict(piezas=piezas, pliegos=resumen, meta=META, kits=KITS),
                                                  ensure_ascii=False, indent=1))

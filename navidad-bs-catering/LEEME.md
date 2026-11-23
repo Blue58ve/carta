@@ -4,7 +4,9 @@ Etiquetas, cinta, sello, sticker de bolsa y tarjeta para el kit navideño (4 hal
 Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vectorizado. Instagram **@bscateringve**.
 
 > **Versión final para imprenta.** Medidas confirmadas: tapa de los envases **14 × 8 cm** y domo **Ø 11 cm × 8,5 cm de alto**.
-> **Para enviar a la imprenta (solo etiquetas):** `etiquetas-imprenta/` → `BS-Catering-Etiquetas-Navidad-2026.pdf` (un PDF, 5 pliegos de 33 × 48 cm; en cada página dice cuántas copias imprimir) + `Instrucciones-para-la-imprenta.pdf` (1 página).
+> **Para enviar a la imprenta (solo etiquetas):** `etiquetas-imprenta/` → 8 PDF sueltos, uno por etiqueta, con la medida y la cantidad en el nombre del archivo, + `00-Instrucciones-para-la-imprenta.pdf` (1 página).
+>
+> Cantidades: Asado Negro 30 · Pernil 30 · Ensalada de Gallina 60 · Hallacas 60 · Pan de Jamón 60 · Cinta Torta Negra 60 · Sello redondo 120 · Sticker de la bolsa 60 (total 480).
 > El paquete completo (con prueba, tarjetas y piezas sueltas) está en `imprenta/`.
 
 ## Para la imprenta: `imprenta/`

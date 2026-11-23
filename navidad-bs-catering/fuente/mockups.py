@@ -179,11 +179,11 @@ F_DOME = [("ellipse", (990, 1143, 398, 398), 1), ("rect", (592, 1143, 1388, 1400
 # 1 · Tapa del envase (zona plana ≈ 160 × 110 mm)
 lid = [(322, 889), (1546, 902), (1610, 1688), (168, 1700)]
 composite(FOTOS / "envase-tapa.jpg", load("etiqueta-asado-negro.png"),
-          place_on_surface(lid, (160, 110), (35, 21, 125, 77)),
+          place_on_surface(lid, (140, 80), (25, 12, 115, 68)),
           "maqueta-envase-asado-negro.jpg", gloss=0.4, crop=(0, 560, 1932, 2000),
           ignore=[(735, 1250, 1065, 1440)], focus=F_LID)
 composite(FOTOS / "envase-tapa.jpg", load("etiqueta-ensalada-de-gallina.png"),
-          place_on_surface(lid, (160, 110), (35, 21, 125, 77)),
+          place_on_surface(lid, (140, 80), (25, 12, 115, 68)),
           "maqueta-envase-ensalada-de-gallina.jpg", gloss=0.4, crop=(0, 560, 1932, 2000),
           ignore=[(735, 1250, 1065, 1440)], focus=F_LID)
 
@@ -254,7 +254,8 @@ def dome_ribbon(photo_path, ribbon, out_name, crop):
         return np.array([0, 0, hc]) + R * d, d
 
     rh, rw = ribbon.shape[:2]
-    Lr, Wr = 240.0, 25.0                       # medidas de la cinta en mm
+    Wr = 25.0                                  # ancho de la cinta en mm; el largo sale del archivo
+    Lr = Wr * rw / rh
     over = (Lr - Lm) / 2
     map_x = np.full((Hh, Wh), -1, np.float32)
     map_y = np.full((Hh, Wh), -1, np.float32)

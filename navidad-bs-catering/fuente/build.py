@@ -30,6 +30,9 @@ PRODUCTOS_ENVASE = [             # etiquetas para envases Safe-T-Fresh
     ("asado-negro", "Asado Negro"),
     ("ensalada-de-gallina", "Ensalada de Gallina"),
 ]
+VARIANTE_PRINCIPAL = ("pernil", "Pernil")   # alternativa al asado negro (piezas 09 y 10)
+TAPA_ENVASE = "14 × 8 cm"        # medida real de la tapa (zona plana)
+DOMO = (110.0, 85.0)             # diámetro y alto reales del domo, en mm
 
 MENSAJE_TARJETA = [
     "Querida familia:",
@@ -302,7 +305,7 @@ for pid, name in PRODUCTOS_ENVASE:
     W, H, shape, art = envase_label(name)
     add_piece(f"etiqueta-{pid}", f"Etiqueta envase · {name}", W, H, shape, art,
               "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 3,5 mm).",
-              "Va centrada sobre la zona plana de la tapa del envase Safe-T-Fresh, un poco hacia la bisagra para no tocar la pestaña frontal.")
+              f"Va centrada sobre la tapa del envase ({TAPA_ENVASE}): quedan 2,5 cm libres a cada lado y 1,2 cm arriba y abajo, sin tocar la pestaña frontal.")
 
 
 def hallacas_label():
@@ -378,7 +381,12 @@ def round_label(D, pid, center_art, top_txt, bottom_txt, size=2.15, ls=0.55):
 
 def torta_cinta():
     """Cinta tipo listón que pasa por encima del domo, de base a base, con colas en V."""
-    W, H, N = 240.0, 25.0, 7.0          # largo, ancho, profundidad del corte en V
+    # recorrido sobre el domo: 2 paredes rectas + media vuelta del casquete (radio = D/2) + 1,1 cm
+    # pegado en la base de cada lado  →  Ø 110 × 85 mm  =  2·30 + π·55 + 2·11 ≈ 255 mm
+    D, Hd = DOMO
+    r = D / 2
+    W = round(2 * (Hd - r) + math.pi * r + 22)
+    H, N = 25.0, 7.0                    # ancho y profundidad del corte en V
     cx, cy = W / 2, H / 2
     shape = (f"M0,0 H{f(W)} L{f(W - N)},{f(cy)} L{f(W)},{f(H)} H0 L{f(N)},{f(cy)} Z")
     a = [bg(W, H),
@@ -393,18 +401,18 @@ def torta_cinta():
          text(cx, 18.9, "OBSEQUIO DE LA CASA", 1.85, "sans", GOLD, 400, ls=0.6),
          sparkle(cx - 22.5, 11.6, 1.25), sparkle(cx + 22.5, 11.6, 1.25)]
     for side in (-1, 1):
-        a += [logo(cx + side * 37, 7.6, 9.8, kind="mono"),
-              sparkle(cx + side * 53, cy, 0.9),
-              text(cx + side * 76, 13.4, "FELIZ NAVIDAD", 2.5, "sans", GOLD, 300, ls=1.1),
-              sparkle(cx + side * 99, cy, 0.9),
-              f'<circle cx="{f(cx + side * 105)}" cy="{f(cy)}" r="0.3" fill="{GOLD}"/>']
+        a += [logo(cx + side * 38, 7.6, 9.8, kind="mono"),
+              sparkle(cx + side * 55, cy, 0.9),
+              text(cx + side * 79, 13.4, "FELIZ NAVIDAD", 2.5, "sans", GOLD, 300, ls=1.1),
+              sparkle(cx + side * 103, cy, 0.9),
+              f'<circle cx="{f(cx + side * 110)}" cy="{f(cy)}" r="0.3" fill="{GOLD}"/>']
     return W, H, shape, "".join(a)
 
 
 W, H, shape, art = torta_cinta()
 add_piece("cinta-torta-negra", "Cinta de regalo · Mini Torta Negra (obsequio)", W, H, shape, art,
-          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en tira de 240 × 25 mm con colas en V (7 mm).",
-          "Pasa por encima del domo como un listón de regalo: se pega desde la base negra de un lado, sube, cruza el tope (ahí queda «Torta Negra») y baja hasta la base del otro lado. Además sella el domo. El largo se ajusta con la medida real: 2 × alto del domo + ancho + 1 cm.")
+          f"Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en tira de {f(W)} × 25 mm con colas en V (7 mm).",
+          "Pasa por encima del domo (Ø 11 cm × 8,5 cm de alto) como un listón de regalo: se pega en la base negra de un lado, sube, cruza el tope (ahí queda «Torta Negra») y baja hasta la base del otro lado, donde queda 1 cm pegado. Además sella el domo.")
 
 
 def sello_label():
@@ -421,7 +429,7 @@ add_piece("sello-cierre", "Sello redondo de cierre (opcional)", W, H, shape, art
           "Para cerrar la solapa de la bolsa o el sobre de la tarjeta. Pieza opcional.")
 
 
-def bolsa_sticker():
+def bolsa_sticker(principal="Asado Negro"):
     W, H, rb = 130.0, 190.0, 6.0
     cx = W / 2
 
@@ -440,7 +448,7 @@ def bolsa_sticker():
          divider(cx, 104.0, 30, star=2.0, gap=4.2, sw=0.24),
          text(cx, 112.6, f"EDICIÓN ESPECIAL · {ANIO}", 3.15, "sans", GOLD, 300, ls=1.35),
          # menú del kit
-         text(cx, 128.5, "Hallacas · Asado Negro", 5.6, "serif", IVORY, 400, italic=True),
+         text(cx, 128.5, f"Hallacas · {principal}", 5.6, "serif", IVORY, 400, italic=True),
          text(cx, 136.8, "Ensalada de Gallina · Pan de Jamón", 5.6, "serif", IVORY, 400, italic=True),
          text(cx, 146.6, "Y UN DULCE OBSEQUIO: TORTA NEGRA", 2.5, "sans", GOLD, 300, ls=0.9),
          divider(cx, 158.0, 9, star=1.2, gap=2.6, sw=0.18),
@@ -494,6 +502,18 @@ add_piece("tarjeta", "Tarjeta de mensaje (frente y dorso)", W, H, rrect_path(0, 
           None, "Cartulina de 300–350 g (opalina o hilo), impresión full color a dos caras. Ideal: dorado en hot stamping en el frente. Corte recto.",
           "Va dentro de la bolsa, apoyada sobre los envases. Si se usa sobre, cerrarlo con el sello redondo.",
           pages=[("frente", front, ""), ("dorso", back_svg, back_html)], safe=6.0)
+
+
+# Variantes con Pernil como plato principal (al final para no cambiar la numeración)
+W, H, shape, art = envase_label(VARIANTE_PRINCIPAL[1])
+add_piece(f"etiqueta-{VARIANTE_PRINCIPAL[0]}", f"Etiqueta envase · {VARIANTE_PRINCIPAL[1]}", W, H, shape, art,
+          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 3,5 mm).",
+          f"Para los kits que llevan pernil en lugar de asado negro. Va centrada sobre la tapa del envase ({TAPA_ENVASE}).")
+W, H, shape, art = bolsa_sticker(VARIANTE_PRINCIPAL[1])
+add_piece("sticker-bolsa-pernil", "Sticker principal de la bolsa · versión Pernil", W, H, shape, art,
+          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en forma de arco (medio punto arriba, esquinas inferiores r = 6 mm).",
+          "Va centrado en el frente de la bolsa esmerilada, debajo de la solapa del asa. Sobre el esmerilado el azul noche resalta y el contenido se intuye alrededor.")
+
 
 
 # ───────────────────────── SALIDA ─────────────────────────

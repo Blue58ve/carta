@@ -1,9 +1,9 @@
 # Kit Navideño BS Catering · «Navidad en casa» 2026
 
-Etiquetas, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro, ensalada de gallina, pan de jamón y mini torta negra de obsequio).
+Etiquetas, cinta, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro o pernil, ensalada de gallina, pan de jamón y mini torta negra de obsequio).
 Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vectorizado.
 
-> **Borrador 2.** Las medidas son estimaciones hechas a partir de las fotos. Ajustar cuando lleguen las medidas reales (ver «Pendientes»).
+> **Versión final.** Medidas confirmadas: tapa de los envases **14 × 8 cm** y domo **Ø 11 cm × 8,5 cm de alto**. Nombre «Navidad en casa» e Instagram **@bscateringve**.
 
 ## Archivos
 
@@ -21,23 +21,25 @@ Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vec
 
 | # | Pieza | Medida de corte | Material | Dónde va |
 |---|---|---|---|---|
-| 01 | Etiqueta Asado Negro | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
-| 02 | Etiqueta Ensalada de Gallina | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase Safe-T-Fresh |
+| 01 | Etiqueta Asado Negro | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase (14 × 8 cm) |
+| 02 | Etiqueta Ensalada de Gallina | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase (14 × 8 cm) |
 | 03 | Etiqueta Hallacas | 130 × 80 mm, esquinas r 4 mm | Vinil autoadhesivo | Centro de la bolsa al vacío |
 | 04 | Etiqueta de cierre Pan de Jamón | 80 × 120 mm (se dobla a la mitad) | Vinil autoadhesivo | Cierra la boca de la bolsa kraft |
-| 05 | Cinta de regalo Torta Negra (obsequio) | 240 × 25 mm, colas en V de 7 mm | Vinil autoadhesivo | Por encima del domo, de base a base (también lo sella) |
+| 05 | Cinta de regalo Torta Negra (obsequio) | 255 × 25 mm, colas en V de 7 mm | Vinil autoadhesivo | Por encima del domo Ø 11 × 8,5 cm, de base a base (también lo sella) |
 | 06 | Sello de cierre (opcional) | Ø 40 mm | Vinil autoadhesivo | Solapa de la bolsa o sobre |
 | 07 | Sticker principal de la bolsa | 130 × 190 mm, arco | Vinil autoadhesivo | Frente de la bolsa esmerilada |
 | 08 | Tarjeta (frente y dorso) | 100 × 150 mm | Cartulina 300–350 g | Dentro de la bolsa |
+| 09 | Etiqueta Pernil (variante) | 90 × 56 mm, esquinas r 3,5 mm | Vinil autoadhesivo | Tapa del envase, cuando el kit lleva pernil en vez de asado |
+| 10 | Sticker de la bolsa · versión Pernil | 130 × 190 mm, arco | Vinil autoadhesivo | Igual que el 07; su menú dice «Hallacas · Pernil» |
 
-Cantidades por kit de 4 personas: 1 de cada etiqueta y la cinta (01–05), 1 sticker de bolsa, 1 tarjeta y 1–2 sellos.
+Cantidades por kit de 4 personas: 1 de cada etiqueta y la cinta (01–05), 1 sticker de bolsa, 1 tarjeta y 1–2 sellos. En los kits con pernil se usan la 09 y el 10 en lugar de la 01 y el 07.
 Como el kit siempre va en múltiplos de 4, un kit de 8 lleva el doble de unidades (2 bolsas de hallacas, 2 envases de cada plato, etc.) con las mismas etiquetas. Por eso ninguna etiqueta indica cantidades.
 
 ### Cómo se coloca la cinta de la torta negra
 1. Pegar una punta en la base negra del domo, de un lado.
 2. Subir por la pared del domo, cruzar el tope (ahí queda «Torta Negra · Obsequio de la casa») y bajar por el otro lado.
 3. Pegar la otra punta en la base. La cinta queda como un listón de regalo y sella el domo.
-4. Largo: 2 × alto del domo + ancho del domo + 1 cm. Con la medida real se ajusta el archivo (hoy 240 mm).
+4. Largo calculado para el domo de Ø 11 cm × 8,5 cm: 2 paredes de 3 cm + media vuelta del tope (π × 5,5 cm ≈ 17,3 cm) + 1,1 cm pegado en la base de cada lado = **25,5 cm**.
 
 ### Cómo se coloca la etiqueta del pan de jamón
 1. Doblar la boca de la bolsa kraft unos 2 cm.
@@ -62,13 +64,13 @@ Como el kit siempre va en múltiplos de 4, un kit de 8 lleva el doble de unidade
 ## Tipografías
 - **Cormorant Garamond** (nombres de producto y textos), **Josefin Sans** (mayúsculas espaciadas, eco de «CATERING») y **Pinyon Script** («Feliz Navidad»). Todas de Google Fonts, licencia libre (OFL). Están en `fuente/fuentes/`.
 
-## Pendientes
-1. **Medidas reales:** tapa del envase (zona plana), bolsa de hallacas, ancho de la bolsa kraft, alto y ancho del domo (para el largo de la cinta) y bolsa esmerilada.
-
-Confirmados: nombre «Navidad en casa» e Instagram **@bscateringve**.
+## Antes del tiraje
+1. **Prueba de la cinta:** imprimir 1 cinta y probarla en el domo. Si sobra o falta largo, se cambia `DOMO` en `fuente/build.py` y se regenera.
+2. **Medidas estimadas desde las fotos** (no confirmadas): etiqueta de hallacas 13 × 8 cm sobre la bolsa al vacío, etiqueta del pan de jamón de 8 cm de ancho sobre la bolsa kraft y sticker de 13 × 19 cm en la bolsa esmerilada. Conviene presentarlas sobre el empaque real con una prueba en papel.
+3. **Prueba de color** del azul noche y el dorado sobre el vinil elegido.
 
 ## Editar y regenerar
-Los textos (nombre del kit, año, Instagram, productos y mensaje de la tarjeta) están al inicio de `fuente/build.py`.
+Los textos (nombre del kit, año, Instagram, productos, medidas de la tapa y del domo, y mensaje de la tarjeta) están al inicio de `fuente/build.py`.
 
 ```bash
 python3 fuente/build.py      # genera SVG y páginas

@@ -4,7 +4,8 @@ Etiquetas, cinta, sello, sticker de bolsa y tarjeta para el kit navideño (4 hal
 Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vectorizado. Instagram **@bscateringve**.
 
 > **Versión final para imprenta.** Medidas confirmadas: tapa de los envases **14 × 8 cm** y domo **Ø 11 cm × 8,5 cm de alto**.
-> Lo que va a la imprenta está en **`imprenta/`** (con su orden de impresión en PDF).
+> **Para enviar a la imprenta (solo etiquetas):** `etiquetas-imprenta/` → `BS-Catering-Etiquetas-Navidad-2026.pdf` (un PDF, 5 pliegos de 33 × 48 cm; en cada página dice cuántas copias imprimir) + `Instrucciones-para-la-imprenta.pdf` (1 página).
+> El paquete completo (con prueba, tarjetas y piezas sueltas) está en `imprenta/`.
 
 ## Para la imprenta: `imprenta/`
 
@@ -34,7 +35,7 @@ Todos los PDF van en **CMYK**, con **textos en curvas**, **3 mm de sangrado** y 
 
 ## Cantidades
 
-Previsión: **50 kits + 10 % de reposición = 55 juegos**. Un kit de 8 personas cuenta como 2 kits.
+Previsión: **60 kits** (30 con Asado Negro y 30 con Pernil). Todas las demás piezas alcanzan para 60. Un kit de 8 personas cuenta como 2 kits.
 
 **Fase 1 · Prueba:** 2 pliegos P0 (vinil) + 1 pliego PF (9 tarjetas). Se arman 2 kits y se revisa color, adhesión (24 h en nevera), medidas y el largo de la cinta.
 
@@ -42,14 +43,14 @@ Previsión: **50 kits + 10 % de reposición = 55 juegos**. Un kit de 8 personas 
 
 | Pliego | Contenido por pliego | Pliegos | Total |
 |---|---|---|---|
-| PA | 7 Asado Negro · 7 Pernil · 7 Ensalada | 8 | 56 de cada una |
+| PA | 5 Asado Negro · 5 Pernil · 11 Ensalada | 6 | 30 Asado · 30 Pernil · 66 Ensalada |
 | PB | 10 Hallacas | 6 | 60 |
 | PC | 20 Pan de Jamón | 3 | 60 |
-| PD | 14 Cintas (255 mm) | 4 | 56 |
-| PE | 4 Stickers de bolsa · 8 Sellos | 14 | 56 stickers · 112 sellos |
+| PD | 14 Cintas (255 mm) | 5 | 70 |
+| PE | 4 Stickers de bolsa · 8 Sellos | 15 | 60 stickers · 120 sellos |
 | PF | 9 Tarjetas (frente y dorso) | 7 | 63 |
 
-Total: **35 pliegos de vinil + 7 de cartulina** (33 × 48 cm). Asado y Pernil se imprimen en igual cantidad para cubrir cualquier combinación.
+Total: **35 pliegos de vinil + 7 de cartulina** (33 × 48 cm).
 
 ## Armado (para el equipo de BS Catering)
 - **Envases:** etiqueta centrada en la tapa; quedan 2,5 cm a cada lado y 1,2 cm arriba y abajo.

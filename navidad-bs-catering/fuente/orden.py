@@ -160,7 +160,7 @@ tr.test td {{ background: #FBF6EA; }}
 <h2>Resumen del trabajo</h2>
 <p>Etiquetas en <b>vinil autoadhesivo impreso y cortado</b> (8 diseños) y una <b>tarjeta en cartulina</b> a dos caras para el kit navideño de BS Catering.
 Se trabaja en dos fases: <span class="pill">1</span><b>prueba</b> ({n_test} pliegos de vinil + 1 de tarjetas) y, una vez aprobada,
-<span class="pill">2</span><b>producción</b> para <b>{R['kits']} kits + 10 % de reposición</b> ({META} juegos): {n_vinil_prod} pliegos de vinil y {n_card_prod} de cartulina, de 33 × 48 cm.</p>
+<span class="pill">2</span><b>producción</b> para <b>{R['kits']} kits</b> (30 con Asado Negro y 30 con Pernil): {n_vinil_prod} pliegos de vinil y {n_card_prod} de cartulina, de 33 × 48 cm.</p>
 
 <div class="grid2">
   <div class="box"><h3>Archivos entregados</h3><ul>
@@ -192,7 +192,7 @@ Se trabaja en dos fases: <span class="pill">1</span><b>prueba</b> ({n_test} plie
 <thead><tr><th>#</th><th></th><th>Pieza y uso</th><th>Medida de corte</th><th class="c">Por kit</th><th class="c">Prueba</th><th class="c">Producción</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
-<p class="mut" style="margin-top:2mm">* Cada kit lleva <b>Asado Negro o Pernil</b>: se imprimen ambos en igual cantidad para cubrir cualquier combinación. Un kit de 8 personas cuenta como 2 kits.
+<p class="mut" style="margin-top:2mm">* Cada kit lleva <b>Asado Negro o Pernil</b>: 30 kits con asado y 30 con pernil. Un kit de 8 personas cuenta como 2 kits.
 La tarjeta de la prueba sale de 1 pliego PF (9 tarjetas).</p>
 
 <div class="break"></div>
@@ -219,13 +219,13 @@ La tarjeta de la prueba sale de 1 pliego PF (9 tarjetas).</p>
   <figcaption class="mut">P0 · Pliego de prueba (33 × 48 cm)</figcaption></figure>
 </div>
 
-<h2>Fase 2 · Producción ({R['kits']} kits + 10 %)</h2>
+<h2>Fase 2 · Producción ({R['kits']} kits)</h2>
 <table>
 <thead><tr><th>Pliego</th><th>Nombre y archivo</th><th>Contenido por pliego</th><th>Material</th><th class="c">Pliegos</th><th>Total</th></tr></thead>
 <tbody>{''.join(sheet_rows)}
 <tr class="tot"><td></td><td colspan="3">Total producción: {n_vinil_prod} pliegos de vinil + {n_card_prod} de cartulina (33 × 48 cm)</td><td class="c">{n_vinil_prod + n_card_prod}</td><td></td></tr>
 </tbody></table>
-<p class="mut" style="margin-top:2mm">Las cantidades salen redondeadas a pliegos completos y todas cubren al menos {META} juegos. Los sellos (112) alcanzan para cerrar el pan y la solapa de cada bolsa.</p>
+<p class="mut" style="margin-top:2mm">Las cantidades salen redondeadas a pliegos completos: cada pieza alcanza para los {META} kits (Asado Negro y Pernil, 30 de cada uno). Los sellos ({prod.get('sello-cierre', 0)}) alcanzan para cerrar el pan y la solapa de cada bolsa.</p>
 
 <div class="break"></div>
 <h2 style="margin-top:0">Vista de los pliegos</h2>

@@ -35,8 +35,9 @@ PT = 72 / 25.4
 SHEET_W, SHEET_H = 330.0, 480.0          # pliego 33 × 48 cm (13 × 19 in)
 MARGIN = 15.0                            # margen libre (pinzas, marcas del plotter)
 GAP = 6.0                                # separación entre cortes (los sangrados se tocan)
-KITS = 50
-META = round(KITS * 1.10)                 # 50 kits + 10 % de reposición = 55
+ASADO, PERNIL = 30, 30                   # kits con asado negro / con pernil (confirmado)
+KITS = ASADO + PERNIL                    # 60 kits: el resto de piezas se imprime para 60 o más
+META = KITS
 
 P = {p["id"]: p for p in B.PIECES}
 NUM = {p["id"]: i for i, p in enumerate(B.PIECES, 1)}
@@ -71,14 +72,16 @@ def span(n, size, gap=GAP):
 
 def sheet_production():
     sheets = []
-    # A · envases: columnas Asado / Pernil / Ensalada (7 de cada una)
-    env = [P["etiqueta-asado-negro"], P["etiqueta-pernil"], P["etiqueta-ensalada-de-gallina"]]
+    # A · envases: 5 Asado + 5 Pernil + 11 Ensalada por pliego  ×6  →  30 · 30 · 66
+    asado, pernil, ens = P["etiqueta-asado-negro"], P["etiqueta-pernil"], P["etiqueta-ensalada-de-gallina"]
     x0, y0 = centered_x(span(3, 90)), centered_y(span(7, 56))
     pl = []
-    for c, piece in enumerate(env):
-        pl += grid(piece, 1, 7, x0 + c * (90 + GAP), y0)
+    for r in range(7):
+        fila = [asado, pernil, ens] if r < 5 else [ens, ens, ens]
+        for c, piece in enumerate(fila):
+            pl.append(dict(piece=piece, x=x0 + c * (90 + GAP), y=y0 + r * (56 + GAP), rot=0))
     sheets.append(dict(id="PA", nombre="Envases: Asado Negro, Pernil y Ensalada de Gallina",
-                       archivo="PA-envases", copias=8, placements=pl))
+                       archivo="PA-envases", copias=6, placements=pl))
     # B · hallacas 2 × 5
     h = P["etiqueta-hallacas"]
     sheets.append(dict(id="PB", nombre="Hallacas", archivo="PB-hallacas", copias=6,
@@ -89,7 +92,7 @@ def sheet_production():
                        placements=grid(pan, 4, 5, centered_x(span(4, 60)), centered_y(span(5, 80)), rot=1)))
     # D · cintas 1 × 14
     ci = P["cinta-torta-negra"]
-    sheets.append(dict(id="PD", nombre=f"Cintas Torta Negra ({int(ci['W'])} mm)", archivo="PD-cintas", copias=4,
+    sheets.append(dict(id="PD", nombre=f"Cintas Torta Negra ({int(ci['W'])} mm)", archivo="PD-cintas", copias=5,
                        placements=grid(ci, 1, 14, centered_x(ci["W"]), centered_y(span(14, 25)))))
     # E · sticker de bolsa 2 × 2 + fila de 8 sellos
     bo, se = P["sticker-bolsa"], P["sello-cierre"]
@@ -98,7 +101,9 @@ def sheet_production():
     pl = grid(bo, 2, 2, centered_x(span(2, 130)), y0)
     pl += grid(se, 8, 1, centered_x(span(8, 30)), y0 + span(2, 190) + GAP)
     sheets.append(dict(id="PE", nombre="Sticker de la bolsa + sellos de cierre", archivo="PE-bolsa-y-sellos",
-                       copias=14, placements=pl))
+                       copias=15, placements=pl))
+    for i, sh in enumerate(sheets, 1):
+        sh["pagina"], sh["de"] = i, len(sheets)
     return sheets
 
 
@@ -145,7 +150,8 @@ html,body{margin:0;padding:0;background:#fff}
 .sheet:last-child{page-break-after:auto}
 .pc{position:absolute}
 .pc>svg{display:block}
-.cap{position:absolute;left:0;right:0;bottom:4.5mm;text-align:center;font:400 2.3mm 'Josefin Sans',sans-serif;
+.cap2{position:absolute;left:0;right:0;bottom:7.6mm;text-align:center;font:600 3mm 'Josefin Sans',sans-serif;letter-spacing:.1mm;color:#1B2333}
+.cap{position:absolute;left:0;right:0;bottom:3.4mm;text-align:center;font:400 2.3mm 'Josefin Sans',sans-serif;
   letter-spacing:.12mm;color:#777}
 .lab{position:absolute;font:400 2.4mm 'Josefin Sans',sans-serif;color:#555;white-space:nowrap}
 """
@@ -164,8 +170,23 @@ def piece_div(pl):
 
 
 def caption(sh, extra=""):
-    return (f'<div class="cap">BS CATERING · NAVIDAD EN CASA {B.ANIO} · PLIEGO {sh["id"]} — {sh["nombre"].upper()}'
+    line = (f'<div class="cap">BS CATERING · NAVIDAD EN CASA {B.ANIO} · PLIEGO {sh["id"]} — {sh["nombre"].upper()}'
             f' · {int(SHEET_W / 10)} × {int(SHEET_H / 10)} CM{extra}</div>')
+    if "pagina" in sh:
+        cont = {}
+        for pl in sh["placements"]:
+            nm = NOMBRE_CORTO[pl["piece"]["id"]]
+            cont[nm] = cont.get(nm, 0) + 1
+        det = " · ".join(f"{n} {k}" for k, n in cont.items())
+        line = (f'<div class="cap2">PÁGINA {sh["pagina"]} DE {sh["de"]} · IMPRIMIR {sh["copias"]} COPIAS'
+                f' &nbsp;—&nbsp; {det} por pliego</div>') + line
+    return line
+
+
+NOMBRE_CORTO = {"etiqueta-asado-negro": "Asado Negro", "etiqueta-pernil": "Pernil",
+                "etiqueta-ensalada-de-gallina": "Ensalada de Gallina", "etiqueta-hallacas": "Hallacas",
+                "etiqueta-pan-de-jamon": "Pan de Jamón", "cinta-torta-negra": "Cintas",
+                "sticker-bolsa": "Stickers de bolsa", "sello-cierre": "Sellos"}
 
 
 def sheet_html(sh):
@@ -374,6 +395,20 @@ def main():
     # guías con medidas como referencia
     for g in sorted((ROOT / "guias").glob("*-guia.pdf")):
         shutil.copy2(g, d_ref / g.name)
+
+    # archivo único con todas las etiquetas: lo más sencillo para la imprenta
+    d_env = ROOT / "etiquetas-imprenta"
+    d_env.mkdir(exist_ok=True)
+    wr = PdfWriter()
+    for sh in sheets:
+        if sh["id"] != "P0":
+            for pg in PdfReader(d_prod / f"{sh['archivo']}.pdf").pages:
+                wr.add_page(pg)
+    wr.add_metadata({"/Title": f"BS Catering · Etiquetas Navidad en casa {B.ANIO}", "/Author": "BS Catering",
+                     "/Subject": "Etiquetas autoadhesivas — pliegos 33 × 48 cm con CutContour"})
+    with open(d_env / f"BS-Catering-Etiquetas-Navidad-{B.ANIO}.pdf", "wb") as fh:
+        wr.write(fh)
+    print("archivo único", d_env)
 
     (TMP / "resumen.json").write_text(json.dumps(dict(piezas=piezas, pliegos=resumen, meta=META, kits=KITS),
                                                  ensure_ascii=False, indent=1))

@@ -199,11 +199,11 @@ composite(FOTOS / "bolsa.jpg", load("sticker-bolsa.png"),
           place_on_surface(bag, (300, 310), (85, 48, 215, 238)),
           "maqueta-bolsa.jpg", gloss=0.15, shade=0.35, focus=F_BAG)
 
-# 4 · Pan de jamón: panel frontal de la etiqueta de cierre sobre la boca de la bolsa
-pan = load("etiqueta-pan-de-jamon.png")
-front = pan[pan.shape[0] // 2:, :]
+# 4 · Pan de jamón: etiqueta frontal de 80 × 60 mm, a 2 cm de la boca de la bolsa
+front = load("etiqueta-pan-de-jamon.png")
 c = np.array([1430, 248.0]); u = np.array([0.910, 0.414]); v = np.array([-0.414, 0.910])
 px = 5.07  # px por mm en la foto
+c = c + 20 * px * v
 TL = c - 40 * px * u; TR = c + 40 * px * u
 quad = [TL, TR, TR + 60 * px * v, TL + 60 * px * v]
 composite(FOTOS / "pan-de-jamon.jpg", front, quad, "maqueta-pan-de-jamon.jpg", gloss=0.2,

@@ -278,10 +278,10 @@ PIECES = []
 
 
 def add_piece(pid, title, W, H, shape, art, material, notes, fold=None, pages=None,
-              safe=3.0, preview_bg=None):
+              safe=3.0, preview_bg=None, cut=None):
     PIECES.append(dict(id=pid, title=title, W=W, H=H, shape=shape, art=art,
                        material=material, notes=notes, fold=fold, pages=pages,
-                       safe=safe))
+                       safe=safe, cut=cut or ("rect",)))
 
 
 def envase_label(name):
@@ -305,7 +305,8 @@ for pid, name in PRODUCTOS_ENVASE:
     W, H, shape, art = envase_label(name)
     add_piece(f"etiqueta-{pid}", f"Etiqueta envase · {name}", W, H, shape, art,
               "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 3,5 mm).",
-              f"Va centrada sobre la tapa del envase ({TAPA_ENVASE}): quedan 2,5 cm libres a cada lado y 1,2 cm arriba y abajo, sin tocar la pestaña frontal.")
+              f"Va centrada sobre la tapa del envase ({TAPA_ENVASE}): quedan 2,5 cm libres a cada lado y 1,2 cm arriba y abajo, sin tocar la pestaña frontal.",
+              cut=("rrect", 3.5))
 
 
 def hallacas_label():
@@ -326,44 +327,30 @@ def hallacas_label():
 W, H, shape, art = hallacas_label()
 add_piece("etiqueta-hallacas", "Etiqueta bolsa de hallacas", W, H, shape, art,
           "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 4 mm).",
-          "Va en el centro del frente de la bolsa al vacío, sobre el cruce de las 4 hallacas. Pegar presionando del centro hacia afuera para que copie el relieve del pabilo.")
+          "Va en el centro del frente de la bolsa al vacío, sobre el cruce de las 4 hallacas. Pegar presionando del centro hacia afuera para que copie el relieve del pabilo.",
+          cut=("rrect", 4.0))
 
 
 def pan_label():
-    """Etiqueta de cierre que se dobla sobre la boca de la bolsa kraft."""
-    W, H, r = 80.0, 120.0, 4.0
-    P = H / 2              # alto de cada panel
+    """Etiqueta frontal de la bolsa kraft. La boca se dobla hacia atrás y se cierra con el sello redondo."""
+    W, H, r = 80.0, 60.0, 4.0
     cx = W / 2
-
-    def panel_frame(y0):
-        return (stroke_path(rrect_path(3, y0 + 3, W - 6, P - 6, 2.2), 0.32)
-                + stroke_path(rrect_path(4.1, y0 + 4.1, W - 8.2, P - 8.2, 1.4), 0.16))
-
-    front = [panel_frame(P),
-             logo(cx, P + 7.5, 16.5),
-             sprig(cx - 13.0, P + 23.6, 11.5, -62, mirror=True),
-             sprig(cx + 13.0, P + 23.6, 11.5, 62),
-             text(cx, P + 36.4, "Pan de Jamón", 8.6, "serif", IVORY, 500, italic=True),
-             divider(cx, P + 41.6, 13),
-             text(cx, P + 48.2, f"{KIT.upper()} · {ANIO}", 2.3, "sans", GOLD, 300, ls=0.8)]
-    # panel trasero: se diseña derecho y se gira 180° (queda legible al doblar)
-    back_inner = [panel_frame(0),
-                  sparkle_cluster(cx, 13.5, 3.2),
-                  text(cx, 30.5, "Feliz Navidad", 9.6, "script", IVORY, 400),
-                  divider(cx, 37.0, 12),
-                  logo(cx, 40.6, 7.0, kind="mono"),
-                  instagram(cx, 54.0, 2.1, GOLD)]
-    back = f'<g transform="rotate(180 {f(cx)} {f(P / 2)})">{"".join(back_inner)}</g>'
-    a = [bg(W, H), subtle_stars(W, H, seed=11, n=0),
-         back, "".join(front)]
-    return W, H, rrect_path(0, 0, W, H, r), "".join(a), P
+    a = [bg(W, H), subtle_stars(W, H, seed=12, n=6, inset=6.5, avoid=[(17, 4, 63, 55)]),
+         double_frame_rrect(W, H, r),
+         logo(cx, 8.6, 16.5),
+         sprig(cx - 13.0, 24.7, 11.5, -62, mirror=True),
+         sprig(cx + 13.0, 24.7, 11.5, 62),
+         text(cx, 37.6, "Pan de Jamón", 8.6, "serif", IVORY, 500, italic=True),
+         divider(cx, 42.8, 13),
+         text(cx, 49.4, f"{KIT.upper()} · {ANIO}", 2.3, "sans", GOLD, 400, ls=0.8)]
+    return W, H, rrect_path(0, 0, W, H, r), "".join(a)
 
 
-W, H, shape, art, P = pan_label()
-add_piece("etiqueta-pan-de-jamon", "Etiqueta de cierre · Pan de Jamón", W, H, shape, art,
+W, H, shape, art = pan_label()
+add_piece("etiqueta-pan-de-jamon", "Etiqueta frontal · Pan de Jamón", W, H, shape, art,
           "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 4 mm).",
-          "Cierra la bolsa kraft y reemplaza la cinta adhesiva. Doblar la boca de la bolsa 2 cm, pegar la mitad inferior (Pan de Jamón) en el frente con la línea de doblez justo en el borde, y doblar la mitad superior hacia atrás. El texto trasero queda derecho al voltear la bolsa.",
-          fold=P)
+          "Va en el frente de la bolsa kraft, centrada y a 2 cm de la boca. La boca se dobla hacia atrás y se cierra con el sello redondo (pieza 06).",
+          cut=("rrect", 4.0))
 
 
 def round_label(D, pid, center_art, top_txt, bottom_txt, size=2.15, ls=0.55):
@@ -379,13 +366,13 @@ def round_label(D, pid, center_art, top_txt, bottom_txt, size=2.15, ls=0.55):
     return "".join(a), circle_path(c, c, R)
 
 
-def torta_cinta():
+def torta_cinta(largo=None):
     """Cinta tipo listón que pasa por encima del domo, de base a base, con colas en V."""
     # recorrido sobre el domo: 2 paredes rectas + media vuelta del casquete (radio = D/2) + 1,1 cm
     # pegado en la base de cada lado  →  Ø 110 × 85 mm  =  2·30 + π·55 + 2·11 ≈ 255 mm
     D, Hd = DOMO
     r = D / 2
-    W = round(2 * (Hd - r) + math.pi * r + 22)
+    W = float(largo or round(2 * (Hd - r) + math.pi * r + 22))
     H, N = 25.0, 7.0                    # ancho y profundidad del corte en V
     cx, cy = W / 2, H / 2
     shape = (f"M0,0 H{f(W)} L{f(W - N)},{f(cy)} L{f(W)},{f(H)} H0 L{f(N)},{f(cy)} Z")
@@ -412,24 +399,26 @@ def torta_cinta():
 W, H, shape, art = torta_cinta()
 add_piece("cinta-torta-negra", "Cinta de regalo · Mini Torta Negra (obsequio)", W, H, shape, art,
           f"Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en tira de {f(W)} × 25 mm con colas en V (7 mm).",
-          "Pasa por encima del domo (Ø 11 cm × 8,5 cm de alto) como un listón de regalo: se pega en la base negra de un lado, sube, cruza el tope (ahí queda «Torta Negra») y baja hasta la base del otro lado, donde queda 1 cm pegado. Además sella el domo.")
+          "Pasa por encima del domo (Ø 11 cm × 8,5 cm de alto) como un listón de regalo: se pega en la base negra de un lado, sube, cruza el tope (ahí queda «Torta Negra») y baja hasta la base del otro lado, donde queda 1 cm pegado. Además sella el domo.",
+          cut=("ribbon", 7.0))
 
 
 def sello_label():
-    D = 40.0
+    D = 30.0
     c = D / 2
-    center = logo(c, 11.4, 13.0, kind="logo")
-    art, shape = round_label(D, "sello", center, "FELIZ NAVIDAD", f"EDICIÓN {ANIO}", 1.85, 0.6)
+    center = logo(c, 10.2, 9.6, kind="logo")
+    art, shape = round_label(D, "sello", center, "FELIZ NAVIDAD", f"EDICIÓN {ANIO}", 1.6, 0.42)
     return D, D, shape, art
 
 
 W, H, shape, art = sello_label()
-add_piece("sello-cierre", "Sello redondo de cierre (opcional)", W, H, shape, art,
-          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel circular Ø 40 mm.",
-          "Para cerrar la solapa de la bolsa o el sobre de la tarjeta. Pieza opcional.")
+add_piece("sello-cierre", "Sello redondo de cierre", W, H, shape, art,
+          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel circular Ø 30 mm.",
+          "Cierra la bolsa del pan de jamón por detrás (la boca doblada). Opcional: uno más para la solapa de la bolsa del kit.",
+          cut=("circle",))
 
 
-def bolsa_sticker(principal="Asado Negro"):
+def bolsa_sticker(principal="Asado Negro o Pernil"):
     W, H, rb = 130.0, 190.0, 6.0
     cx = W / 2
 
@@ -459,7 +448,8 @@ def bolsa_sticker(principal="Asado Negro"):
 W, H, shape, art = bolsa_sticker()
 add_piece("sticker-bolsa", "Sticker principal de la bolsa", W, H, shape, art,
           "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en forma de arco (medio punto arriba, esquinas inferiores r = 6 mm).",
-          "Va centrado en el frente de la bolsa esmerilada, debajo de la solapa del asa. Sobre el esmerilado el azul noche resalta y el contenido se intuye alrededor.")
+          "Va centrado en el frente de la bolsa esmerilada, debajo de la solapa del asa. Sobre el esmerilado el azul noche resalta y el contenido se intuye alrededor.",
+          cut=("arch", 6.0))
 
 
 def tarjeta():
@@ -504,16 +494,12 @@ add_piece("tarjeta", "Tarjeta de mensaje (frente y dorso)", W, H, rrect_path(0, 
           pages=[("frente", front, ""), ("dorso", back_svg, back_html)], safe=6.0)
 
 
-# Variantes con Pernil como plato principal (al final para no cambiar la numeración)
+# Pernil como alternativa al asado negro (al final para no cambiar la numeración)
 W, H, shape, art = envase_label(VARIANTE_PRINCIPAL[1])
 add_piece(f"etiqueta-{VARIANTE_PRINCIPAL[0]}", f"Etiqueta envase · {VARIANTE_PRINCIPAL[1]}", W, H, shape, art,
           "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 3,5 mm).",
-          f"Para los kits que llevan pernil en lugar de asado negro. Va centrada sobre la tapa del envase ({TAPA_ENVASE}).")
-W, H, shape, art = bolsa_sticker(VARIANTE_PRINCIPAL[1])
-add_piece("sticker-bolsa-pernil", "Sticker principal de la bolsa · versión Pernil", W, H, shape, art,
-          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel en forma de arco (medio punto arriba, esquinas inferiores r = 6 mm).",
-          "Va centrado en el frente de la bolsa esmerilada, debajo de la solapa del asa. Sobre el esmerilado el azul noche resalta y el contenido se intuye alrededor.")
-
+          f"Para los kits que llevan pernil en lugar de asado negro. Va centrada sobre la tapa del envase ({TAPA_ENVASE}).",
+          cut=("rrect", 3.5))
 
 
 # ───────────────────────── SALIDA ─────────────────────────
@@ -626,7 +612,7 @@ def build():
                f'stroke="#FF00FF" stroke-width="0.25"/></svg>')
         (OUT_SVG / f"{pid}-corte.svg").write_text(cut)
         manifest.append(dict(id=pid, title=p["title"], W=W, H=H, material=p["material"],
-                             notes=p["notes"], jobs=jobs,
+                             notes=p["notes"], jobs=jobs, cut=p["cut"],
                              sides=[s for s, _, _ in pages] if p["pages"] else None))
     (BUILD / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1))
     print(f"{len(manifest)} piezas generadas")

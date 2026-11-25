@@ -1,85 +1,62 @@
 # Kit Navideño BS Catering · «Navidad en casa» 2026
 
-Etiquetas, cinta, sello, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro o pernil, ensalada de gallina, pan de jamón y mini torta negra de obsequio).
-Estilo **elegante**: azul noche, dorado y marfil, con el logo de BS Catering vectorizado. Instagram **@bscateringve**.
+Etiquetas, sellos, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro o pernil, ensalada de gallina, pan de jamón y mini torta negra de obsequio). Instagram **@bscateringve**.
 
-> **Versión final para imprenta.** Medidas confirmadas: tapa de los envases **14 × 8 cm** y domo **Ø 11 cm × 8,5 cm de alto**.
-> **Para enviar a la imprenta (solo etiquetas):** `etiquetas-imprenta/` → 8 PDF sueltos, uno por etiqueta, con la medida y la cantidad en el nombre del archivo, + `00-Instrucciones-para-la-imprenta.pdf` (1 página).
->
-> Cantidades: Asado Negro 30 · Pernil 30 · Ensalada de Gallina 60 · Hallacas 60 · Pan de Jamón 60 · Cinta Torta Negra 60 · Sello redondo 120 · Sticker de la bolsa 60 (total 480).
-> El paquete completo (con prueba, tarjetas y piezas sueltas) está en `imprenta/`.
+> **Versión 2 (25/11/2026), tras la prueba impresa.** En la primera prueba el azul noche salió casi negro y los textos dorados, finos y pequeños, no se leían. Cambios:
+> - Fondo **azul más claro** (`#2B568A`) y **todos los textos y el logo en blanco** (el blanco del vinil, sin tinta).
+> - Dorado **solo en marcos, ramitas y destellos**, con trazos más gruesos.
+> - Tipografías más firmes y más grandes: **Lora seminegrita** (nombres) y **Montserrat seminegrita** (información). Nada por debajo de 2,6 mm de alto.
+> - **Torta negra:** sello redondo de Ø 5 cm en el tope del domo (reemplaza a la cinta).
+> - **Sticker de la bolsa:** más pequeño, 10 × 14 cm.
+> - **Sello de cierre Ø 3 cm:** solo el logo, sin texto pequeño.
 
-## Para la imprenta: `imprenta/`
+## Para enviar a la imprenta: `etiquetas-imprenta/`
 
-| Archivo / carpeta | Qué es |
-|---|---|
-| `00-ORDEN-DE-IMPRESION.pdf` | Instrucciones completas: archivos, materiales, acabados, color, piezas con medidas, cantidades de prueba y de producción |
-| `01-PRUEBA/P0-prueba-vinil.pdf` | Pliego de prueba 33 × 48 cm: una de cada pieza y la cinta en 3 largos (245 / 255 / 265 mm) |
-| `02-PRODUCCION/` | Pliegos 33 × 48 cm: PA envases, PB hallacas, PC pan de jamón, PD cintas, PE sticker de bolsa + sellos, PF tarjetas (frente y dorso) |
-| `03-PIEZAS-INDIVIDUALES/` | Cada pieza por separado, para montar en rollo u otro formato |
-| `04-REFERENCIA/` | Vistas de los pliegos y guías con medidas (no se imprimen) |
+8 PDF, uno por etiqueta, a tamaño real. El nombre del archivo dice la medida y **la cantidad**. Se acompaña con `00-Instrucciones-para-la-imprenta.pdf` (1 página).
+Formato: CMYK, textos en curvas, 3 mm de sangrado y línea de corte en tinta plana **CutContour** (magenta, sobreimpresión, no se imprime).
 
-Todos los PDF van en **CMYK**, con **textos en curvas**, **3 mm de sangrado** y la línea de corte en tinta plana **CutContour** (magenta, sobreimpresión). La tarjeta se corta con guillotina en las marcas.
-
-## Piezas
-
-| # | Pieza | Medida de corte | Material | Por kit | Dónde va |
-|---|---|---|---|---|---|
-| 01 | Asado Negro | 90 × 56 mm, r 3,5 mm | Vinil | 1 (o Pernil) | Tapa del envase |
-| 02 | Ensalada de Gallina | 90 × 56 mm, r 3,5 mm | Vinil | 1 | Tapa del envase |
-| 03 | Hallacas | 130 × 80 mm, r 4 mm | Vinil | 1 | Centro de la bolsa al vacío |
-| 04 | Pan de Jamón (frontal) | 80 × 60 mm, r 4 mm | Vinil | 1 | Frente de la bolsa kraft, a 2 cm de la boca |
-| 05 | Cinta Torta Negra | 255 × 25 mm, colas en V | Vinil | 1 | Cruza el domo de base a base |
-| 06 | Sello redondo | Ø 30 mm | Vinil | 1 + 1 opcional | Cierra la bolsa del pan por detrás · solapa de la bolsa |
-| 07 | Sticker de la bolsa | 130 × 190 mm, arco | Vinil | 1 | Frente de la bolsa esmerilada (menú: «Asado Negro o Pernil») |
-| 08 | Tarjeta | 100 × 150 mm, 2 caras | Cartulina 300–350 g | 1 | Dentro de la bolsa |
-| 09 | Pernil | 90 × 56 mm, r 3,5 mm | Vinil | 1 (en lugar del 01) | Tapa del envase |
-
-## Cantidades
-
-Previsión: **60 kits** (30 con Asado Negro y 30 con Pernil). Todas las demás piezas alcanzan para 60. Un kit de 8 personas cuenta como 2 kits.
-
-**Fase 1 · Prueba:** 2 pliegos P0 (vinil) + 1 pliego PF (9 tarjetas). Se arman 2 kits y se revisa color, adhesión (24 h en nevera), medidas y el largo de la cinta.
-
-**Fase 2 · Producción:**
-
-| Pliego | Contenido por pliego | Pliegos | Total |
+| # | Etiqueta | Medida de corte | Cantidad |
 |---|---|---|---|
-| PA | 5 Asado Negro · 5 Pernil · 11 Ensalada | 6 | 30 Asado · 30 Pernil · 66 Ensalada |
-| PB | 10 Hallacas | 6 | 60 |
-| PC | 20 Pan de Jamón | 3 | 60 |
-| PD | 14 Cintas (255 mm) | 5 | 70 |
-| PE | 4 Stickers de bolsa · 8 Sellos | 15 | 60 stickers · 120 sellos |
-| PF | 9 Tarjetas (frente y dorso) | 7 | 63 |
+| 01 | Asado Negro | 90 × 56 mm, esquinas r 3,5 | **30** |
+| 02 | Pernil | 90 × 56 mm, esquinas r 3,5 | **30** |
+| 03 | Ensalada de Gallina | 90 × 56 mm, esquinas r 3,5 | **60** |
+| 04 | Hallacas | 130 × 80 mm, esquinas r 4 | **60** |
+| 05 | Pan de Jamón | 80 × 60 mm, esquinas r 4 | **60** |
+| 06 | Sello Torta Negra | Ø 50 mm | **60** |
+| 07 | Sello de cierre | Ø 30 mm | **120** (60 pan + 60 solapa de la bolsa) |
+| 08 | Sticker de la bolsa | 100 × 140 mm, arco | **60** |
+| | **Total** | | **480** |
 
-Total: **35 pliegos de vinil + 7 de cartulina** (33 × 48 cm).
+Material: vinil blanco autoadhesivo, impresión full color, **laminado mate**. Recomendación: pedir 1 muestra de cada una antes del tiraje.
 
-## Armado (para el equipo de BS Catering)
-- **Envases:** etiqueta centrada en la tapa; quedan 2,5 cm a cada lado y 1,2 cm arriba y abajo.
-- **Hallacas:** al centro de la bolsa al vacío; presionar del centro hacia afuera para que copie el relieve del pabilo.
-- **Pan de jamón:** etiqueta al frente, a 2 cm de la boca. Doblar la boca hacia atrás y cerrar con el sello redondo.
-- **Torta negra:** pegar una punta de la cinta en la base negra, cruzar el domo por arriba y pegar la otra punta en la base del otro lado.
+La **tarjeta** (frente y dorso, 100 × 150 mm, cartulina 300–350 g, 60 unidades) está aparte en `tarjeta-imprenta/`.
+
+## Armado
+- **Envases (tapa 14 × 8 cm):** etiqueta centrada; quedan 2,5 cm a cada lado y 1,2 cm arriba y abajo.
+- **Hallacas:** al centro de la bolsa al vacío; presionar del centro hacia afuera.
+- **Pan de jamón:** etiqueta al frente, a 2 cm de la boca; la boca se dobla hacia atrás y se cierra con el sello de Ø 3 cm.
+- **Torta negra:** sello de Ø 5 cm en el tope del domo (Ø 11 cm).
 - **Bolsa:** sticker centrado en el frente, debajo de la solapa del asa. Opcional: un sello en la solapa.
 
-## Color de referencia
+## Color de referencia (valores CMYK de los archivos)
 
-| Color | Pantalla | CMYK aprox. | Pantone de referencia |
+| Color | Pantalla | CMYK | Uso |
 |---|---|---|---|
-| Azul noche | `#0F1C30` | C100 M85 Y45 K55 | 2767 C (aprox.) |
-| Dorado | `#C9A45C` | C20 M35 Y75 K5 | 7562 C · metálico 871 C |
-| Marfil | `#F4EDE0` | C3 M6 Y12 K0 | — |
+| Azul | `#2B568A` | C90 M70 Y21 K5 | Fondo de las etiquetas |
+| Blanco | `#FFFFFF` | sin tinta | Textos y logo |
+| Dorado | `#D9B66F` | C15 M27 Y67 K0 | Marcos y adornos |
 
-## Otras carpetas
-`impresion/` y `guias/` (PDF de trabajo en RGB y guías), `vista-previa/` (PNG), `maquetas/` y `fuente/fotos/` (no se suben al repositorio), `fuente/logo/` (logo vectorizado), `fuente/` (generadores y tipografías: Cormorant Garamond, Josefin Sans, Pinyon Script e Inter, licencia OFL).
+## Carpetas
+`etiquetas-imprenta/` y `tarjeta-imprenta/` (lo que se envía), `impresion/` (PDF de trabajo en RGB), `guias/` (medidas, zona segura y corte), `vista-previa/` (PNG), `maquetas/` y `fuente/fotos/` (no se suben al repositorio), `fuente/logo/` (logo vectorizado), `fuente/` (generadores y tipografías: Lora, Montserrat, Pinyon Script, Inter y, para documentos, Cormorant Garamond y Josefin Sans; todas OFL).
 
 ## Regenerar
-Textos, medidas (tapa, domo) y productos están al inicio de `fuente/build.py`; pliegos y cantidades en `fuente/imprenta.py`.
+Textos, medidas y productos al inicio de `fuente/build.py`; cantidades en `fuente/imprenta.py`.
 
 ```bash
-python3 fuente/build.py       # SVG y páginas
-node fuente/render.js         # PDF de trabajo y PNG
-python3 fuente/pdf_boxes.py   # medida exacta + TrimBox
-python3 fuente/imprenta.py    # paquete para la imprenta (CMYK, curvas, CutContour, pliegos)
-python3 fuente/orden.py       # orden de impresión
-python3 fuente/mockups.py     # maquetas sobre las fotos
+python3 fuente/build.py         # SVG y páginas
+node fuente/render.js           # PDF de trabajo y PNG
+python3 fuente/pdf_boxes.py     # medida exacta + TrimBox
+python3 fuente/imprenta.py      # PDF para la imprenta (CMYK, curvas, CutContour)
+python3 fuente/instrucciones.py # hoja de instrucciones
+python3 fuente/mockups.py       # maquetas sobre las fotos
 ```

@@ -113,7 +113,7 @@ def finish(out, out_name, crop=None, max_side=1600, focus=None, **glass):
 
 
 def composite(photo_path, label_rgba, quad, out_name, gloss=0.35, shade=0.55, crop=None,
-              max_side=1600, ignore=None, focus=None):
+              max_side=1600, ignore=None, focus=None, glass=None, glass_cut=None):
     photo = cv2.imread(str(photo_path), cv2.IMREAD_COLOR).astype(np.float32) / 255
     Hh, Wh = photo.shape[:2]
     lh, lw = label_rgba.shape[:2]
@@ -144,7 +144,8 @@ def composite(photo_path, label_rgba, quad, out_name, gloss=0.35, shade=0.55, cr
     rgb = rgb + (1 - rgb) * hl
     out = photo * (1 - a) + np.clip(rgb, 0, 1) * a
     out = (out * 255).astype(np.uint8)
-    finish(out, out_name, crop, max_side, focus)
+    extra = dict(glass=glass, glass_cut=glass_cut, protect=a[..., 0]) if glass else {}
+    finish(out, out_name, crop, max_side, focus, **extra)
 
 
 def load(name):
@@ -196,7 +197,7 @@ composite(FOTOS / "hallacas.jpg", load("etiqueta-hallacas.png"),
 # 3 · Bolsa esmerilada (cuerpo bajo la solapa ≈ 300 × 310 mm)
 bag = [(193, 605), (1893, 567), (1687, 2009), (367, 2190)]
 composite(FOTOS / "bolsa.jpg", load("sticker-bolsa.png"),
-          place_on_surface(bag, (300, 310), (85, 48, 215, 238)),
+          place_on_surface(bag, (300, 310), (100, 62, 200, 202)),
           "maqueta-bolsa.jpg", gloss=0.15, shade=0.35, focus=F_BAG)
 
 # 4 · Pan de jamón: etiqueta frontal de 80 × 60 mm, a 2 cm de la boca de la bolsa
@@ -304,5 +305,7 @@ def dome_ribbon(photo_path, ribbon, out_name, crop):
     finish(out, out_name, crop, 1600, F_DOME, glass=G_DOME, glass_cut=G_DOME_CUT, protect=a[..., 0])
 
 
-dome_ribbon(FOTOS / "domo-torta.jpg", load("cinta-torta-negra.png"), "maqueta-torta-negra.jpg",
-            crop=(300, 450, 1700, 1900))
+# sello redondo Ø 50 mm en el tope del domo (visto en escorzo), con el domo tratado como plástico
+composite(FOTOS / "domo-torta.jpg", load("sello-torta-negra.png"),
+          [(800, 790), (1172, 790), (1188, 996), (784, 996)], "maqueta-torta-negra.jpg",
+          gloss=0.5, crop=(300, 450, 1700, 1900), focus=F_DOME, glass=G_DOME, glass_cut=G_DOME_CUT)

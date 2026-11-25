@@ -33,15 +33,15 @@ ASADO, PERNIL = 30, 30                   # kits con asado negro / con pernil (co
 KITS = ASADO + PERNIL                    # 60 kits: el resto de piezas se imprime para 60
 
 # Etiquetas que se mandan a hacer: nombre de archivo, medida y cantidad
-ETIQUETAS = {
-    "etiqueta-asado-negro": ("Asado-Negro", "90x56mm", ASADO),
-    "etiqueta-pernil": ("Pernil", "90x56mm", PERNIL),
-    "etiqueta-ensalada-de-gallina": ("Ensalada-de-Gallina", "90x56mm", KITS),
+ETIQUETAS = {                            # orden de la lista: las proteínas al final
     "etiqueta-hallacas": ("Hallacas", "130x80mm", KITS),
+    "etiqueta-ensalada-de-gallina": ("Ensalada-de-Gallina", "90x56mm", KITS),
     "etiqueta-pan-de-jamon": ("Pan-de-Jamon", "80x60mm", KITS),
     "sello-torta-negra": ("Sello-Torta-Negra", "50mm", KITS),
     "sello-cierre": ("Sello-cierre", "30mm", KITS * 2),        # cierre del pan + solapa de la bolsa
     "sticker-bolsa": ("Sticker-bolsa", "100x140mm", KITS),
+    "etiqueta-asado-negro": ("Asado-Negro", "90x56mm", ASADO),
+    "etiqueta-pernil": ("Pernil", "90x56mm", PERNIL),
 }
 TARJETA = ("Tarjeta-frente-y-dorso", "100x150mm", KITS)
 

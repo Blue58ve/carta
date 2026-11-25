@@ -13,6 +13,7 @@ Salida:
 import base64
 import json
 import math
+import os
 import re
 from pathlib import Path
 
@@ -48,14 +49,25 @@ MENSAJE_TARJETA = [
 ]
 FIRMA = ["Con cariño,", "la familia de BS Catering"]
 
-# Paleta (RGB para pantalla; equivalentes CMYK en LEEME.md)
-# v2 (tras la prueba impresa): fondo azul más claro, textos en blanco, dorado solo en adornos.
-BLUE = "#2B568A"       # azul base de las etiquetas
-WHITE = "#FFFFFF"      # todos los textos y el logo (en el vinil blanco = sin tinta: máximo contraste)
-GOLD = "#D9B66F"       # solo marcos, ramitas y destellos
-IVORY = "#F6F1E7"      # fondo del dorso de la tarjeta
-INK = "#1E3557"        # texto sobre marfil
-NAVY = BLUE            # alias para el código existente
+# Paleta por tema (RGB para pantalla; equivalentes CMYK en LEEME.md).
+# v3: se recupera la paleta original (azul noche, dorado, marfil) con letra serif clásica,
+# más gruesa y más grande. Se elige con la variable de entorno TEMA (noche | marfil).
+TEMAS = {
+    # A · fondo azul noche (menos oscuro que la v1, que imprimió casi negro), textos marfil, logo dorado
+    "noche": dict(nombre="Azul noche", bg="#1F3557", fg="#F6EEDC", fg2="#EADCBF", orn="#D4B06A",
+                  logo="#D8B670", card_bg="#1F3557", card_fg="#F6EEDC"),
+    # B · fondo marfil, textos y logo azul noche, detalles dorados (estilo papelería fina)
+    "marfil": dict(nombre="Marfil", bg="#F7F1E5", fg="#1F3557", fg2="#1F3557", orn="#B48C42",
+                   logo="#1F3557", card_bg="#F7F1E5", card_fg="#1F3557"),
+}
+TEMA = os.environ.get("TEMA", "noche")
+T = TEMAS[TEMA]
+BG, FG, FG2, ORN, LOGO_C = T["bg"], T["fg"], T["fg2"], T["orn"], T["logo"]
+NAVY_INK = "#1F3557"   # azul noche para textos sobre marfil
+IVORY = "#F7F1E5"
+INK = NAVY_INK
+GOLD = ORN             # alias: adornos
+NAVY = BG              # alias para el código existente
 
 BLEED = 3.0
 # ─────────────────────────────────────────────────────────────────
@@ -63,6 +75,13 @@ BLEED = 3.0
 
 def font_face_css():
     fonts = [
+        ("Playfair Display", 500, "normal", "PlayfairDisplay-500.woff"),
+        ("Playfair Display", 600, "normal", "PlayfairDisplay-600.woff"),
+        ("Playfair Display", 700, "normal", "PlayfairDisplay-700.woff"),
+        ("Playfair Display", 500, "italic", "PlayfairDisplay-500i.woff"),
+        ("Playfair Display", 600, "italic", "PlayfairDisplay-600i.woff"),
+        ("Cormorant Garamond", 500, "normal", "CormorantGaramond-500.woff"),
+        ("Cormorant Garamond", 700, "normal", "CormorantGaramond-700.woff"),
         ("Lora", 400, "normal", "Lora-400.woff"),
         ("Lora", 500, "normal", "Lora-500.woff"),
         ("Lora", 600, "normal", "Lora-600.woff"),
@@ -90,8 +109,8 @@ def font_face_css():
 
 FONT_CSS = font_face_css()
 TEXT_CSS = """
-.serif{font-family:'Lora',serif}
-.sans{font-family:'Montserrat',sans-serif}
+.serif{font-family:'Playfair Display',serif}
+.sans{font-family:'Josefin Sans',sans-serif}
 .script{font-family:'Pinyon Script',cursive}
 """
 
@@ -120,14 +139,14 @@ def f(v):
 
 # ───────────────────────── PRIMITIVAS ─────────────────────────
 
-def logo(cx, y, h, color=WHITE, kind="logo"):
+def logo(cx, y, h, color=LOGO_C, kind="logo"):
     ar = LOGO_AR if kind == "logo" else MONO_AR
     w = h * ar
     return (f'<use href="#{kind}" x="{f(cx - w / 2)}" y="{f(y)}" '
             f'width="{f(w)}" height="{f(h)}" fill="{color}"/>')
 
 
-def text(x, y, s, size, cls="serif", color=WHITE, weight=600, italic=False,
+def text(x, y, s, size, cls="serif", color=FG, weight=600, italic=False,
          ls=0.0, anchor="middle", opacity=1.0, extra=""):
     # el letter-spacing añade espacio al final: se compensa al centrar
     dx = ls / 2 if (anchor == "middle" and ls) else 0
@@ -223,9 +242,11 @@ def stroke_path(d, w, color=GOLD, extra=""):
     return f'<path d="{d}" fill="none" stroke="{color}" stroke-width="{f(w)}" {extra}/>'
 
 
-def frame_rrect(W, H, r, i=3.0, sw=0.5, color=GOLD):
-    """Marco dorado simple, con trazo grueso para que imprima limpio."""
-    return stroke_path(rrect_path(i, i, W - 2*i, H - 2*i, max(r - i + 1.5, 1.0)), sw, color)
+def frame_rrect(W, H, r, i=3.0, sw=0.45, color=None, i2=4.25, sw2=0.2):
+    """Marco dorado doble (como la v1) pero con trazos más gruesos para que impriman limpio."""
+    color = color or ORN
+    return (stroke_path(rrect_path(i, i, W - 2*i, H - 2*i, max(r - i + 1.5, 1.0)), sw, color)
+            + stroke_path(rrect_path(i2, i2, W - 2*i2, H - 2*i2, max(r - i2 + 1.5, 0.8)), sw2, color))
 
 
 def double_frame_rrect(W, H, r, i1=3.0, i2=4.1, color=GOLD):
@@ -233,20 +254,20 @@ def double_frame_rrect(W, H, r, i1=3.0, i2=4.1, color=GOLD):
             + stroke_path(rrect_path(i2, i2, W - 2*i2, H - 2*i2, max(r - i2 + 1.2, 0.6)), 0.16, color))
 
 
-def instagram(cx, y, size, color=WHITE, handle=INSTAGRAM, ls=0.1):
+def instagram(cx, y, size, color=FG2, handle=INSTAGRAM, ls=0.15):
     """Ícono + usuario, centrado en cx (y = línea base)."""
     s = size * 1.05
-    approx_w = len(handle) * size * 0.6 + s + size * 0.6
+    approx_w = len(handle) * size * 0.52 + s + size * 0.6
     x0 = cx - approx_w / 2
     icon_y = y - s * 0.86
     ico = (f'<g fill="none" stroke="{color}" stroke-width="{f(size*0.085)}">'
            f'<rect x="{f(x0)}" y="{f(icon_y)}" width="{f(s)}" height="{f(s)}" rx="{f(s*0.28)}"/>'
            f'<circle cx="{f(x0 + s/2)}" cy="{f(icon_y + s/2)}" r="{f(s*0.23)}"/></g>'
            f'<circle cx="{f(x0 + s*0.77)}" cy="{f(icon_y + s*0.23)}" r="{f(s*0.055)}" fill="{color}"/>')
-    return ico + text(x0 + s + size * 0.6, y, handle, size, "sans", color, 500, ls=ls, anchor="start")
+    return ico + text(x0 + s + size * 0.6, y, handle, size, "sans", color, 600, ls=ls, anchor="start")
 
 
-def arc_text(cx, cy, r, s, size, top=True, color=WHITE, ls=0.5, weight=600, pid="arc"):
+def arc_text(cx, cy, r, s, size, top=True, color=FG, ls=0.5, weight=600, pid="arc"):
     if top:
         d = f"M{f(cx - r)},{f(cy)} A{f(r)},{f(r)} 0 0 1 {f(cx + r)},{f(cy)}"
     else:
@@ -257,7 +278,7 @@ def arc_text(cx, cy, r, s, size, top=True, color=WHITE, ls=0.5, weight=600, pid=
             f'<textPath href="#{pid}" startOffset="50%">{s}</textPath></text>')
 
 
-def bg(W, H, color=BLUE):
+def bg(W, H, color=BG):
     return (f'<rect x="{-BLEED}" y="{-BLEED}" width="{f(W + 2*BLEED)}" '
             f'height="{f(H + 2*BLEED)}" fill="{color}"/>')
 
@@ -298,15 +319,15 @@ def add_piece(pid, title, W, H, shape, art, material, notes, fold=None, pages=No
 def envase_label(name):
     W, H, r = 90.0, 56.0, 3.5
     cx = W / 2
-    size = 8.8 if len(name) <= 12 else 7.0
+    size = 8.6 if len(name) <= 12 else 6.8
     a = [bg(W, H), frame_rrect(W, H, r),
-         logo(cx, 5.0, 14.5),
-         sprig(cx - 11.6, 18.6, 10.0, -62, mirror=True, sw=0.32),
-         sprig(cx + 11.6, 18.6, 10.0, 62, sw=0.32),
+         logo(cx, 5.4, 14.0),
+         sprig(cx - 11.4, 18.6, 10.0, -62, mirror=True, sw=0.3),
+         sprig(cx + 11.4, 18.6, 10.0, 62, sw=0.3),
          text(cx, 31.0, name, size, "serif"),
-         divider(cx, 35.4, 12, star=1.3, gap=2.8, sw=0.3),
-         text(cx, 41.8, f"{KIT.upper()} · {ANIO}", 2.75, "sans", ls=0.45),
-         instagram(cx, 48.7, 2.6)]
+         divider(cx, 35.4, 12, star=1.3, gap=2.8, sw=0.28),
+         text(cx, 41.9, f"{KIT.upper()} · {ANIO}", 2.9, "sans", FG2, 600, ls=0.55),
+         instagram(cx, 48.5, 2.7)]
     return W, H, rrect_path(0, 0, W, H, r), "".join(a)
 
 
@@ -321,14 +342,14 @@ for pid, name in PRODUCTOS_ENVASE:
 def hallacas_label():
     W, H, r = 130.0, 80.0, 4.0
     cx = W / 2
-    a = [bg(W, H), frame_rrect(W, H, r, sw=0.55),
-         logo(cx, 6.5, 19.5),
-         text(cx, 44.0, "Hallacas", 14.0, "serif"),
-         sprig(cx - 30, 42.5, 16, -70, mirror=True, sw=0.38),
-         sprig(cx + 30, 42.5, 16, 70, sw=0.38),
-         divider(cx, 49.6, 19, star=1.6, gap=3.4, sw=0.34),
-         text(cx, 57.2, f"{KIT.upper()} · {ANIO}", 3.4, "sans", ls=0.6),
-         instagram(cx, 67.6, 3.2)]
+    a = [bg(W, H), frame_rrect(W, H, r, sw=0.5, sw2=0.22),
+         logo(cx, 6.6, 19.0),
+         text(cx, 44.0, "Hallacas", 13.6, "serif"),
+         sprig(cx - 36, 42.0, 15, -70, mirror=True, sw=0.36),
+         sprig(cx + 36, 42.0, 15, 70, sw=0.36),
+         divider(cx, 49.8, 19, star=1.6, gap=3.4, sw=0.32),
+         text(cx, 57.4, f"{KIT.upper()} · {ANIO}", 3.5, "sans", FG2, 600, ls=0.75),
+         instagram(cx, 67.6, 3.3)]
     return W, H, rrect_path(0, 0, W, H, r), "".join(a)
 
 
@@ -344,38 +365,39 @@ def pan_label():
     W, H, r = 80.0, 60.0, 4.0
     cx = W / 2
     a = [bg(W, H), frame_rrect(W, H, r),
-         logo(cx, 5.4, 14.5),
-         sprig(cx - 11.6, 19.0, 10.0, -62, mirror=True, sw=0.32),
-         sprig(cx + 11.6, 19.0, 10.0, 62, sw=0.32),
-         text(cx, 32.0, "Pan de Jamón", 8.3, "serif"),
-         divider(cx, 36.6, 12, star=1.3, gap=2.8, sw=0.3),
-         text(cx, 43.2, f"{KIT.upper()} · {ANIO}", 2.75, "sans", ls=0.45),
-         instagram(cx, 50.6, 2.6)]
+         logo(cx, 5.8, 14.0),
+         sprig(cx - 11.4, 19.0, 10.0, -62, mirror=True, sw=0.3),
+         sprig(cx + 11.4, 19.0, 10.0, 62, sw=0.3),
+         text(cx, 32.0, "Pan de Jamón", 8.0, "serif"),
+         divider(cx, 36.6, 12, star=1.3, gap=2.8, sw=0.28),
+         text(cx, 43.3, f"{KIT.upper()} · {ANIO}", 2.9, "sans", FG2, 600, ls=0.55),
+         instagram(cx, 50.4, 2.7)]
     return W, H, rrect_path(0, 0, W, H, r), "".join(a)
 
 
 W, H, shape, art = pan_label()
 add_piece("etiqueta-pan-de-jamon", "Etiqueta frontal · Pan de Jamón", W, H, shape, art,
           "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel rectangular con esquinas redondeadas (r = 4 mm).",
-          "Va en el frente de la bolsa kraft, centrada y a 2 cm de la boca. La boca se dobla hacia atrás y se cierra con el sello redondo (pieza 06).",
+          "Va en el frente de la bolsa kraft, centrada y a 2 cm de la boca. La boca se dobla hacia atrás y se cierra con el sello redondo.",
           cut=("rrect", 4.0))
 
 
-def ring(c, r, sw, color=GOLD):
-    return f'<circle cx="{f(c)}" cy="{f(c)}" r="{f(r)}" fill="none" stroke="{color}" stroke-width="{f(sw)}"/>'
+def ring(c, r, sw, color=None):
+    return (f'<circle cx="{f(c)}" cy="{f(c)}" r="{f(r)}" fill="none" stroke="{color or ORN}" '
+            f'stroke-width="{f(sw)}"/>')
 
 
 def torta_sello():
-    """Sello redondo para el tope del domo de la torta negra (reemplaza a la cinta)."""
+    """Sello redondo para el tope del domo de la torta negra."""
     D = 50.0
     c = D / 2
-    a = [bg(D, D), ring(c, 22.6, 0.55), ring(c, 21.3, 0.25),
-         arc_text(c, c, 17.9, "OBSEQUIO DE LA CASA", 2.7, True, WHITE, 0.4, 600, "torta-t"),
-         arc_text(c, c, 20.0, f"NAVIDAD {ANIO}", 2.7, False, WHITE, 0.6, 600, "torta-b"),
+    a = [bg(D, D), ring(c, 22.6, 0.5), ring(c, 21.4, 0.22),
+         arc_text(c, c, 17.9, "OBSEQUIO DE LA CASA", 2.8, True, FG2, 0.5, 600, "torta-t"),
+         arc_text(c, c, 20.0, f"NAVIDAD {ANIO}", 2.8, False, FG2, 0.7, 600, "torta-b"),
          sparkle(c - 19.0, c, 1.05), sparkle(c + 19.0, c, 1.05),
-         logo(c, 11.6, 7.4, kind="mono"),
-         text(c, 26.0, "Torta", 6.3, "serif"),
-         text(c, 32.8, "Negra", 6.3, "serif")]
+         logo(c, 11.4, 7.4, kind="mono"),
+         text(c, 26.0, "Torta", 6.2, "serif"),
+         text(c, 32.8, "Negra", 6.2, "serif")]
     return D, D, circle_path(c, c, c), "".join(a)
 
 
@@ -387,10 +409,10 @@ add_piece("sello-torta-negra", "Sello · Mini Torta Negra (obsequio)", W, H, sha
 
 
 def sello_label():
-    """Sello pequeño de cierre: solo el logo, sin texto chico."""
+    """Sello pequeño de cierre: solo el logo."""
     D = 30.0
     c = D / 2
-    art = "".join([bg(D, D), ring(c, 13.0, 0.5), logo(c, 8.0, 14.0)])
+    art = "".join([bg(D, D), ring(c, 13.0, 0.45), ring(c, 12.0, 0.2), logo(c, 8.2, 13.6)])
     return D, D, circle_path(c, c, c), art
 
 
@@ -405,20 +427,21 @@ def bolsa_sticker(principal="Asado Negro o Pernil"):
     W, H, rb = 100.0, 140.0, 5.0
     cx = W / 2
     a = [bg(W, H),
-         stroke_path(arch_path(3, 3, W - 6, H - 6, max(rb - 1.5, 1)), 0.55),
-         sparkle_cluster(cx, 12.6, 3.2),
-         logo(cx, 19.5, 33.0),
-         sprig(cx - 23.5, 52.0, 16, -64, mirror=True, sw=0.36),
-         sprig(cx + 23.5, 52.0, 16, 64, sw=0.36),
-         text(cx, 67.6, KIT, 9.6, "serif"),
-         divider(cx, 72.8, 22, star=1.6, gap=3.4, sw=0.32),
-         text(cx, 79.8, f"EDICIÓN ESPECIAL · {ANIO}", 2.9, "sans", ls=0.5),
-         # menú del kit
-         text(cx, 91.6, f"Hallacas · {principal}", 4.3, "serif", weight=500),
-         text(cx, 98.8, "Ensalada de Gallina · Pan de Jamón", 4.3, "serif", weight=500),
-         text(cx, 106.8, "+ TORTA NEGRA DE OBSEQUIO", 2.7, "sans", ls=0.4),
-         divider(cx, 115.6, 8, star=1.1, gap=2.4, sw=0.28),
-         instagram(cx, 126.4, 3.0)]
+         stroke_path(arch_path(3, 3, W - 6, H - 6, max(rb - 1.5, 1)), 0.5),
+         stroke_path(arch_path(4.3, 4.3, W - 8.6, H - 8.6, max(rb - 2.5, 0.8)), 0.22),
+         sparkle_cluster(cx, 13.0, 3.2),
+         logo(cx, 19.8, 32.0),
+         sprig(cx - 23.0, 51.2, 16, -64, mirror=True, sw=0.34),
+         sprig(cx + 23.0, 51.2, 16, 64, sw=0.34),
+         text(cx, 66.8, KIT, 9.2, "serif"),
+         divider(cx, 72.2, 22, star=1.6, gap=3.4, sw=0.3),
+         text(cx, 79.4, f"EDICIÓN ESPECIAL · {ANIO}", 3.0, "sans", FG2, 600, ls=0.6),
+         # menú del kit: las proteínas al final
+         text(cx, 91.4, "Hallacas · Ensalada de Gallina", 4.3, "serif", weight=500, italic=True),
+         text(cx, 98.6, f"Pan de Jamón · {principal}", 4.3, "serif", weight=500, italic=True),
+         text(cx, 106.6, "+ TORTA NEGRA DE OBSEQUIO", 2.8, "sans", FG2, 600, ls=0.5),
+         divider(cx, 115.6, 8, star=1.1, gap=2.4, sw=0.26),
+         instagram(cx, 126.4, 3.1)]
     return W, H, arch_path(0, 0, W, H, rb), "".join(a)
 
 
@@ -432,23 +455,28 @@ add_piece("sticker-bolsa", "Sticker principal de la bolsa", W, H, shape, art,
 def tarjeta():
     W, H = 100.0, 150.0
     cx = W / 2
+
+    def frame():
+        return (stroke_path(rrect_path(5, 5, W - 10, H - 10, 1.2), 0.45)
+                + stroke_path(rrect_path(6.3, 6.3, W - 12.6, H - 12.6, 0.6), 0.2))
+
     front = "".join([
-        bg(W, H),
-        stroke_path(rrect_path(5, 5, W - 10, H - 10, 1.2), 0.5),
+        bg(W, H, T["card_bg"]),
+        frame(),
         sparkle_cluster(cx, 24.0, 4.0),
-        text(cx - 7, 58.0, "Feliz", 19.5, "script", weight=400),
-        text(cx + 2.5, 79.0, "Navidad", 19.5, "script", weight=400),
-        divider(cx, 92.0, 22, star=1.8, gap=3.8, sw=0.3),
+        text(cx - 7, 58.0, "Feliz", 19.5, "script", T["card_fg"], 400),
+        text(cx + 2.5, 79.0, "Navidad", 19.5, "script", T["card_fg"], 400),
+        divider(cx, 92.0, 22, star=1.8, gap=3.8, sw=0.28),
         logo(cx, 100.0, 26.0),
-        text(cx, 136.5, f"{KIT.upper()} · {ANIO}", 2.9, "sans", ls=0.5),
+        text(cx, 136.5, f"{KIT.upper()} · {ANIO}", 3.0, "sans", FG2, 600, ls=0.6),
     ])
     paras = "".join(f"<p>{p}</p>" for p in MENSAJE_TARJETA)
     back_svg = "".join([
         bg(W, H, IVORY),
-        stroke_path(rrect_path(5, 5, W - 10, H - 10, 1.2), 0.5),
+        frame(),
         sparkle_cluster(cx, 15.5, 2.6),
-        logo(cx, 122.5, 9.0, color=BLUE, kind="mono"),
-        instagram(cx, 138.0, 2.6, BLUE),
+        logo(cx, 122.5, 9.0, color=NAVY_INK, kind="mono"),
+        instagram(cx, 138.0, 2.7, NAVY_INK),
     ])
     back_html = f"""
 <div class="msg">
@@ -477,13 +505,13 @@ add_piece(f"etiqueta-{VARIANTE_PRINCIPAL[0]}", f"Etiqueta envase · {VARIANTE_PR
 
 CARD_CSS = f"""
 .msg{{position:absolute;left:{BLEED + 11}mm;right:{BLEED + 11}mm;top:{BLEED + 22}mm;
-  font-family:'Lora',serif;font-size:3.04mm;line-height:1.46;color:{INK};
-  text-align:center;font-weight:400;}}
-.msg p{{margin:0 0 2.1mm 0;}}
-.msg p:first-child{{font-style:italic;font-weight:500;font-size:3.6mm;margin-bottom:2.4mm;color:{BLUE};}}
-.msg p:nth-last-child(2){{font-weight:600;margin-top:3mm;}}
-.msg .firma{{margin-top:3.2mm;}}
-.msg .firma span{{font-family:'Pinyon Script',cursive;font-size:5.6mm;line-height:1.3;color:{BLUE};}}
+  font-family:'Cormorant Garamond',serif;font-size:3.55mm;line-height:1.42;color:{INK};
+  text-align:center;font-weight:500;}}
+.msg p{{margin:0 0 2.2mm 0;}}
+.msg p:first-child{{font-style:italic;font-size:4mm;margin-bottom:2.5mm;}}
+.msg p:nth-last-child(2){{font-weight:700;margin-top:3mm;}}
+.msg .firma{{margin-top:3.4mm;}}
+.msg .firma span{{font-family:'Pinyon Script',cursive;font-size:5.8mm;line-height:1.3;}}
 """
 
 

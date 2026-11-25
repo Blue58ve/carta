@@ -30,6 +30,22 @@ def img(path):
     return "file://" + str(path)
 
 
+def cmyk(hexcolor):
+    """CMYK que resulta de la conversión de los archivos (misma ruta: PDF RGB → Ghostscript CMYK)."""
+    from reportlab.pdfgen import canvas as rl
+    TMP.mkdir(parents=True, exist_ok=True)
+    src, mid, tif = TMP / "sw.pdf", TMP / "sw-cmyk.pdf", TMP / "sw.tif"
+    c = rl.Canvas(str(src), pagesize=(20, 20))
+    c.setFillColor(hexcolor)
+    c.rect(0, 0, 20, 20, stroke=0, fill=1)
+    c.save()
+    I.to_cmyk_curves(src, mid)
+    subprocess.run(["gs", "-q", "-dBATCH", "-dNOPAUSE", "-sDEVICE=tiff32nc", "-r20", "-o", str(tif), str(mid)], check=True)
+    from PIL import Image
+    v = Image.open(tif).getpixel((2, 2))
+    return "C{} M{} Y{} K{}".format(*(round(x / 2.55) for x in v))
+
+
 FORMA = {"etiqueta-asado-negro": "Rectángulo, esquinas r 3,5 mm", "etiqueta-pernil": "Rectángulo, esquinas r 3,5 mm",
          "etiqueta-ensalada-de-gallina": "Rectángulo, esquinas r 3,5 mm", "etiqueta-hallacas": "Rectángulo, esquinas r 4 mm",
          "etiqueta-pan-de-jamon": "Rectángulo, esquinas r 4 mm", "sello-torta-negra": "Círculo",
@@ -57,20 +73,20 @@ HTML = f"""<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
 @page {{ size: A4; margin: 10mm 13mm 9mm; }}
 * {{ box-sizing: border-box; }}
 body {{ margin:0; font: 400 9pt/1.42 'Inter', sans-serif; color:#1B2333; }}
-.head {{ background:{B.BLUE}; color:#fff; padding: 4.5mm 7mm; display:flex; gap:6mm; align-items:center; border-radius:1.5mm; }}
+.head {{ background:{B.NAVY_INK}; color:#fff; padding: 4.5mm 7mm; display:flex; gap:6mm; align-items:center; border-radius:1.5mm; }}
 .head img {{ width: 19mm; }}
-.eyebrow {{ font: 600 7pt 'Montserrat'; letter-spacing:.24em; text-transform:uppercase; color:#E8CF98; margin:0 0 1.5mm; }}
-h1 {{ font: 600 17pt/1.15 'Lora', serif; margin:0; }}
+.eyebrow {{ font: 600 7pt 'Josefin Sans'; letter-spacing:.24em; text-transform:uppercase; color:#E8CF98; margin:0 0 1.5mm; }}
+h1 {{ font: 600 17pt/1.15 'Playfair Display', serif; margin:0; }}
 .head .meta {{ margin-left:auto; text-align:right; font-size:7.8pt; color:#DCE4EF; line-height:1.55; }}
-h2 {{ font: 600 11.5pt 'Lora', serif; color:{B.BLUE}; margin: 3.6mm 0 1.6mm; border-bottom:.35mm solid #C9A45C; padding-bottom:1mm; }}
+h2 {{ font: 600 11.5pt 'Playfair Display', serif; color:{B.NAVY_INK}; margin: 3.6mm 0 1.6mm; border-bottom:.35mm solid #C9A45C; padding-bottom:1mm; }}
 p {{ margin: 0 0 1.6mm; }}
 .intro {{ background:#F3F5F9; border-radius:1.5mm; padding: 2.6mm 4mm; margin-top: 3mm; }}
 table {{ width:100%; border-collapse:collapse; font-size:8.6pt; }}
 th {{ text-align:left; font: 600 7pt 'Inter'; text-transform:uppercase; letter-spacing:.05em; color:#5B6474; border-bottom:.3mm solid #1B2333; padding:1.3mm 1.5mm; }}
 td {{ border-bottom:.2mm solid #DADFE7; padding:1.3mm 1.5mm; vertical-align:middle; }}
-td.pg {{ font: 600 10pt 'Inter'; color:{B.BLUE}; width: 8mm; }}
+td.pg {{ font: 600 10pt 'Inter'; color:{B.NAVY_INK}; width: 8mm; }}
 td.th {{ width: 24mm; }} td.th img {{ max-width: 22mm; max-height: 14mm; display:block; }}
-td.c, th.c {{ text-align:center; }} td.big {{ font: 600 15pt 'Inter'; color:{B.BLUE}; width: 22mm; }}
+td.c, th.c {{ text-align:center; }} td.big {{ font: 600 15pt 'Inter'; color:{B.NAVY_INK}; width: 22mm; }}
 td.num {{ white-space:nowrap; font-weight:600; }}
 .mut {{ color:#5B6474; font-weight:400; font-size:7.8pt; }}
 .file {{ font-size: 7.2pt; color:#4A6890; font-feature-settings: 'calt' 0; }}
@@ -82,13 +98,13 @@ ul {{ margin:0; padding-left: 4.2mm; }} li {{ margin: 0 0 1mm; }}
 .sw i {{ display:block; height:6mm; }} .sw span {{ display:block; padding:1.2mm 1.8mm; }}
 .note {{ border-left: .8mm solid #C9A45C; padding: 1.5mm 3mm; background:#FBF6EA; margin-top: 3mm; }}
 </style></head><body>
-<div class="head"><img src="{img(B.ROOT / 'logo' / 'bs-catering-logo-blanco.svg')}">
-<div><p class="eyebrow">Instrucciones para la imprenta · versión 2</p><h1>Etiquetas autoadhesivas · Navidad en casa {B.ANIO}</h1></div>
+<div class="head"><img src="{img(B.ROOT / 'logo' / 'bs-catering-logo-dorado.svg')}">
+<div><p class="eyebrow">Instrucciones para la imprenta · versión 3</p><h1>Etiquetas autoadhesivas · Navidad en casa {B.ANIO}</h1></div>
 <div class="meta">BS Catering<br>{B.INSTAGRAM}<br>{FECHA}</div></div>
 
 <div class="intro"><b>8 archivos PDF, uno por etiqueta</b>, a tamaño real (escala 1:1). El nombre de cada archivo dice
 la etiqueta, la medida y <b>la cantidad a imprimir</b>. El montaje en pliegos queda a criterio de la imprenta.
-Esta versión reemplaza a la anterior: fondo azul más claro y textos en blanco.</div>
+Esta versión reemplaza a las anteriores.</div>
 
 <h2>Etiquetas y cantidades</h2>
 <table><thead><tr><th>#</th><th></th><th>Etiqueta y archivo</th><th>Medida de corte</th><th class="c">Cantidad</th></tr></thead>
@@ -100,15 +116,15 @@ Esta versión reemplaza a la anterior: fondo azul más claro y textos en blanco.
 <li><b>Vinil blanco autoadhesivo</b>, impresión full color.</li>
 <li><b>Laminado mate</b> (las etiquetas van a nevera).</li>
 <li><b>Corte</b> por plotter o troquel siguiendo la línea de corte. Pueden entregarse en planchas con medio corte o sueltas.</li>
-<li>Los textos y el logo son <b>blancos</b>: es el blanco del vinil, sin tinta. No imprimir blanco.</li>
 </ul></div>
 <div><h2>Los archivos</h2><ul>
 <li>CMYK, textos convertidos a curvas, <b>3 mm de sangrado</b>.</li>
 <li>Línea de corte en tinta plana <b>«CutContour»</b> (magenta, sobreimpresión). <b>No se imprime.</b></li>
 </ul>
 <h2>Color de referencia</h2>
-<div class="sw"><div><i style="background:{B.BLUE}"></i><span><b>Azul</b> C90 M70 Y21 K5</span></div>
-<div><i style="background:{B.GOLD}"></i><span><b>Dorado</b> (adornos) C15 M27 Y67 K0</span></div></div>
+<div class="sw"><div><i style="background:{B.BG}"></i><span><b>Fondo</b> {cmyk(B.BG)}</span></div>
+<div><i style="background:{B.FG}"></i><span><b>Textos</b> {cmyk(B.FG)}</span></div>
+<div><i style="background:{B.ORN}"></i><span><b>Dorado</b> {cmyk(B.ORN)}</span></div></div>
 </div></div>
 
 <div class="note"><b>Antes del tiraje completo:</b> imprimir y cortar <b>1 muestra de cada etiqueta</b> para aprobar el tono del azul, el laminado y el corte.</div>

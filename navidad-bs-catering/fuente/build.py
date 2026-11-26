@@ -409,16 +409,20 @@ add_piece("sello-torta-negra", "Sello · Mini Torta Negra (obsequio)", W, H, sha
 
 
 def sello_label():
-    """Sello pequeño de cierre: solo el logo."""
-    D = 30.0
+    """Sello de cierre Ø 50 mm: logo al centro y texto en arco (misma familia que el sello de la torta)."""
+    D = 50.0
     c = D / 2
-    art = "".join([bg(D, D), ring(c, 13.0, 0.45), ring(c, 12.0, 0.2), logo(c, 8.2, 13.6)])
+    art = "".join([bg(D, D), ring(c, 22.6, 0.5), ring(c, 21.4, 0.22),
+                   arc_text(c, c, 17.9, "FELIZ NAVIDAD", 2.8, True, FG2, 0.9, 600, "cierre-t"),
+                   arc_text(c, c, 20.0, f"EDICIÓN {ANIO}", 2.8, False, FG2, 0.8, 600, "cierre-b"),
+                   sparkle(c - 19.0, c, 1.05), sparkle(c + 19.0, c, 1.05),
+                   logo(c, 16.0, 18.0)])
     return D, D, circle_path(c, c, c), art
 
 
 W, H, shape, art = sello_label()
 add_piece("sello-cierre", "Sello redondo de cierre", W, H, shape, art,
-          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel circular Ø 30 mm.",
+          "Vinil autoadhesivo blanco, impresión full color, laminado mate. Troquel circular Ø 50 mm.",
           "Cierra la bolsa del pan de jamón por detrás (la boca doblada). Opcional: uno más para la solapa de la bolsa del kit.",
           cut=("circle",))
 

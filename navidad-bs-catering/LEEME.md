@@ -5,7 +5,7 @@ Etiquetas, sellos, sticker de bolsa y tarjeta para el kit navideño (4 hallacas,
 > **Versión final (26/11/2026): «Marfil clásico» con azul Oxford.**
 > Fondo marfil, textos y logo en **azul Oxford** (`#14213D`), detalles dorados en marcos dobles, ramitas y destellos. Nombres en **Playfair Display**, información en **Josefin Sans** seminegrita (eco del «CATERING» del logo), con tamaños grandes: la letra oscura sobre fondo claro no se cierra al imprimir.
 >
-> Historial: v1 azul noche con textos dorados finos (no se leía impresa) → v2 azul medio con textos blancos (legible, pero sin elegancia) → v3 dos propuestas (A azul noche, B marfil) → **final: B con azul Oxford**. Se mantienen el sello de Ø 5 cm para la torta, el sticker de bolsa de 10 × 14 cm, el sello de cierre solo con el logo y las proteínas (Asado Negro / Pernil) al final del menú y de la lista de archivos.
+> Historial: v1 azul noche con textos dorados finos (no se leía impresa) → v2 azul medio con textos blancos (legible, pero sin elegancia) → v3 dos propuestas (A azul noche, B marfil) → **final: B con azul Oxford**. Se mantienen el sello de Ø 5 cm para la torta, el sticker de bolsa de 10 × 14 cm, el sello de cierre de Ø 5 cm y las proteínas (Asado Negro / Pernil) al final del menú y de la lista de archivos.
 
 ## Para enviar a la imprenta: `etiquetas-imprenta/`
 
@@ -18,7 +18,7 @@ Formato: CMYK, textos en curvas, 3 mm de sangrado y línea de corte en tinta pla
 | 02 | Ensalada de Gallina | 90 × 56 mm, esquinas r 3,5 | **60** |
 | 03 | Pan de Jamón | 80 × 60 mm, esquinas r 4 | **60** |
 | 04 | Sello Torta Negra | Ø 50 mm | **60** |
-| 05 | Sello de cierre | Ø 30 mm | **120** (60 pan + 60 solapa de la bolsa) |
+| 05 | Sello de cierre | Ø 50 mm | **120** (60 pan + 60 solapa de la bolsa) |
 | 06 | Sticker de la bolsa | 100 × 140 mm, arco | **60** |
 | 07 | Asado Negro | 90 × 56 mm, esquinas r 3,5 | **30** |
 | 08 | Pernil | 90 × 56 mm, esquinas r 3,5 | **30** |
@@ -31,7 +31,7 @@ La **tarjeta** (frente y dorso, 100 × 150 mm, cartulina 300–350 g, 60 unidade
 ## Armado
 - **Envases (tapa 14 × 8 cm):** etiqueta centrada; quedan 2,5 cm a cada lado y 1,2 cm arriba y abajo.
 - **Hallacas:** al centro de la bolsa al vacío; presionar del centro hacia afuera.
-- **Pan de jamón:** etiqueta al frente, a 2 cm de la boca; la boca se dobla hacia atrás y se cierra con el sello de Ø 3 cm.
+- **Pan de jamón:** etiqueta al frente, a 2 cm de la boca; la boca se dobla hacia atrás y se cierra con el sello de Ø 5 cm.
 - **Torta negra:** sello de Ø 5 cm en el tope del domo (Ø 11 cm).
 - **Bolsa:** sticker centrado en el frente, debajo de la solapa del asa. Opcional: un sello en la solapa.
 

@@ -52,7 +52,7 @@ FORMA = {"etiqueta-asado-negro": "Rectángulo, esquinas r 3,5 mm", "etiqueta-per
          "sello-cierre": "Círculo", "sticker-bolsa": "Arco, esquinas inferiores r 5 mm"}
 MEDIDA = {"etiqueta-asado-negro": "9 × 5,6 cm", "etiqueta-pernil": "9 × 5,6 cm", "etiqueta-ensalada-de-gallina": "9 × 5,6 cm",
           "etiqueta-hallacas": "13 × 8 cm", "etiqueta-pan-de-jamon": "8 × 6 cm", "sello-torta-negra": "Ø 5 cm",
-          "sello-cierre": "Ø 3 cm", "sticker-bolsa": "10 × 14 cm"}
+          "sello-cierre": "Ø 5 cm", "sticker-bolsa": "10 × 14 cm"}
 NOMBRE = {"etiqueta-asado-negro": "Asado Negro", "etiqueta-pernil": "Pernil", "etiqueta-ensalada-de-gallina": "Ensalada de Gallina",
           "etiqueta-hallacas": "Hallacas", "etiqueta-pan-de-jamon": "Pan de Jamón", "sello-torta-negra": "Sello Torta Negra",
           "sello-cierre": "Sello de cierre", "sticker-bolsa": "Sticker de la bolsa"}
@@ -78,14 +78,14 @@ body {{ margin:0; font: 400 9pt/1.42 'Inter', sans-serif; color:#1B2333; }}
 .eyebrow {{ font: 600 7pt 'Josefin Sans'; letter-spacing:.24em; text-transform:uppercase; color:#E8CF98; margin:0 0 1.5mm; }}
 h1 {{ font: 600 17pt/1.15 'Playfair Display', serif; margin:0; }}
 .head .meta {{ margin-left:auto; text-align:right; font-size:7.8pt; color:#DCE4EF; line-height:1.55; }}
-h2 {{ font: 600 11.5pt 'Playfair Display', serif; color:{B.NAVY_INK}; margin: 3.6mm 0 1.6mm; border-bottom:.35mm solid #C9A45C; padding-bottom:1mm; }}
+h2 {{ font: 600 11.5pt 'Playfair Display', serif; color:{B.NAVY_INK}; margin: 2.8mm 0 1.3mm; border-bottom:.35mm solid #C9A45C; padding-bottom:.8mm; }}
 p {{ margin: 0 0 1.6mm; }}
-.intro {{ background:#F3F5F9; border-radius:1.5mm; padding: 2.6mm 4mm; margin-top: 3mm; }}
+.intro {{ background:#F3F5F9; border-radius:1.5mm; padding: 2.2mm 4mm; margin-top: 2.5mm; }}
 table {{ width:100%; border-collapse:collapse; font-size:8.6pt; }}
 th {{ text-align:left; font: 600 7pt 'Inter'; text-transform:uppercase; letter-spacing:.05em; color:#5B6474; border-bottom:.3mm solid #1B2333; padding:1.3mm 1.5mm; }}
-td {{ border-bottom:.2mm solid #DADFE7; padding:1.3mm 1.5mm; vertical-align:middle; }}
+td {{ border-bottom:.2mm solid #DADFE7; padding:0.85mm 1.5mm; vertical-align:middle; }}
 td.pg {{ font: 600 10pt 'Inter'; color:{B.NAVY_INK}; width: 8mm; }}
-td.th {{ width: 24mm; }} td.th img {{ max-width: 22mm; max-height: 14mm; display:block; }}
+td.th {{ width: 22mm; }} td.th img {{ max-width: 20mm; max-height: 11mm; display:block; }}
 td.c, th.c {{ text-align:center; }} td.big {{ font: 600 15pt 'Inter'; color:{B.NAVY_INK}; width: 22mm; }}
 td.num {{ white-space:nowrap; font-weight:600; }}
 .mut {{ color:#5B6474; font-weight:400; font-size:7.8pt; }}
@@ -102,7 +102,7 @@ ul {{ margin:0; padding-left: 4.2mm; }} li {{ margin: 0 0 1mm; }}
 <div><p class="eyebrow">Instrucciones para la imprenta · versión 3</p><h1>Etiquetas autoadhesivas · Navidad en casa {B.ANIO}</h1></div>
 <div class="meta">BS Catering<br>{B.INSTAGRAM}<br>{FECHA}</div></div>
 
-<div class="intro"><b>8 archivos PDF, uno por etiqueta</b>, a tamaño real (escala 1:1). El nombre de cada archivo dice
+<div class="intro"><b>8 etiquetas (un PDF por etiqueta) y la tarjeta</b>, a tamaño real (escala 1:1). El nombre de cada archivo dice
 la etiqueta, la medida y <b>la cantidad a imprimir</b>. El montaje en pliegos queda a criterio de la imprenta.
 Esta versión reemplaza a las anteriores.</div>
 
@@ -111,8 +111,14 @@ Esta versión reemplaza a las anteriores.</div>
 <tbody>{''.join(filas)}
 <tr class="tot"><td></td><td></td><td>Total</td><td></td><td class="c big">{total}</td></tr></tbody></table>
 
+<h2>Tarjeta</h2>
+<table><tbody><tr><td class="pg">T</td>
+<td class="th"><img src="{img(ROOT / 'vista-previa' / 'tarjeta-frente.png')}" style="max-height:13mm"></td>
+<td><b>Tarjeta de mensaje · frente y dorso</b><br><span class="mut">Cartulina 300–350 g (opalina o sulfato), impresión 4/4, corte recto con guillotina. 3 mm de sangrado, sin línea de corte. Página 1 = frente, página 2 = dorso.</span><br><span class="file">Tarjeta/{I.TARJETA[0]}_{I.TARJETA[1]}_{I.TARJETA[2]}-unidades.pdf</span></td>
+<td class="num">10 × 15 cm</td><td class="c big">{I.TARJETA[2]}</td></tr></tbody></table>
+
 <div class="grid">
-<div><h2>Material y acabado</h2><ul>
+<div><h2>Material y acabado (etiquetas)</h2><ul>
 <li><b>Vinil blanco autoadhesivo</b>, impresión full color.</li>
 <li><b>Laminado mate</b> (las etiquetas van a nevera).</li>
 <li><b>Corte</b> por plotter o troquel siguiendo la línea de corte. Pueden entregarse en planchas con medio corte o sueltas.</li>

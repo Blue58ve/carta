@@ -56,14 +56,14 @@ TEMAS = {
     # A · fondo azul noche (menos oscuro que la v1, que imprimió casi negro), textos marfil, logo dorado
     "noche": dict(nombre="Azul noche", bg="#1F3557", fg="#F6EEDC", fg2="#EADCBF", orn="#D4B06A",
                   logo="#D8B670", card_bg="#1F3557", card_fg="#F6EEDC"),
-    # B · fondo marfil, textos y logo azul noche, detalles dorados (estilo papelería fina)
-    "marfil": dict(nombre="Marfil", bg="#F7F1E5", fg="#1F3557", fg2="#1F3557", orn="#B48C42",
-                   logo="#1F3557", card_bg="#F7F1E5", card_fg="#1F3557"),
+    # B · fondo marfil, textos y logo azul Oxford (formal), detalles dorados (estilo papelería fina) — ELEGIDO
+    "marfil": dict(nombre="Marfil", bg="#F7F1E5", fg="#14213D", fg2="#14213D", orn="#B48C42",
+                   logo="#14213D", card_bg="#F7F1E5", card_fg="#14213D"),
 }
-TEMA = os.environ.get("TEMA", "noche")
+TEMA = os.environ.get("TEMA", "marfil")
 T = TEMAS[TEMA]
 BG, FG, FG2, ORN, LOGO_C = T["bg"], T["fg"], T["fg2"], T["orn"], T["logo"]
-NAVY_INK = "#1F3557"   # azul noche para textos sobre marfil
+NAVY_INK = "#14213D"   # azul Oxford para textos sobre marfil
 IVORY = "#F7F1E5"
 INK = NAVY_INK
 GOLD = ORN             # alias: adornos

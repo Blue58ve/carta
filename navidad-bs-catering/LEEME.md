@@ -2,12 +2,10 @@
 
 Etiquetas, sellos, sticker de bolsa y tarjeta para el kit navideño (4 hallacas, asado negro o pernil, ensalada de gallina, pan de jamón y mini torta negra de obsequio). Instagram **@bscateringve**.
 
-> **Versión 3 (25/11/2026): dos propuestas de estilo, pendiente de elegir.**
-> La v1 (azul noche + textos dorados finos) no se leía impresa; la v2 (azul medio + textos blancos) se leía pero perdió la elegancia. La v3 recupera la paleta original con letra serif clásica (**Playfair Display**) más gruesa y más grande, y textos informativos en **Josefin Sans** seminegrita (eco del «CATERING» del logo):
-> - **A · Azul noche refinado** (`TEMA=noche`, por defecto): fondo azul noche menos oscuro, textos marfil, logo dorado.
-> - **B · Marfil clásico** (`TEMA=marfil`): fondo marfil, textos y logo azul noche, detalles dorados.
+> **Versión final (26/11/2026): «Marfil clásico» con azul Oxford.**
+> Fondo marfil, textos y logo en **azul Oxford** (`#14213D`), detalles dorados en marcos dobles, ramitas y destellos. Nombres en **Playfair Display**, información en **Josefin Sans** seminegrita (eco del «CATERING» del logo), con tamaños grandes: la letra oscura sobre fondo claro no se cierra al imprimir.
 >
-> Se mantienen los cambios de la v2: sello redondo de Ø 5 cm para la torta, sticker de bolsa de 10 × 14 cm y sello de cierre solo con el logo. Las proteínas (Asado Negro / Pernil) van al final en el menú y en la lista de archivos.
+> Historial: v1 azul noche con textos dorados finos (no se leía impresa) → v2 azul medio con textos blancos (legible, pero sin elegancia) → v3 dos propuestas (A azul noche, B marfil) → **final: B con azul Oxford**. Se mantienen el sello de Ø 5 cm para la torta, el sticker de bolsa de 10 × 14 cm, el sello de cierre solo con el logo y las proteínas (Asado Negro / Pernil) al final del menú y de la lista de archivos.
 
 ## Para enviar a la imprenta: `etiquetas-imprenta/`
 
@@ -37,22 +35,24 @@ La **tarjeta** (frente y dorso, 100 × 150 mm, cartulina 300–350 g, 60 unidade
 - **Torta negra:** sello de Ø 5 cm en el tope del domo (Ø 11 cm).
 - **Bolsa:** sticker centrado en el frente, debajo de la solapa del asa. Opcional: un sello en la solapa.
 
-## Color de referencia
-Los valores CMYK exactos de cada estilo salen en `00-Instrucciones-para-la-imprenta.pdf` (se calculan con la misma conversión de los archivos).
+## Color de referencia (valores CMYK de los archivos)
 
-| Estilo | Fondo | Textos | Logo | Adornos |
-|---|---|---|---|---|
-| A · Azul noche | `#1F3557` | marfil `#F6EEDC` | dorado `#D8B670` | dorado `#D4B06A` |
-| B · Marfil | `#F7F1E5` | azul noche `#1F3557` | azul noche | dorado `#B48C42` |
+| Color | Pantalla | CMYK | Uso |
+|---|---|---|---|
+| Marfil | `#F7F1E5` | C2 M4 Y9 K0 | Fondo |
+| Azul Oxford | `#14213D` | C93 M84 Y46 K53 | Textos y logo |
+| Dorado | `#B48C42` | C27 M42 Y88 K5 | Marcos y adornos |
+
+El tema anterior A («azul noche») sigue disponible con `TEMA=noche`.
 
 ## Carpetas
-`etiquetas-imprenta/` y `tarjeta-imprenta/` (lo que se envía), `impresion/` (PDF de trabajo en RGB), `guias/` (medidas, zona segura y corte), `vista-previa/` (PNG), `maquetas/` y `fuente/fotos/` (no se suben al repositorio), `fuente/logo/` (logo vectorizado), `fuente/` (generadores y tipografías: Lora, Montserrat, Pinyon Script, Inter y, para documentos, Cormorant Garamond y Josefin Sans; todas OFL).
+`etiquetas-imprenta/` y `tarjeta-imprenta/` (lo que se envía), `impresion/` (PDF de trabajo en RGB), `guias/` (medidas, zona segura y corte), `vista-previa/` (PNG), `maquetas/` y `fuente/fotos/` (no se suben al repositorio), `fuente/logo/` (logo vectorizado), `fuente/` (generadores y tipografías: Playfair Display, Josefin Sans, Cormorant Garamond, Pinyon Script e Inter; todas OFL).
 
 ## Regenerar
 Textos, medidas y productos al inicio de `fuente/build.py`; cantidades en `fuente/imprenta.py`.
 
 ```bash
-TEMA=noche python3 fuente/build.py   # SVG y páginas (TEMA=noche | marfil)
+python3 fuente/build.py         # SVG y páginas (tema por defecto: marfil)
 node fuente/render.js           # PDF de trabajo y PNG
 python3 fuente/pdf_boxes.py     # medida exacta + TrimBox
 python3 fuente/imprenta.py      # PDF para la imprenta (CMYK, curvas, CutContour)
